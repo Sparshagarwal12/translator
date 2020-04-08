@@ -1,0 +1,9 @@
+{
+    "login": "Login",
+    "adhaar": "Adhaar",
+    "password": "Password",
+    "failed" : "Failed",
+    "one_or_more":"One or More fields are empty",
+    "no_account":"Don't Have an Account?",
+    "login_succeed!": "Login Succeed!"
+}
