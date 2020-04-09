@@ -5,5 +5,14 @@
     "failed" : "નિષ્ફળ",
     "one_or_more":"એક અથવા વધુ ક્ષેત્રો ખાલી છે",
     "no_account":"ખાતું નથી?",
-    "login_succeed!": "પ્રવેશ સફળ"
+    "login_succeed!": "પ્રવેશ સફળ",
+
+    "register":"register",
+    "fname":"Full Name",
+    "exsist":"Adhaar No. exists!",
+    "already_reg":"this adhhar no. is already registered",
+    "error":"Error",
+    "connection":"Check Your Internet Connection",
+    "valid_adhaar": "Please Type valid Adhhar No.",
+    "empty_field": "Empty Field"
 }

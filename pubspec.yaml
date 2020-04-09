@@ -22,6 +22,7 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   shared_preferences: ^0.5.6+2
+  http: ^0.12.0+4
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -45,7 +46,7 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - lib/lang/bn.json
+    # - lib/lang/bn.json
     - lib/lang/en.json
     - lib/lang/gu.json
     - lib/lang/hi.json

@@ -78,9 +78,11 @@ class _SplashPageState extends State<SplashPage> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => LoginPage()));
+                                  builder: (context) => LoginPage())
+                                  );
+                          // Navigator.pushNamed(context, 'loginR');
                         },
-                        // child: Text(getTranslated(context, 'login'))
+                        child: Text(getTranslated(context, 'login'))
                         ),
                   ),
                 ),

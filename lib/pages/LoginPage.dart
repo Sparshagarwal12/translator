@@ -7,6 +7,7 @@ import 'dart:convert';
 // import 'package:covid19/slefDeclaration.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localization_master/localization/language_constants.dart';
+import 'package:flutter_localization_master/pages/coronaMonitor.dart';
 // import 'package:fluttertoast/fluttertoast.dart';
 // import 'package:http/http.dart';
 // import 'package:shared_preferences/shared_preferences.dart';
@@ -223,22 +224,29 @@ class _LoginPageState extends State<LoginPage> {
                                         adhharEditor.text != "") {
                                       // login();
                                     } else {
-                                      return showDialog(
-                                          context: (context),
-                                          builder: (context) {
-                                            return AlertDialog(
-                                              title: Text(getTranslated(context, 'failed')),
-                                              content: Text(
-                                                  getTranslated(context, 'one_or_more')),
-                                              actions: <Widget>[
-                                                IconButton(
-                                                    icon: Icon(Icons.done),
-                                                    onPressed: () {
-                                                      Navigator.pop(context);
-                                                    })
-                                              ],
-                                            );
-                                          });
+                                      Navigator.pushAndRemoveUntil(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  CoronaMonitor()),
+                                          (_) => false);
+
+                                      // return showDialog(
+                                      //     context: (context),
+                                      //     builder: (context) {
+                                      //       return AlertDialog(
+                                      //         title: Text(getTranslated(context, 'failed')),
+                                      //         content: Text(
+                                      //             getTranslated(context, 'one_or_more')),
+                                      //         actions: <Widget>[
+                                      //           IconButton(
+                                      //               icon: Icon(Icons.done),
+                                      //               onPressed: () {
+                                      //                 Navigator.pop(context);
+                                      //               })
+                                      //         ],
+                                      //       );
+                                      //     });
                                     }
                                   },
                                   child: Text(

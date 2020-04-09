@@ -53,8 +53,8 @@ class _MyAppState extends State<MyApp> {
         theme: ThemeData(primarySwatch: Colors.blue),
         locale: _locale,
         supportedLocales: [
+          Locale("en", "US"),
           Locale("bn", "IN"),
-          Locale("en", "UK"),
           Locale("gu", "IN"),
           Locale("hi", "IN"),
           Locale("kn", "IN"),
@@ -64,7 +64,6 @@ class _MyAppState extends State<MyApp> {
           Locale("ta", "IN"),
           Locale("te", "IN"),
           Locale("ur", "IN")
-
         ],
         localizationsDelegates: [
           DemoLocalization.delegate,

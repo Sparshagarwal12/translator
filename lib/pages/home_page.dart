@@ -60,11 +60,11 @@ class _HomePageState extends State<HomePage> {
             // To close the Drawer
             Navigator.pop(context);
             // Navigating to About Page
-            Navigator.pushNamed(context, 'splash');
-            // Navigator.push(
-            //   context,
-            //   MaterialPageRoute(builder: (context) => SplashPage()),
-            // );
+            // Navigator.pushNamed(context, 'splashR');
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => SplashPage()),
+            );
           },
           height: 50,
           shape: StadiumBorder(),
