@@ -2,7 +2,9 @@
 import 'package:flutter/material.dart';
 // import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter_localization_master/localization/language_constants.dart';
+import 'package:flutter_localization_master/pages/LanguagePage.dart';
 import 'package:flutter_localization_master/pages/LoginPage.dart';
+import 'developerPage.dart';
 // import 'globalVar.dart' as global;
 // import 'homePage.dart';
 
@@ -75,14 +77,15 @@ class _SplashPageState extends State<SplashPage> {
                   child: Center(
                     child: MaterialButton(
                         onPressed: () {
+                          Navigator.pop(context);
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => LoginPage())
+                                  builder: (context) => LanguagePage())
                                   );
                           // Navigator.pushNamed(context, 'loginR');
                         },
-                        child: Text(getTranslated(context, 'login'))
+                        child: Text("Next")
                         ),
                   ),
                 ),

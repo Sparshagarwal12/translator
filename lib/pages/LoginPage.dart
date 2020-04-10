@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-// import 'package:flutter_localization_master/familyDeclaration.dart';
+// import 'package:covid19/familyDeclaration.dart';
 // import 'package:covid19/grid.dart';
 // import 'package:covid19/helpLine.dart';
 // import 'package:covid19/registerVariables.dart';
@@ -8,11 +8,11 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_localization_master/localization/language_constants.dart';
 import 'package:flutter_localization_master/pages/coronaMonitor.dart';
-// import 'package:fluttertoast/fluttertoast.dart';
-// import 'package:http/http.dart';
-// import 'package:shared_preferences/shared_preferences.dart';
-// import 'package:translator/translator.dart';
-// import 'globalVar.dart' as global;
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:http/http.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:translator/translator.dart';
+import 'globalVar.dart' as global;
 
 class LoginPage extends StatefulWidget {
   @override
@@ -25,12 +25,16 @@ class _LoginPageState extends State<LoginPage> {
   String selectedUser;
   TextEditingController adhharEditor = new TextEditingController();
   TextEditingController passEditor = new TextEditingController();
+  GoogleTranslator translator = new GoogleTranslator();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(getTranslated(context, 'login')),
+        title: Text(
+          // "Login",
+          getTranslated(context, 'login'),
+          ),
         backgroundColor: Color(0xFF426bd7),
         elevation: 0.0,
         automaticallyImplyLeading: false,
@@ -46,40 +50,17 @@ class _LoginPageState extends State<LoginPage> {
                   padding: EdgeInsets.only(top: 60.0),
                   width: MediaQuery.of(context).size.width,
                   height: MediaQuery.of(context).size.height / 2.5,
-                  // decoration: BoxDecoration(
-                  //     image: DecorationImage(
-                  //         fit: BoxFit.fill,
-                  //         // image: AssetImage("assets/images/fightindia.jpg")),
-                  //     gradient: LinearGradient(
-                  //         colors: [
-                  //           Color(0xFF3180e4),
-                  //           Color(0xFF564dc2),
-                  //         ],
-                  //         begin: Alignment.topCenter,
-                  //         end: Alignment.bottomCenter)),
-                  // child: Center(
-                  //     child: Column(children: <Widget>[
-                  //   Center(
-                  //     child: Text(
-                  //       "#IndiaFightsCorona",
-                  //       textAlign: TextAlign.center,
-                  //       style: TextStyle(
-                  //           fontSize: 29.0,
-                  //           color: Colors.yellow,
-                  //           fontWeight: FontWeight.bold),
-                  //     ),
-                  //   ),
-                  //   Center(
-                  //     child: Text(
-                  //       "Fight of India With Corona\n",
-                  //       textAlign: TextAlign.center,
-                  //       style: TextStyle(fontSize: 18.0, color: Colors.white),
-                  //     ),
-                  //   ),
-                  //   Image(
-                  //       width: 350,
-                  //       image: AssetImage("assets/images/covid19.png")),
-                  // ])),
+                  decoration: BoxDecoration(
+                      image: DecorationImage(
+                          fit: BoxFit.fill,
+                          image: AssetImage("assets/images/fightindia.jpg")),
+                      gradient: LinearGradient(
+                          colors: [
+                            Color(0xFF3180e4),
+                            Color(0xFF564dc2),
+                          ],
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter)),
                 ),
                 Container(
                   width: MediaQuery.of(context).size.width,
@@ -113,8 +94,8 @@ class _LoginPageState extends State<LoginPage> {
                                   children: <Widget>[
                                     Center(
                                       child: Text(
-                                        getTranslated(context, 'login'),
                                         // "LOGIN",
+                                        getTranslated(context,'login'),
                                         style: TextStyle(fontSize: 17.0),
                                       ),
                                     ),
@@ -155,7 +136,7 @@ class _LoginPageState extends State<LoginPage> {
                                     Align(
                                         alignment: Alignment.centerLeft,
                                         child: Text(
-                                          // "Password",
+                                          // "Password"
                                           getTranslated(context, 'password'),
                                           style: TextStyle(
                                               color: Colors.blue,
@@ -175,7 +156,9 @@ class _LoginPageState extends State<LoginPage> {
                                       height: 10.0,
                                     ),
                                     DropdownButton(
-                                      hint: Text('Select User type',
+                                      hint: Text(
+                                        'Select User type'
+                                        ,
                                           style: TextStyle(
                                               color: Colors.black,
                                               fontSize: 15.0)),
@@ -222,42 +205,39 @@ class _LoginPageState extends State<LoginPage> {
                                   onPressed: () {
                                     if (passEditor.text != "" &&
                                         adhharEditor.text != "") {
-                                      // login();
+                                      login();
                                     } else {
-                                      Navigator.pushAndRemoveUntil(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  CoronaMonitor()),
-                                          (_) => false);
-
-                                      // return showDialog(
-                                      //     context: (context),
-                                      //     builder: (context) {
-                                      //       return AlertDialog(
-                                      //         title: Text(getTranslated(context, 'failed')),
-                                      //         content: Text(
-                                      //             getTranslated(context, 'one_or_more')),
-                                      //         actions: <Widget>[
-                                      //           IconButton(
-                                      //               icon: Icon(Icons.done),
-                                      //               onPressed: () {
-                                      //                 Navigator.pop(context);
-                                      //               })
-                                      //         ],
-                                      //       );
-                                      //     });
+                                      return showDialog(
+                                          context: (context),
+                                          builder: (context) {
+                                            return AlertDialog(
+                                              title: Text(
+                                                // "Failed",
+                                                getTranslated(context, 'failed'),
+                                                ),
+                                              content: Text(
+                                                  // "One or More fields are empty"
+                                                  getTranslated(context, 'one_or_more'),
+                                                  ),
+                                              actions: <Widget>[
+                                                IconButton(
+                                                    icon: Icon(Icons.done),
+                                                    onPressed: () {
+                                                      Navigator.pop(context);
+                                                    })
+                                              ],
+                                            );
+                                          });
                                     }
                                   },
                                   child: Text(
-                                    // "Login",
+                                    // "Login"
                                     getTranslated(context, 'login'),
                                     style: TextStyle(color: Colors.white),
                                   ),
                                 ),
                               ),
                               SizedBox(height: 20.0),
-                              Text(getTranslated(context, 'no_account'))
                             ],
                           ),
                         ),
@@ -273,30 +253,32 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  // Future<dynamic> login() async {
-  //   print(adhharEditor.text);
-  //   print(passEditor.text);
-  //   String url = "https://covid-mitrc.herokuapp.com/accounts/login";
-  //   var req = {"username": adhharEditor.text, "password": passEditor.text};
-  //   Response response = await post(
-  //     Uri.parse(url),
-  //     headers: {"Content-Type": "application/json"},
-  //     body: json.encode(req),
-  //   );
-  //   var res = json.decode(response.body);
-  //   if (response.statusCode == 200) {
-  //     var prefs = await SharedPreferences.getInstance();
-  //     if (res['aadhar'] != null || res['aadhar'] != "") {
-  //       prefs.setString('aadhar', res['aadhar']);
-  //       prefs.setInt('id', res['id']);
-  //       print(
-  //           'User -> Aadhar : ${prefs.getString("aadhar")}, ID : ${prefs.getInt("id")}');
-  //       Fluttertoast.showToast(msg: "Login Succeed!");
-  //       Navigator.pushAndRemoveUntil(context,
-  //           MaterialPageRoute(builder: (context) => DashBoard()), (_) => false);
-  //     }
-  //   } else {
-  //     Fluttertoast.showToast(msg: res['error']);
-  //   }
-  // }
+  Future<dynamic> login() async {
+    print(adhharEditor.text);
+    print(passEditor.text);
+    String url = "https://covid-mitrc.herokuapp.com/accounts/login";
+    var req = {"username": adhharEditor.text, "password": passEditor.text};
+    Response response = await post(
+      Uri.parse(url),
+      headers: {"Content-Type": "application/json"},
+      body: json.encode(req),
+    );
+    var res = json.decode(response.body);
+    if (response.statusCode == 200) {
+      var prefs = await SharedPreferences.getInstance();
+      if (res['aadhar'] != null || res['aadhar'] != "") {
+        prefs.setString('aadhar', res['aadhar']);
+        prefs.setInt('id', res['id']);
+        print(
+            'User -> Aadhar : ${prefs.getString("aadhar")}, ID : ${prefs.getInt("id")}');
+        Fluttertoast.showToast(msg: "Login Succeed!");
+        Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(builder: (context) => CoronaMonitor()),
+            (_) => false);
+      }
+    } else {
+      Fluttertoast.showToast(msg: res['error']);
+    }
+  }
 }

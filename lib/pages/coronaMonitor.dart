@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localization_master/localization/language_constants.dart';
+import 'package:flutter_localization_master/pages/MyHomePage.dart';
 // import 'package:fprojects/familyDeclaration.dart';
 // import 'package:fprojects/slefDeclaration.dart';
 import 'package:http/http.dart' as http;
@@ -362,7 +363,8 @@ class _CoronaMonitorState extends State<CoronaMonitor> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: <Widget>[
                                   Text(
-                                    "विश्व के आंकड़े कोरोना पर",
+                                    // "विश्व के आंकड़े कोरोना पर",
+                                    getTranslated(context, 'world_figure'),
                                     style: TextStyle(fontSize: 25.0),
                                   ),
                                   SizedBox(
@@ -628,13 +630,14 @@ class _CoronaMonitorState extends State<CoronaMonitor> {
                           ),
                           child: MaterialButton(
                             onPressed: () {
-                              // Navigator.push(
-                              //     context,
-                              //     MaterialPageRoute(
-                              //         builder: (context) => FamilyDeclaration()));
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>mainBoard()));
                             },
                             child: Text(
-                              "Next",
+                              // "Next",
+                              getTranslated(context, 'next'),
                               style: TextStyle(color: Colors.white),
                             ),
                           ),
