@@ -104,19 +104,32 @@ class _NewsApi extends State<NewsApi> {
                                           content['articles'][index]
                                               ["title"])));
                             },
-                            child: Card(
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10.0)),
-                              elevation: 10,
-                              margin: EdgeInsets.all(5.0),
-                              child: Padding(
-                                  padding: EdgeInsets.all(10),
-                                  child: Center(
+                            child: Container(
+                              decoration: BoxDecoration(
+                                gradient: LinearGradient(
+                                    colors: index % 2 == 0 ? color1 : color2,
+                                    begin: Alignment.topLeft,
+                                    end: Alignment.bottomRight),
+                                borderRadius: BorderRadius.circular(15.0),
+                                boxShadow: [
+                                  BoxShadow(
+                                      color: Colors.black45,
+                                      blurRadius: 15.0,
+                                      offset: Offset.fromDirection(1.0, 10.0))
+                                ],
+                              ),
+                              margin: EdgeInsets.all(10.0),
+                              width: 300,
+                              height: 100,
+                              child: Center(
+                                  child: Padding(
+                                      padding: EdgeInsets.all(10),
                                       child: Text(
-                                    content['articles'][index]["title"]
-                                        .toString(),
-                                    style: TextStyle(fontSize: 20.0),
-                                  ))),
+                                        content['articles'][index]["title"],
+                                        style: TextStyle(
+                                            fontSize: 20.0,
+                                            color: Colors.white),
+                                      ))),
                             ),
                           ),
                         ),

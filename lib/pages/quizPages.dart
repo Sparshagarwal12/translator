@@ -55,11 +55,10 @@ class _QuizState extends State<Quiz> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0.0,
-        backgroundColor: Colors.white,
         title: Text(
           "Quiz",
           // getTranslated(context, 'login'),
-          style: TextStyle(color: Colors.black, fontSize: 30.0),
+          
         ),
       ),
       body: Container(
