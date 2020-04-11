@@ -1,3 +1,5 @@
+import 'package:flutter_localization_master/localization/language_constants.dart';
+
 import 'grid.dart';
 import 'oownchecker2.dart';
 import 'selfchecker.dart';
@@ -82,7 +84,8 @@ class _ownchecker extends State<ownchecker> {
                                 children: <Widget>[
                                   Center(
                                     child: Text(
-                                      "तुम्हारी उम्र क्या हैं?",
+                                      // "तुम्हारी उम्र क्या हैं?",
+                                      getTranslated(context,'own_ques1'),
                                       style: TextStyle(fontSize: 25.0),
                                       textAlign: TextAlign.center,
                                     ),

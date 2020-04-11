@@ -91,6 +91,7 @@ flutter:
     - assets/audio/
     - assets/hindi.mp3
     - images/
+    - assets/logo/
     # - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

@@ -53,14 +53,6 @@ class _QuizState extends State<Quiz> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        elevation: 0.0,
-        title: Text(
-          "Quiz",
-          // getTranslated(context, 'login'),
-          
-        ),
-      ),
       body: Container(
         color: Colors.white,
         width: MediaQuery.of(context).size.width,

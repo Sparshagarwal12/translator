@@ -1,6 +1,8 @@
 import 'searchPage.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'dart:convert';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -13,6 +15,36 @@ Future<Map> getUri() async {
   String url = "https://api.covid19india.org/data.json";
   http.Response response = await http.get(url);
   return json.decode(response.body);
+}
+
+List<Color> color1 = [
+  Color(0xFF11998e),
+  Color(0xFF38ef7d),
+];
+List<Color> color2 = [
+  Color(0xFFff9966),
+  Color(0xFFff5e62),
+];
+
+Route createRoute(Widget name) {
+  return PageRouteBuilder(
+      pageBuilder: (context, animation, secondaryAnimation) => name,
+      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+        var begin = Offset(0.0, 1.0);
+        var end = Offset.zero;
+        var curve = Curves.easeInOutQuad;
+
+        var tween = Tween(begin: begin, end: end);
+        var curvedAnimation = CurvedAnimation(
+          parent: animation,
+          curve: curve,
+        );
+
+        return SlideTransition(
+          position: tween.animate(curvedAnimation),
+          child: child,
+        );
+      });
 }
 
 double width;
@@ -50,42 +82,59 @@ class _OuterState extends State<OuterState> {
                 return ListView.builder(
                   itemCount: content['statewise'].length,
                   itemBuilder: (BuildContext context, int index) {
-                    return GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => stateDetails(
-                                    content['statewise'][index]["state"])));
-                      },
-                      child: Container(
-                        height: 60,
-                        margin: EdgeInsets.all(10.0),
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(15.0),
-                            boxShadow: [
-                              BoxShadow(color: Colors.black26, blurRadius: 10.0)
-                            ]),
-                        child: Center(
-                            child: Text(
-                          content['statewise'][index]["state"],
-                          style: TextStyle(fontSize: 20.0),
-                        )),
+                    return AnimationConfiguration.staggeredList(
+                      position: index,
+                      duration: const Duration(milliseconds: 800),
+                      child: SlideAnimation(
+                        horizontalOffset: 50.0,
+                        child: FadeInAnimation(
+                          child: GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => stateDetails(
+                                          content['statewise'][index]
+                                              ["state"])));
+                            },
+                            child: Container(
+                              decoration: BoxDecoration(
+                                gradient: LinearGradient(
+                                    colors: index % 2 == 0 ? color1 : color2,
+                                    begin: Alignment.topLeft,
+                                    end: Alignment.bottomRight),
+                                borderRadius: BorderRadius.circular(15.0),
+                                boxShadow: [
+                                  BoxShadow(
+                                      color: Colors.black45,
+                                      blurRadius: 15.0,
+                                      offset: Offset.fromDirection(1.0, 10.0))
+                                ],
+                              ),
+                              margin: EdgeInsets.all(15.0),
+                              width: 300,
+                              height: 110,
+                              child: Center(
+                                  child: Text(
+                                content['statewise'][index]["state"],
+                                style: TextStyle(
+                                    fontSize: 20.0,
+                                    fontWeight: FontWeight.bold),
+                              )),
+                            ),
+                          ),
+                        ),
                       ),
                     );
                   },
                 );
               } else {
-                return Container(
-                  width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height,
-                  child: Center(
-                    child: CircularProgressIndicator(
-                      strokeWidth: 3.0,
-                    ),
-                  ),
-                );
+                return Center(
+                child: SpinKitChasingDots(
+                  color: Colors.black,
+                  size: 50.0,
+                ),
+              );
               }
             }),
       ),
@@ -131,82 +180,93 @@ Widget stateDetails(var date) {
                                 fontSize: 30, fontWeight: FontWeight.bold),
                           ),
                           SizedBox(height: 10),
-                          Card(
-                            elevation: 10,
-                            child: Center(
-                                child: Column(
-                              children: <Widget>[
-                                Padding(
+                          Container(
+                              decoration: BoxDecoration(
+                                gradient: LinearGradient(
+                                    colors: index % 2 == 0 ? color1 : color2,
+                                    begin: Alignment.topLeft,
+                                    end: Alignment.bottomRight),
+                                borderRadius: BorderRadius.circular(15.0),
+                                boxShadow: [
+                                  BoxShadow(
+                                      color: Colors.black45,
+                                      blurRadius: 15.0,
+                                      offset: Offset.fromDirection(1.0, 10.0))
+                                ],
+                              ),
+                              margin: EdgeInsets.all(15.0),
+                              child: Column(
+                                children: <Widget>[
+                                  Padding(
+                                      padding: EdgeInsets.only(left: 10),
+                                      child: Align(
+                                        alignment: Alignment.topLeft,
+                                        child: Text(
+                                          "\nActive Cases: " +
+                                              content['statewise'][index]
+                                                      ["active"]
+                                                  .toString(),
+                                          style: TextStyle(fontSize: 25.0),
+                                          textAlign: TextAlign.start,
+                                        ),
+                                      )),
+                                  Padding(
                                     padding: EdgeInsets.only(left: 10),
                                     child: Align(
                                       alignment: Alignment.topLeft,
                                       child: Text(
-                                        "\nActive Cases: " +
+                                        "\nConfirmed Cases: " +
                                             content['statewise'][index]
-                                                    ["active"]
+                                                    ["confirmed"]
                                                 .toString(),
                                         style: TextStyle(fontSize: 25.0),
                                         textAlign: TextAlign.start,
                                       ),
-                                    )),
-                                Padding(
-                                  padding: EdgeInsets.only(left: 10),
-                                  child: Align(
-                                    alignment: Alignment.topLeft,
-                                    child: Text(
-                                      "\nConfirmed Cases: " +
-                                          content['statewise'][index]
-                                                  ["confirmed"]
-                                              .toString(),
-                                      style: TextStyle(fontSize: 25.0),
-                                      textAlign: TextAlign.start,
                                     ),
                                   ),
-                                ),
-                                Padding(
-                                    padding: EdgeInsets.only(left: 10),
-                                    child: Align(
-                                      alignment: Alignment.topLeft,
-                                      child: Text(
-                                        "\nDeaths Cases: " +
-                                            content['statewise'][index]
-                                                    ["deaths"]
-                                                .toString(),
-                                        style: TextStyle(fontSize: 25.0),
-                                        textAlign: TextAlign.start,
-                                      ),
-                                    )),
-                                Padding(
-                                    padding: EdgeInsets.only(left: 10),
-                                    child: Align(
-                                      alignment: Alignment.topLeft,
-                                      child: Text(
-                                        "\nLast Updated Time: " +
-                                            "\n" +
-                                            content['statewise'][index]
-                                                    ["lastupdatedtime"]
-                                                .toString(),
-                                        style: TextStyle(fontSize: 25.0),
-                                        textAlign: TextAlign.center,
-                                      ),
-                                    )),
-                                Padding(
-                                    padding: EdgeInsets.only(left: 10),
-                                    child: Align(
-                                      alignment: Alignment.topLeft,
-                                      child: Text(
-                                        "\nTotal Recovered Cases: " +
-                                            content['statewise'][index]
-                                                    ["recovered"]
-                                                .toString() +
-                                            "\n",
-                                        style: TextStyle(fontSize: 25.0),
-                                        textAlign: TextAlign.start,
-                                      ),
-                                    )),
-                              ],
-                            )),
-                          ),
+                                  Padding(
+                                      padding: EdgeInsets.only(left: 10),
+                                      child: Align(
+                                        alignment: Alignment.topLeft,
+                                        child: Text(
+                                          "\nDeaths Cases: " +
+                                              content['statewise'][index]
+                                                      ["deaths"]
+                                                  .toString(),
+                                          style: TextStyle(fontSize: 25.0),
+                                          textAlign: TextAlign.start,
+                                        ),
+                                      )),
+                                  Padding(
+                                      padding: EdgeInsets.only(left: 10),
+                                      child: Align(
+                                        alignment: Alignment.topLeft,
+                                        child: Text(
+                                          "\nLast Updated Time: " +
+                                              "\n" +
+                                              content['statewise'][index]
+                                                      ["lastupdatedtime"]
+                                                  .toString(),
+                                          style: TextStyle(fontSize: 25.0),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      )),
+                                  Padding(
+                                      padding: EdgeInsets.only(left: 10),
+                                      child: Align(
+                                        alignment: Alignment.topLeft,
+                                        child: Text(
+                                          "\nTotal Recovered Cases: " +
+                                              content['statewise'][index]
+                                                      ["recovered"]
+                                                  .toString() +
+                                              "\n",
+                                          style: TextStyle(fontSize: 25.0),
+                                          textAlign: TextAlign.start,
+                                        ),
+                                      )),
+                                ],
+                              )),
                         ]));
                   } else {
                     return Container();
@@ -215,8 +275,9 @@ Widget stateDetails(var date) {
               );
             } else {
               return Center(
-                child: CircularProgressIndicator(
-                  strokeWidth: 3.0,
+                child: SpinKitChasingDots(
+                  color: Colors.black,
+                  size: 50.0,
                 ),
               );
             }

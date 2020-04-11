@@ -62,9 +62,6 @@ class _NewsApi extends State<NewsApi> {
     width = MediaQuery.of(context).size.width;
     height = MediaQuery.of(context).size.height;
     return Scaffold(
-      appBar: AppBar(
-        title: Text("कोरोना के खिलाफ भारत की लड़ाई"),
-      ),
       body: Container(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,

@@ -1,3 +1,5 @@
+import 'package:flutter_localization_master/localization/language_constants.dart';
+
 import 'grid.dart';
 import 'otherchecker.dart';
 import 'ownchecker1.dart';
@@ -63,7 +65,8 @@ class _checker3 extends State<checker3> {
                             child: Column(children: <Widget>[
                               Center(
                                 child: Text(
-                                  "अपने राज्य का उल्लेख करें।",
+                                  // "अपने राज्य का उल्लेख करें।",
+                                  getTranslated(context, 'ques_2'),
                                   style: TextStyle(fontSize: 20.0),
                                 ),
                               ),
@@ -77,7 +80,8 @@ class _checker3 extends State<checker3> {
                               ),
                               Center(
                                   child: Text(
-                                " आप अपने लिए या किसी और के लिए जवाब दे रहे हैं?",
+                                // " आप अपने लिए या किसी और के लिए जवाब दे रहे हैं?",
+                                getTranslated(context, 'ques_4'),
                                 style: TextStyle(fontSize: 20),
                                 textAlign: TextAlign.center,
                               )),
@@ -89,7 +93,9 @@ class _checker3 extends State<checker3> {
                                           value: 0,
                                           groupValue: _radioValue,
                                           onChanged: _handleRadio),
-                                      Text("अपने लिए"),
+                                      Text(
+                                        // "अपने लिए"
+                                        getTranslated(context, 'ans1')),
                                     ],
                                   ),
                                   Row(
@@ -98,7 +104,9 @@ class _checker3 extends State<checker3> {
                                           value: 1,
                                           groupValue: _radioValue,
                                           onChanged: _handleRadio),
-                                      Text("किसी और के लिए")
+                                      Text(
+                                        // "किसी और के लिए"
+                                        getTranslated(context, 'ans1'))
                                     ],
                                   ),
                                   SizedBox(
@@ -138,7 +146,8 @@ class _checker3 extends State<checker3> {
                           }
                         },
                         child: Text(
-                          "आगे  >>>",
+                          // "आगे  >>>",
+                          getTranslated(context, 'next'),
                           style: TextStyle(color: Colors.white),
                         ),
                       ),

@@ -40,7 +40,12 @@ class CarouselDemoState extends State<CarouselDemo> {
     return Scaffold(
     
       body: Container(
-        color: Colors.blueAccent,
+        decoration: BoxDecoration(
+                gradient: LinearGradient(colors: [
+              Color(0xFFFF9933),
+              Color(0xFFFFFFFF),
+              Color(0xFF138808),
+            ], begin: Alignment.topCenter, end: Alignment.bottomCenter)),
       height: MediaQuery.of(context).size.height,
       width:  MediaQuery.of(context).size.height,
         child: Column(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localization_master/localization/language_constants.dart';
+import 'package:flutter_localization_master/pages/PatientReport.dart';
 import 'hospitaldata.dart';
 
 class hospitalinner extends StatefulWidget {
@@ -114,11 +115,11 @@ class _hospitalinner extends State<hospitalinner>
                             margin: EdgeInsets.only(left: 10),
                           ),
                           onTap: () {
-                            // Navigator.push(
-                            //   context,
-                            //   MaterialPageRoute(
-                            //       builder: (context) => secondgrid()),
-                            // );
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => PatientReport()),
+                            );
                           },
                         ),
                       ),

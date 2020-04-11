@@ -1,3 +1,5 @@
+import 'package:flutter_localization_master/localization/language_constants.dart';
+
 import 'grid.dart';
 import 'selfchecker.dart';
 import 'selfchecker3.dart';
@@ -85,7 +87,8 @@ class _checker2 extends State<checker2> {
                                 ),
                                 Center(
                                   child: Text(
-                                    "क्या आप बीमार हैं, या किसी बीमार की देखभाल कर रहे हैं?",
+                                    // "क्या आप बीमार हैं, या किसी बीमार की देखभाल कर रहे हैं?",
+                                    getTranslated(context, 'ques_1'),
                                     style: TextStyle(
                                         fontSize: 20.0,
                                         fontWeight: FontWeight.bold),
@@ -103,7 +106,9 @@ class _checker2 extends State<checker2> {
                                             value: 0,
                                             groupValue: _radioValue,
                                             onChanged: _handleRadio),
-                                        Text("हाँ"),
+                                        Text(
+                                          // "हाँ"
+                                          getTranslated(context, 'y')),
                                       ],
                                     ),
                                     Row(
@@ -112,7 +117,9 @@ class _checker2 extends State<checker2> {
                                             value: 1,
                                             groupValue: _radioValue,
                                             onChanged: _handleRadio),
-                                        Text("नहीं")
+                                        Text(
+                                          // "नहीं"
+                                          getTranslated(context, 'n')),
                                       ],
                                     )
                                   ],
@@ -157,7 +164,8 @@ class _checker2 extends State<checker2> {
                                 }
                               },
                               child: Text(
-                                "आगे  >>>",
+                                // "आगे  >>>",
+                                getTranslated(context, 'next'),
                                 style: TextStyle(color: Colors.white),
                               ),
                             ),

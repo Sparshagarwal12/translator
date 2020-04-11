@@ -53,7 +53,6 @@ class _DashBoard extends State<DashBoard> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: Text("asdsad")),
         body: Center(
             child: Container(
                 decoration: BoxDecoration(
@@ -1158,7 +1157,7 @@ class _DashBoard extends State<DashBoard> with SingleTickerProviderStateMixin {
                                             context,
                                             MaterialPageRoute(
                                                 builder: (context) =>
-                                                    selfcheck2()),
+                                                    checker()),
                                           );
                                         },
                                       ),

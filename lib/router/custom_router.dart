@@ -9,10 +9,10 @@ import 'package:flutter_localization_master/router/route_constants.dart';
 class CustomRouter {
   static Route<dynamic> generatedRoute(RouteSettings settings) {
     switch (settings.name) {
-      // case homeRoute:
-      //   return MaterialPageRoute(builder: (_) => Lang());
+      case homeRoute:
+        return MaterialPageRoute(builder: (_) => LanguagePage());
       case splashRoute:
-        return MaterialPageRoute(builder: (_) => PatientReport());
+        return MaterialPageRoute(builder: (_) => SplashPage());
       // case loginRoute:
       //   return MaterialPageRoute(builder: (_) => LoginPage());
       // default:

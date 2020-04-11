@@ -64,9 +64,6 @@ class _ChatBotState extends State<ChatBot> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text("ChatBot"),
-        ),
         body: Container(
           decoration: BoxDecoration(
             gradient: LinearGradient(colors: [

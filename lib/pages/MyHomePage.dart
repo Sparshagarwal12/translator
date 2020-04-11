@@ -28,9 +28,11 @@ Widget build(BuildContext context) {
   return Scaffold(
     body:_children[_currentIndex],
      appBar: AppBar(
+      //  leading: Image(image: AssetImage('image/Corona.png'),),
      backgroundColor: Colors.white,
      title:Text("Fight against COVID19",
-     style: TextStyle(color: Colors.black),),
+     style: TextStyle(color: Colors.black),
+     textAlign: TextAlign.center,),
      ),
 
     // body: Container

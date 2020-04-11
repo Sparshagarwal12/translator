@@ -1,3 +1,5 @@
+import 'package:flutter_localization_master/localization/language_constants.dart';
+
 import 'selfchecker2.dart';
 import 'slefDeclaration.dart';
 import 'package:flutter/material.dart';
@@ -66,6 +68,7 @@ class _checker extends State<checker> {
                                   Center(
                                     child: Text(
                                       "आत्म मूल्यांकन में आपका स्वागत है",
+                                      // getTranslated(context, 'key')
                                       style: TextStyle(fontSize: 20.0,
                                       fontWeight: FontWeight.bold,),
                                       textAlign: TextAlign.center,
@@ -76,7 +79,8 @@ class _checker extends State<checker> {
                                   ),
                                   Center(
                                     child: Text(
-                                      "नमस्ते, मैं क्लारा हूं। आशा है, आप स्वस्थ हैं और कोरोना वायरस से प्रभावित नहीं हैं। फिर भी आपको जांचना होगा। मैं आपको कोरोना वायरस सेल्फ-चेकर के माध्यम से मार्गदर्शन करने के लिए हूं।\nयदि आप किसी जानलेवा आपातकाल का सामना कर रहे हैं, तो कृपया तुरंत 911 पर कॉल करें।\nयह प्रणाली स्वास्थ्य पेशेवरों के निर्णय या किसी नैदानिक मूल्यांकन के प्रदर्शन को प्रतिस्थापित नहीं करती है।\nदेखभाल के सही स्तर पर जानकारी प्रदान करने के लिए, हम आपसे कई प्रश्न पूछने जा रहे हैं।\nआप तैयार हैं? आएँ शुरू करें।",
+                                      // "नमस्ते, मैं क्लारा हूं। आशा है, आप स्वस्थ हैं और कोरोना वायरस से प्रभावित नहीं हैं। फिर भी आपको जांचना होगा। मैं आपको कोरोना वायरस सेल्फ-चेकर के माध्यम से मार्गदर्शन करने के लिए हूं।\nयदि आप किसी जानलेवा आपातकाल का सामना कर रहे हैं, तो कृपया तुरंत 911 पर कॉल करें।\nयह प्रणाली स्वास्थ्य पेशेवरों के निर्णय या किसी नैदानिक मूल्यांकन के प्रदर्शन को प्रतिस्थापित नहीं करती है।\nदेखभाल के सही स्तर पर जानकारी प्रदान करने के लिए, हम आपसे कई प्रश्न पूछने जा रहे हैं।\nआप तैयार हैं? आएँ शुरू करें।",
+                                    getTranslated(context, 'checker_welcome'),
                                       style: TextStyle(fontSize: 17.0),
                                     ),
                                   )
@@ -113,7 +117,8 @@ class _checker extends State<checker> {
                                                selfcheck2()));
                                   },
                                   child: Text(
-                                    "आगे  >>>",
+                                    // "आगे  >>>",
+                                    getTranslated(context, 'next'),
                                     style: TextStyle(color: Colors.white),
                                   ),
                                 ),

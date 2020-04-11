@@ -41,6 +41,8 @@
   "advisory": "Advisory",
   "faq": "FAQ",
   "audio_sample": "Audio Sample",
+
+
   "self_checker": "Self Checker",
   "corona_tracker": "Corona Tracker",
   "user_requrirement": "User Requirement",
@@ -85,6 +87,7 @@
   "name": "Enter Your Name",
   "stateise_ext": "Statewise Corona Cases",
   "timeseries": "Time Series Data",
+  
   "checker_welcome": "Hello, I am Angel Gudia Corona  Checker. Hope you are healthy and not affected by the corona virus. Still you have to check. I am here to guide you through the corona virus self-checker.If you face a fatal emergency If you are, please call 1075 immediately. This system does not replace the judgment of health professionals or the performance of any clinical evaluation. To provide information at the level, we are going to ask you many questions. Are you ready? Come start. ",
   "ques_1": "Are you sick, or taking care of someone sick? ",
   "ques_2": "Mention your state. ",

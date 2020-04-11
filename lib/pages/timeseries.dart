@@ -2,6 +2,8 @@ import 'searchPage.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class TimeSeries extends StatefulWidget {
@@ -13,6 +15,36 @@ Future<Map> getUri() async {
   String url = "https://api.covid19india.org/data.json";
   http.Response response = await http.get(url);
   return json.decode(response.body);
+}
+
+List<Color> color1 = [
+  Color(0xFF11998e),
+  Color(0xFF38ef7d),
+];
+List<Color> color2 = [
+  Color(0xFFff9966),
+  Color(0xFFff5e62),
+];
+
+Route createRoute(Widget name) {
+  return PageRouteBuilder(
+      pageBuilder: (context, animation, secondaryAnimation) => name,
+      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+        var begin = Offset(0.0, 1.0);
+        var end = Offset.zero;
+        var curve = Curves.easeInOutQuad;
+
+        var tween = Tween(begin: begin, end: end);
+        var curvedAnimation = CurvedAnimation(
+          parent: animation,
+          curve: curve,
+        );
+
+        return SlideTransition(
+          position: tween.animate(curvedAnimation),
+          child: child,
+        );
+      });
 }
 
 double width;
@@ -50,43 +82,59 @@ class _TimeSeries extends State<TimeSeries> {
                 return ListView.builder(
                   itemCount: content['cases_time_series'].length,
                   itemBuilder: (BuildContext context, int index) {
-                    return GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => timeDetails(
-                                    content['cases_time_series'][index]
-                                        ["date"])));
-                      },
-                      child: Container(
-                        height: 60,
-                        margin: EdgeInsets.all(10.0),
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(15.0),
-                            boxShadow: [
-                              BoxShadow(color: Colors.black26, blurRadius: 10.0)
-                            ]),
-                        child: Center(
-                            child: Text(
-                          content['cases_time_series'][index]["date"],
-                          style: TextStyle(fontSize: 20.0),
-                        )),
+                    return AnimationConfiguration.staggeredList(
+                      position: index,
+                      duration: const Duration(milliseconds: 800),
+                      child: SlideAnimation(
+                        horizontalOffset: 50.0,
+                        child: FadeInAnimation(
+                          child: GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => timeDetails(
+                                          content['cases_time_series'][index]
+                                              ["date"])));
+                            },
+                            child: Container(
+                              decoration: BoxDecoration(
+                                gradient: LinearGradient(
+                                    colors: index % 2 == 0 ? color1 : color2,
+                                    begin: Alignment.topLeft,
+                                    end: Alignment.bottomRight),
+                                borderRadius: BorderRadius.circular(15.0),
+                                boxShadow: [
+                                  BoxShadow(
+                                      color: Colors.black45,
+                                      blurRadius: 15.0,
+                                      offset: Offset.fromDirection(1.0, 10.0))
+                                ],
+                              ),
+                              margin: EdgeInsets.all(15.0),
+                              width: 300,
+                              height: 150,
+                              child: Center(
+                                  child: Text(
+                                content['cases_time_series'][index]["date"],
+                                style: TextStyle(
+                                    fontSize: 20.0,
+                                    fontWeight: FontWeight.bold),
+                              )),
+                            ),
+                          ),
+                        ),
                       ),
                     );
                   },
                 );
               } else {
-                return Container(
-                  width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height,
-                  child: Center(
-                    child: CircularProgressIndicator(
-                      strokeWidth: 3.0,
-                    ),
-                  ),
-                );
+                return Center(
+                child: SpinKitChasingDots(
+                  color: Colors.black,
+                  size: 50.0,
+                ),
+              );
               }
             }),
       ),
@@ -130,8 +178,22 @@ Widget timeDetails(var date) {
                                 fontSize: 30, fontWeight: FontWeight.bold),
                           ),
                           SizedBox(height: 10),
-                          Card(
-                            elevation: 10,
+                          Container(
+                            decoration: BoxDecoration(
+                              gradient: LinearGradient(
+                                  colors: color2,
+                                  begin: Alignment.topLeft,
+                                  end: Alignment.bottomRight),
+                              borderRadius: BorderRadius.circular(15.0),
+                              boxShadow: [
+                                BoxShadow(
+                                    color: Colors.black45,
+                                    blurRadius: 15.0,
+                                    offset: Offset.fromDirection(1.0, 10.0))
+                              ],
+                            ),
+                            margin: EdgeInsets.all(15.0),
+                            width: 350,
                             child: Center(
                                 child: Column(
                               children: <Widget>[
@@ -239,7 +301,7 @@ Widget timeDetails(var date) {
                                 ),
                               ],
                             )),
-                          ),
+                          )
                         ]));
                   } else {
                     return Container();
@@ -248,8 +310,9 @@ Widget timeDetails(var date) {
               );
             } else {
               return Center(
-                child: CircularProgressIndicator(
-                  strokeWidth: 3.0,
+                child: SpinKitChasingDots(
+                  color: Colors.black,
+                  size: 50.0,
                 ),
               );
             }
