@@ -520,9 +520,9 @@ class _DashBoard extends State<DashBoard> with SingleTickerProviderStateMixin {
                                               mainAxisAlignment:
                                                   MainAxisAlignment.center,
                                               children: <Widget>[
-                                                // Image(
-                                                //     image: AssetImage(
-                                                //         'images/hospital.png')),
+                                                Image(
+                                                    image: AssetImage(
+                                                        'images/hospital.png')),
                                                 Center(
                                                   child: Text(
                                                     // "\nअस्पताल",
@@ -579,13 +579,13 @@ class _DashBoard extends State<DashBoard> with SingleTickerProviderStateMixin {
                                               mainAxisAlignment:
                                                   MainAxisAlignment.center,
                                               children: <Widget>[
-                                                // Image(
-                                                //     image: AssetImage(
-                                                //         'images/headset.png')),
+                                                Image(
+                                                    image: AssetImage(
+                                                        'images/headset.png')),
                                                 Center(
                                                   child: Text(
                                                     // "\nहेल्पलाइन",
-                                                    getTranslated(
+                                                    "\n"+getTranslated(
                                                         context, 'helpline'),
                                                     textAlign: TextAlign.center,
                                                     textDirection:
@@ -630,13 +630,13 @@ class _DashBoard extends State<DashBoard> with SingleTickerProviderStateMixin {
                                               mainAxisAlignment:
                                                   MainAxisAlignment.center,
                                               children: <Widget>[
-                                                // Image(
-                                                //     image: AssetImage(
-                                                //         'images/lab_items.png')),
+                                                Image(
+                                                    image: AssetImage(
+                                                        'images/lab_items.png')),
                                                 Center(
                                                   child: Text(
                                                     // "\nपरीक्षण प्रयोगशाला",
-                                                   getTranslated(context, 'testing_labs'),
+                                                   "\n"+getTranslated(context, 'testing_labs'),
                                                     textAlign: TextAlign.center,
                                                     textDirection:
                                                         TextDirection.ltr,
@@ -688,13 +688,13 @@ class _DashBoard extends State<DashBoard> with SingleTickerProviderStateMixin {
                                               mainAxisAlignment:
                                                   MainAxisAlignment.center,
                                               children: <Widget>[
-                                                // Image(
-                                                //     image: AssetImage(
-                                                //         'images/blackspot.png')),
+                                                Image(
+                                                    image: AssetImage(
+                                                        'images/blackspot.png')),
                                                 Center(
                                                   child: Text(
                                                     // "मानचित्र ",
-                                                    getTranslated(
+                                                 "\n"+   getTranslated(
                                                         context, 'blackspot'),
                                                     textAlign: TextAlign.center,
                                                     textDirection:
@@ -739,14 +739,14 @@ class _DashBoard extends State<DashBoard> with SingleTickerProviderStateMixin {
                                               mainAxisAlignment:
                                                   MainAxisAlignment.center,
                                               children: <Widget>[
-                                                // Image(
-                                                //   image: AssetImage(
-                                                //       'images/youtube.png'),
-                                                // ),
+                                                Image(
+                                                  image: AssetImage(
+                                                      'images/youtube.png'),
+                                                ),
                                                 Center(
                                                   child: Text(
                                                     // "\nवीडियो",
-                                                    getTranslated(
+                                                 "\n"+   getTranslated(
                                                         context, 'video'),
                                                     textAlign: TextAlign.center,
                                                     textDirection:
@@ -799,9 +799,9 @@ class _DashBoard extends State<DashBoard> with SingleTickerProviderStateMixin {
                                               mainAxisAlignment:
                                                   MainAxisAlignment.center,
                                               children: <Widget>[
-                                                // Image(
-                                                //     image: AssetImage(
-                                                //         'images/ministry.png')),
+                                                Image(
+                                                    image: AssetImage(
+                                                        'images/ministry.png')),
                                                 Center(
                                                   child: Text(
                                                     // "स्वास्थ्य मंत्रालय",
@@ -850,13 +850,13 @@ class _DashBoard extends State<DashBoard> with SingleTickerProviderStateMixin {
                                               mainAxisAlignment:
                                                   MainAxisAlignment.center,
                                               children: <Widget>[
-                                                // Image(
-                                                //     image: AssetImage(
-                                                //         'images/warning.png')),
+                                                Image(
+                                                    image: AssetImage(
+                                                        'images/warning.png')),
                                                 Center(
                                                   child: Text(
                                                     // "\nसावधानियां",
-                                                    getTranslated(
+                                                  "\n"+  getTranslated(
                                                         context, 'precaution'),
                                                     textAlign: TextAlign.center,
                                                     textDirection:
@@ -909,9 +909,9 @@ class _DashBoard extends State<DashBoard> with SingleTickerProviderStateMixin {
                                               mainAxisAlignment:
                                                   MainAxisAlignment.center,
                                               children: <Widget>[
-                                                // Image(
-                                                //     image: AssetImage(
-                                                //         'images/aware.png')),
+                                                Image(
+                                                    image: AssetImage(
+                                                        'images/aware.png')),
                                                 Center(
                                                   child: Text(
                                                     // "जागरूकता",
@@ -960,13 +960,13 @@ class _DashBoard extends State<DashBoard> with SingleTickerProviderStateMixin {
                                               mainAxisAlignment:
                                                   MainAxisAlignment.center,
                                               children: <Widget>[
-                                                // Image(
-                                                //     image: AssetImage(
-                                                //         'images/advice.png')),
+                                                Image(
+                                                    image: AssetImage(
+                                                        'images/advice.png')),
                                                 Center(
                                                   child: Text(
                                                     // "\nसलाहकार",
-                                                    getTranslated(
+                                                  "\n"+  getTranslated(
                                                         context, 'advisory'),
                                                     textAlign: TextAlign.center,
                                                     textDirection:
@@ -1019,13 +1019,13 @@ class _DashBoard extends State<DashBoard> with SingleTickerProviderStateMixin {
                                               mainAxisAlignment:
                                                   MainAxisAlignment.center,
                                               children: <Widget>[
-                                                // Image(
-                                                //     image: AssetImage(
-                                                //         'images/faq.png')),
+                                                Image(
+                                                    image: AssetImage(
+                                                        'images/faq.png')),
                                                 Center(
                                                   child: Text(
                                                     // "\nसामान्य प्रश्न",
-                                                    getTranslated(
+                                                 "\n"+   getTranslated(
                                                         context, 'faq'),
                                                     textAlign: TextAlign.center,
                                                     textDirection:
@@ -1070,13 +1070,13 @@ class _DashBoard extends State<DashBoard> with SingleTickerProviderStateMixin {
                                               mainAxisAlignment:
                                                   MainAxisAlignment.center,
                                               children: <Widget>[
-                                                // Image(
-                                                //     image: AssetImage(
-                                                //         'images/audio.png')),
+                                                Image(
+                                                    image: AssetImage(
+                                                        'images/audio.png')),
                                                 Center(
                                                   child: Text(
                                                     // "ऑडियो नमूना",
-                                                    getTranslated(context,
+                                                getTranslated(context,
                                                         'audio_sample'),
                                                     textAlign: TextAlign.center,
                                                     textDirection:
@@ -1129,9 +1129,9 @@ class _DashBoard extends State<DashBoard> with SingleTickerProviderStateMixin {
                                               mainAxisAlignment:
                                                   MainAxisAlignment.center,
                                               children: <Widget>[
-                                                // Image(
-                                                //     image: AssetImage(
-                                                //         'images/selfcheck.png')),
+                                                Image(
+                                                    image: AssetImage(
+                                                        'images/selfcheck.png')),
                                                 Center(
                                                   child: Text(
                                                     // "स्वयं जाँचकर्ता",
@@ -1180,13 +1180,13 @@ class _DashBoard extends State<DashBoard> with SingleTickerProviderStateMixin {
                                               mainAxisAlignment:
                                                   MainAxisAlignment.center,
                                               children: <Widget>[
-                                                // Image(
-                                                //     image: AssetImage(
-                                                //         'images/virus.png')),
+                                                Image(
+                                                    image: AssetImage(
+                                                        'images/virus.png')),
                                                 Center(
                                                   child: Text(
                                                     // "\nकोरोना ट्रैकर",
-                                                    getTranslated(context,
+                                               "\n"+     getTranslated(context,
                                                         'corona_tracker'),
                                                     textAlign: TextAlign.center,
                                                     textDirection:
@@ -1239,21 +1239,21 @@ class _DashBoard extends State<DashBoard> with SingleTickerProviderStateMixin {
                                               mainAxisAlignment:
                                                   MainAxisAlignment.center,
                                               children: <Widget>[
-                                                // Image(
-                                                //     image: AssetImage(
-                                                //         'images/require.png')),
+                                                Image(
+                                                    image: AssetImage(
+                                                        'images/require.png')),
                                                 Center(
                                                   child: Text(
-                                                    "लोगों की जरुरत",
-                                                    // getTranslated(context,
-                                                    //     'user_requirement'),
+                                                    // "लोगों की जरुरत",
+                                                    getTranslated(context,
+                                                        'user_requrirement'),
                                                     textAlign: TextAlign.center,
                                                     textDirection:
                                                         TextDirection.ltr,
                                                     style: TextStyle(
                                                       fontWeight:
                                                           FontWeight.bold,
-                                                      fontSize: 18.0,
+                                                      fontSize: 17.0,
                                                       color: Colors.blue,
                                                     ),
                                                   ),
@@ -1290,13 +1290,13 @@ class _DashBoard extends State<DashBoard> with SingleTickerProviderStateMixin {
                                               mainAxisAlignment:
                                                   MainAxisAlignment.center,
                                               children: <Widget>[
-                                                // Image(
-                                                //     image: AssetImage(
-                                                //         'images/inform.png')),
+                                                Image(
+                                                    image: AssetImage(
+                                                        'images/inform.png')),
                                                 Center(
                                                   child: Text(
                                                     // "\nअन्य व्यक्ति की जानकारी",
-                                                    getTranslated(
+                                                  "\n"+  getTranslated(
                                                         context, 'people_info'),
                                                     textAlign: TextAlign.center,
                                                     textDirection:
@@ -1355,7 +1355,7 @@ class _DashBoard extends State<DashBoard> with SingleTickerProviderStateMixin {
                                                 Center(
                                                   child: Text(
                                                     // "\nबाहरी स्रोत से डेटा",
-                                                    getTranslated(context,
+                                                   "\n"+ getTranslated(context,
                                                         'external_soc'),
                                                     textAlign: TextAlign.center,
                                                     textDirection:
@@ -1407,7 +1407,7 @@ class _DashBoard extends State<DashBoard> with SingleTickerProviderStateMixin {
                                                   child: Text(
                                                     // "बाहरी स्रोत से परीक्षण केंद्र डेटा",
                                                     getTranslated(
-                                                        context, 'login'),
+                                                        context, 'external_lab'),
                                                     textAlign: TextAlign.center,
                                                     textDirection:
                                                         TextDirection.ltr,

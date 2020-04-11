@@ -81,7 +81,7 @@ class _SplashPageState extends State<SplashPage> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => LanguagePage())
+                                  builder: (context) => AboutPage())
                                   );
                           // Navigator.pushNamed(context, 'loginR');
                         },

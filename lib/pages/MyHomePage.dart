@@ -27,12 +27,11 @@ Widget build(BuildContext context) {
   // TODO: implement build
   return Scaffold(
     body:_children[_currentIndex],
-    //  appBar: AppBar(
-    //  backgroundColor: Colors.white,
-    //  title: Center(child: Image.asset("assets/images/mitrc.png")), 
-    //  Text("Fight against COVID19",
-    //  style: TextStyle(color: Colors.black),),
-    //  ),
+     appBar: AppBar(
+     backgroundColor: Colors.white,
+     title:Text("Fight against COVID19",
+     style: TextStyle(color: Colors.black),),
+     ),
 
     // body: Container
     // (

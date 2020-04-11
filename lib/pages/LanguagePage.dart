@@ -29,6 +29,7 @@ class _LanguagePage extends State<LanguagePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(title: Text("Covid-19")),
       body: Container(
         decoration: BoxDecoration(
             gradient: LinearGradient(colors: [
@@ -39,64 +40,71 @@ class _LanguagePage extends State<LanguagePage> {
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            Center(
-              child: Text(
-                "\n\nPlease Select Your Language\nकृपया अपनी भाषा चुनें",
-                style: TextStyle(fontSize: 26.0, fontWeight: FontWeight.bold),
-                textAlign: TextAlign.center,
-              ),
+            Text(
+              "\nPlease Select Your Language\nकृपया अपनी भाषा चुनें",
+              style: TextStyle(fontSize: 26.0, fontWeight: FontWeight.bold),
+              textAlign: TextAlign.center,
             ),
             SizedBox(height: 40.0),
             Image(image: AssetImage('images/flag.gif')),
             SizedBox(height: 40.0),
-            Expanded(
-              child: DropdownButton<Language>(
-                underline: SizedBox(),
-                icon: Icon(
-                  Icons.language,
-                  color: Colors.blue,
-                ),
-                onChanged: (Language language) {
-                  _changeLanguage(language);
-                },
-                items: Language.languageList()
-                    .map<DropdownMenuItem<Language>>(
-                      (e) => DropdownMenuItem<Language>(
-                        value: e,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: <Widget>[Text(e.name)],
-                        ),
+            Padding(
+                padding: EdgeInsets.all(20),
+                child: Container(
+                  width: MediaQuery.of(context).size.width,
+                  child: Card(
+                    child: Center(
+                      child: DropdownButton<Language>(
+                        underline: SizedBox(),
+                        onChanged: (Language language) {
+                          _changeLanguage(language);
+                        },
+                        items: Language.languageList()
+                            .map<DropdownMenuItem<Language>>(
+                              (e) => DropdownMenuItem<Language>(
+                                value: e,
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: <Widget>[
+                                    Text(
+                                      e.name,
+                                      style: TextStyle(
+                                          fontSize: 20, color: Colors.black),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            )
+                            .toList(),
                       ),
-                    )
-                    .toList(),
-              ),
-            ),
-            MaterialButton(
-              onPressed: () {
-                // To close the Drawer
-                // Navigator.pop(context);
-                // Navigating to About Page
-                // Navigator.pushNamed(context, 'splashR');
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => HomePage()),
-                );
-              },
-              height: 50,
-              shape: StadiumBorder(),
-              color: Theme.of(context).primaryColor,
-              child: Center(
-                child: Text(
-                  // "Next",
-                  getTranslated(context, 'next'),
-                  style: TextStyle(color: Colors.white, fontSize: 20),
-                ),
-              ),
-            )
+                    ),
+                  ),
+                )),
+            Padding(
+                padding: EdgeInsets.all(40),
+                child: MaterialButton(
+                  onPressed: () {
+                    // To close the Drawer
+                    // Navigator.pop(context);
+                    // Navigating to About Page
+                    // Navigator.pushNamed(context, 'splashR');
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => HomePage()),
+                    );
+                  },
+                  height: 50,
+                  shape: StadiumBorder(),
+                  color: Theme.of(context).primaryColor,
+                  child: Center(
+                    child: Text(
+                      // "Next",
+                      getTranslated(context, 'next'),
+                      style: TextStyle(color: Colors.white, fontSize: 20),
+                    ),
+                  ),
+                ))
           ],
         ),
       ),

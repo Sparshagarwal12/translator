@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localization_master/localization/language_constants.dart';
 import 'hospitaldata.dart';
 
 class hospitalinner extends StatefulWidget {
@@ -21,8 +22,9 @@ class _hospitalinner extends State<hospitalinner>
               Color(0xFF138808),
             ], begin: Alignment.topCenter, end: Alignment.bottomCenter)),
             child: ListView(children: <Widget>[
+              Image(image: AssetImage('images/flag.gif'),),
               SizedBox(
-                height: MediaQuery.of(context).size.height / 8,
+                height: 20,
               ),
               Padding(
                   padding: EdgeInsets.only(left: 20, right: 20),
@@ -54,12 +56,13 @@ class _hospitalinner extends State<hospitalinner>
                                               AssetImage('images/hospitallist.png')),
                                       Center(
                                         child: Text(
-                                          "अस्पताल की सूची देखें",
+                                          // "अस्पताल की सूची देखें",
+                                          getTranslated(context, 'hospital_list'),
                                           textAlign: TextAlign.center,
                                           textDirection: TextDirection.ltr,
                                           style: TextStyle(
                                             fontWeight: FontWeight.bold,
-                                            fontSize: 20,
+                                            fontSize: 18,
                                             color: Colors.blue,
                                           ),
                                         ),
@@ -72,7 +75,7 @@ class _hospitalinner extends State<hospitalinner>
                     ],
                   )),
               SizedBox(
-                height: MediaQuery.of(context).size.height / 15,
+                height: MediaQuery.of(context).size.height / 20,
               ),
               Padding(
                   padding: EdgeInsets.only(left: 20, right: 20),
@@ -94,11 +97,12 @@ class _hospitalinner extends State<hospitalinner>
                                   Image(image: AssetImage('images/inform.png')),
                                   Center(
                                     child: Text(
-                                      "\nअपनी रिपोर्ट देखें",
+                                      // "\nअपनी रिपोर्ट देखें",
+                                    "\n"+  getTranslated(context, 'see_report'),
                                       textAlign: TextAlign.center,
                                       textDirection: TextDirection.ltr,
                                       style: TextStyle(
-                                        fontSize: 20,
+                                        fontSize: 18,
                                         fontWeight: FontWeight.bold,
                                         color: Colors.blue,
                                       ),
@@ -121,7 +125,7 @@ class _hospitalinner extends State<hospitalinner>
                     ],
                   )),
               SizedBox(
-                height: MediaQuery.of(context).size.height / 15,
+                height: MediaQuery.of(context).size.height / 20,
               ),
               Padding(
                   padding: EdgeInsets.only(left: 20, right: 20),
@@ -143,11 +147,12 @@ class _hospitalinner extends State<hospitalinner>
                                   Image(image: AssetImage('images/hospitaldetail.png')),
                                   Center(
                                     child: Text(
-                                      "\nअस्पताल का विवरण देखें",
+                                      // "\nअस्पताल का विवरण देखें",
+                                      getTranslated(context, 'corona_hospital'),
                                       textAlign: TextAlign.center,
                                       textDirection: TextDirection.ltr,
                                       style: TextStyle(
-                                        fontSize: 20,
+                                        fontSize: 18,
                                         fontWeight: FontWeight.bold,
                                         color: Colors.blue,
                                       ),

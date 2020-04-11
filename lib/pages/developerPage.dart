@@ -1,3 +1,5 @@
+import 'package:flutter_localization_master/pages/LanguagePage.dart';
+
 import 'faqPage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
@@ -15,10 +17,31 @@ List<Color> colorsStudent = [
   Color(0xFF8E2DE2),
   Color(0xFF4A00E0),
 ];
-List<String> image = ["deepak.png", "awneet.png", "rahul.png"];
+List<String> image = [
+  "https://imgur.com/download/anBYcdR",
+  "https://imgur.com/download/Vh3S6Vh",
+  "https://imgur.com/download/ranpvpF",
+  "https://imgur.com/download/moWLJdf",
+  "https://imgur.com/download/A8hyt9a",
+  "https://imgur.com/download/pHP8MLV",
+  "https://imgur.com/download/jGRwI9T",
+  "https://imgur.com/download/NJgpYrS",
+  "https://imgur.com/download/n8FBNnu"
+];
+List<String> name = [
+  "Deepak Sharma",
+  "Awneet",
+  "Rahul Shandilya",
+  "Meenakshi",
+  "Gaurav Saini",
+  "Sanchit Mangal",
+  "Ashu Sharma",
+  "Deepanshu Chauhan",
+  "Devesh Gupta"
+];
 Route createRoute() {
   return PageRouteBuilder(
-      pageBuilder: (context, animation, secondaryAnimation) => FAQPage(),
+      pageBuilder: (context, animation, secondaryAnimation) => LanguagePage(),
       transitionsBuilder: (context, animation, secondaryAnimation, child) {
         var begin = Offset(0.0, 1.0);
         var end = Offset.zero;
@@ -54,13 +77,13 @@ class _AboutPageState extends State<AboutPage> {
         height: MediaQuery.of(context).size.height,
         color: Colors.white,
         child: ListView.builder(
-          itemCount: 3,
+          itemCount: name.length,
           itemBuilder: (BuildContext context, int index) {
             return AnimationConfiguration.staggeredList(
               position: index,
-              duration: const Duration(milliseconds: 800),
+              duration: const Duration(milliseconds: 500),
               child: SlideAnimation(
-                horizontalOffset: 90.0,
+                horizontalOffset: 50.0,
                 child: FadeInAnimation(
                   child: GestureDetector(
                     onTap: () {
@@ -72,7 +95,7 @@ class _AboutPageState extends State<AboutPage> {
                       height: MediaQuery.of(context).size.height / 7,
                       decoration: BoxDecoration(
                         gradient: LinearGradient(
-                            colors: index < 3 ? colorsMentor : colorsStudent,
+                            colors: index < 4 ? colorsMentor : colorsStudent,
                             begin: Alignment.topLeft,
                             end: Alignment.bottomRight),
                         borderRadius: BorderRadius.circular(15.0),
@@ -89,9 +112,9 @@ class _AboutPageState extends State<AboutPage> {
                           Container(
                             decoration: BoxDecoration(
                                 image: DecorationImage(
-                                    fit: BoxFit.fitWidth,
-                                    image: AssetImage(
-                                      "assets/about/" + image[index],
+                                    fit: BoxFit.fill,
+                                    image: NetworkImage(
+                                      image[index],
                                     )),
                                 color: Colors.white,
                                 borderRadius: BorderRadius.circular(15.0)),
@@ -106,12 +129,12 @@ class _AboutPageState extends State<AboutPage> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
                               Text(
-                                "Team Member " + index.toString(),
+                                name[index],
                                 style: TextStyle(
                                     color: Colors.white, fontSize: 20.0),
                               ),
                               Text(
-                                index < 3 ? "Mentor" : "Studet",
+                                index < 4 ? "Mentor" : "Studet",
                                 style: TextStyle(
                                     color: Colors.white, fontSize: 15.0),
                               )

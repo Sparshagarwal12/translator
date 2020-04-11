@@ -47,6 +47,12 @@ dependencies:
   firebase_core:
   neumorphic: ^0.1.2
   curved_navigation_bar:
+  flutter_launcher_icons: "^0.7.3"
+
+flutter_icons:
+  android: "launcher_icon" 
+  ios: true
+  image_path: "assets/logo/indcovid.png"
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
