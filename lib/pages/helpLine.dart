@@ -2,6 +2,9 @@ import 'searchPage.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class HelpLine extends StatefulWidget {
   @override
@@ -12,6 +15,36 @@ Future<List<dynamic>> getUri() async {
   String url = "https://covid-mitrc.herokuapp.com/accounts/helpline";
   http.Response response = await http.get(url);
   return json.decode(response.body);
+}
+
+List<Color> color1 = [
+  Color(0xFF11998e),
+  Color(0xFF38ef7d),
+];
+List<Color> color2 = [
+  Color(0xFFff9966),
+  Color(0xFFff5e62),
+];
+
+Route createRoute(Widget name) {
+  return PageRouteBuilder(
+      pageBuilder: (context, animation, secondaryAnimation) => name,
+      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+        var begin = Offset(0.0, 1.0);
+        var end = Offset.zero;
+        var curve = Curves.easeInOutQuad;
+
+        var tween = Tween(begin: begin, end: end);
+        var curvedAnimation = CurvedAnimation(
+          parent: animation,
+          curve: curve,
+        );
+
+        return SlideTransition(
+          position: tween.animate(curvedAnimation),
+          child: child,
+        );
+      });
 }
 
 double width;
@@ -28,9 +61,20 @@ class _HelpLineState extends State<HelpLine> {
     height = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          "Help Line no.",
-          style: TextStyle(fontSize: 32.0),
+        // GestureDetector(child: IconButton(
+
+        //   icon:Icon('Icons.arrow_back'),
+        //   onPressed: (){
+        //     Navigator.pop(context);
+        //   },))
+
+        leading: Image(image: AssetImage('images/Corona.png')),
+        title: Center(
+          child: Text(
+            "हेल्पलाइन नंबर",
+            textAlign: TextAlign.justify,
+            style: TextStyle(fontSize: 25.0),
+          ),
         ),
         actions: <Widget>[
           IconButton(
@@ -42,7 +86,7 @@ class _HelpLineState extends State<HelpLine> {
                     return AlertDialog(
                       elevation: 20.0,
                       //context: context,
-                      title: Text("data"),
+                      title: Text("डेटा दर्ज करें"),
                       content: TextField(onSubmitted: (value) {
                         if (states.contains(value)) {
                           searchQuery = value.toUpperCase();
@@ -57,8 +101,8 @@ class _HelpLineState extends State<HelpLine> {
                               context: context,
                               builder: (BuildContext context) {
                                 return AlertDialog(
-                                  title: Text("Wrong query"),
-                                  content: Text("Please check keyword"),
+                                  title: Text("गलत सवाल किया"),
+                                  content: Text("कृपया कीवर्ड जांचें"),
                                   actions: <Widget>[
                                     IconButton(
                                         icon: Icon(Icons.done),
@@ -71,7 +115,26 @@ class _HelpLineState extends State<HelpLine> {
                         }
                       }),
                       actions: <Widget>[
-                        IconButton(icon: Icon(Icons.done), onPressed: () {})
+                        IconButton(
+                            icon: Icon(Icons.done),
+                            onPressed: () {
+                              Navigator.pop(context);
+                              return showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                      title: Text("गलत सवाल किया"),
+                                      content: Text("कृपया कीवर्ड जांचें"),
+                                      actions: <Widget>[
+                                        IconButton(
+                                            icon: Icon(Icons.done),
+                                            onPressed: () {
+                                              Navigator.pop(context);
+                                            })
+                                      ],
+                                    );
+                                  });
+                            })
                       ],
                     );
                   },
@@ -79,7 +142,7 @@ class _HelpLineState extends State<HelpLine> {
               })
         ],
         elevation: 0.0,
-        backgroundColor: Color(0xFF3180e4),
+        backgroundColor: Color(0xFFFF9933),
         automaticallyImplyLeading: false,
       ),
       body: Container(
@@ -87,8 +150,9 @@ class _HelpLineState extends State<HelpLine> {
         height: MediaQuery.of(context).size.height,
         decoration: BoxDecoration(
           gradient: LinearGradient(colors: [
-            Color(0xFF3180e4),
-            Color(0xFF564dc2),
+            Color(0xFFFF9933),
+            Color(0xFFFFFFFF),
+            Color(0xFF138808),
           ], begin: Alignment.topCenter, end: Alignment.bottomCenter),
         ),
         child: FutureBuilder(
@@ -105,41 +169,54 @@ class _HelpLineState extends State<HelpLine> {
                 return ListView.builder(
                   itemCount: states.length,
                   itemBuilder: (BuildContext context, int index) {
-                    return GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) =>
-                                    helpLineDetails(states[index])));
-                      },
-                      child: Container(
-                        height: 60,
-                        margin: EdgeInsets.all(10.0),
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(15.0),
-                            boxShadow: [
-                              BoxShadow(color: Colors.black26, blurRadius: 10.0)
-                            ]),
-                        child: Center(
-                            child: Text(
-                          states[index],
-                          style: TextStyle(fontSize: 20.0),
-                        )),
+                    return AnimationConfiguration.staggeredList(
+                      position: index,
+                      duration: const Duration(milliseconds: 800),
+                      child: SlideAnimation(
+                        horizontalOffset: 50.0,
+                        child: FadeInAnimation(
+                          child: GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          helpLineDetails(states[index])));
+                            },
+                            child: Container(
+                              decoration: BoxDecoration(
+                                gradient: LinearGradient(
+                                    colors: index % 2 == 0 ? color1 : color2,
+                                    begin: Alignment.topLeft,
+                                    end: Alignment.bottomRight),
+                                borderRadius: BorderRadius.circular(15.0),
+                                boxShadow: [
+                                  BoxShadow(
+                                      color: Colors.black45,
+                                      blurRadius: 15.0,
+                                      offset: Offset.fromDirection(1.0, 10.0))
+                                ],
+                              ),
+                              margin: EdgeInsets.all(10.0),
+                              width: 300,
+                              height: 100,
+                              child: Center(
+                                  child: Text(
+                                states[index],
+                                style: TextStyle(fontSize: 20.0),
+                              )),
+                            ),
+                          ),
+                        ),
                       ),
                     );
                   },
                 );
               } else {
-                return Container(
-                  width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height,
-                  child: Center(
-                    child: CircularProgressIndicator(
-                      backgroundColor: Colors.black,
-                      strokeWidth: 10,
-                    ),
+                return Center(
+                  child: SpinKitChasingDots(
+                    color: Colors.black,
+                    size: 50.0,
                   ),
                 );
               }
@@ -152,10 +229,13 @@ class _HelpLineState extends State<HelpLine> {
 Widget helpLineDetails(String state) {
   return Scaffold(
     appBar: AppBar(
-      backgroundColor: Color(0xFF3180e4),
-      title: Text(
-        state,
-        style: TextStyle(fontSize: 30.0),
+      leading: Image.asset('images/Corona.png'),
+      backgroundColor: Color(0xFFFF9933),
+      title: Center(
+        child: Text(
+          state,
+          style: TextStyle(fontSize: 30.0),
+        ),
       ),
       elevation: 0.0,
       automaticallyImplyLeading: false,
@@ -165,8 +245,9 @@ Widget helpLineDetails(String state) {
         height: height,
         decoration: BoxDecoration(
           gradient: LinearGradient(colors: [
-            Color(0xFF3180e4),
-            Color(0xFF564dc2),
+            Color(0xFFFF9933),
+            Color(0xFFFFFFFF),
+            Color(0xFF138808),
           ], begin: Alignment.topCenter, end: Alignment.bottomCenter),
         ),
         child: FutureBuilder(
@@ -178,33 +259,202 @@ Widget helpLineDetails(String state) {
                 itemCount: content.length,
                 itemBuilder: (BuildContext context, int index) {
                   if (content[index]["state"] == state) {
-                    return Container(
-                      margin: EdgeInsets.all(5.0),
-                      //height: 100.0,
-                      padding: EdgeInsets.all(10.0),
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(15.0),
-                          boxShadow: [
-                            BoxShadow(color: Colors.black26, blurRadius: 10.0)
-                          ]),
-                      child: Column(
-                        children: <Widget>[
-                          Align(
-                            alignment: Alignment.centerLeft,
-                            child: Text(
-                              "Phone: " + content[index]["contact"].toString(),
-                              style: TextStyle(fontSize: 16.0),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.centerLeft,
-                            child: Text(
-                              "Email: " + content[index]["email"],
-                              style: TextStyle(fontSize: 16.0),
-                            ),
-                          ),
-                        ],
+                    return AnimationConfiguration.staggeredList(
+                      position: index,
+                      duration: const Duration(milliseconds: 800),
+                      child: SlideAnimation(
+                        horizontalOffset: 50.0,
+                        child: FadeInAnimation(
+                            child: Column(
+                          children: <Widget>[
+                            Container(
+                                decoration: BoxDecoration(
+                                  gradient: LinearGradient(
+                                      colors: index % 2 == 0 ? color1 : color2,
+                                      begin: Alignment.topLeft,
+                                      end: Alignment.bottomRight),
+                                  borderRadius: BorderRadius.circular(15.0),
+                                  boxShadow: [
+                                    BoxShadow(
+                                        color: Colors.black45,
+                                        blurRadius: 15.0,
+                                        offset: Offset.fromDirection(1.0, 10.0))
+                                  ],
+                                ),
+                                margin: EdgeInsets.all(10.0),
+                                // width: 300,
+                                height: 100,
+                                child: Column(
+                                  children: <Widget>[
+                                    Center(
+                                        child: Column(
+                                      children: <Widget>[
+                                        IconButton(
+                                            icon: Icon(Icons.call),
+                                            onPressed: () => launch("tel://" +
+                                                content[index]["contact1"]
+                                                    .toString())),
+                                        Text(
+                                          "Phone: " +
+                                              content[index]["contact1"]
+                                                  .toString(),
+                                          style: TextStyle(fontSize: 25.0),
+                                          textAlign: TextAlign.start,
+                                        ),
+                                      ],
+                                    )),
+                                  ],
+                                )),
+                            Container(
+                                decoration: BoxDecoration(
+                                  gradient: LinearGradient(
+                                      colors: index % 2 == 0 ? color1 : color2,
+                                      begin: Alignment.topLeft,
+                                      end: Alignment.bottomRight),
+                                  borderRadius: BorderRadius.circular(15.0),
+                                  boxShadow: [
+                                    BoxShadow(
+                                        color: Colors.black45,
+                                        blurRadius: 15.0,
+                                        offset: Offset.fromDirection(1.0, 10.0))
+                                  ],
+                                ),
+                                margin: EdgeInsets.all(10.0),
+                                // width: 300,
+                                height: 100,
+                                child: Column(
+                                  children: <Widget>[
+                                    Center(
+                                        child: Column(
+                                      children: <Widget>[
+                                        IconButton(
+                                            icon: Icon(Icons.call),
+                                            onPressed: () => launch("tel://" +
+                                                content[index]["contact2"]
+                                                    .toString())),
+                                        Text(
+                                          "Phone: " +
+                                              content[index]["contact2"]
+                                                  .toString(),
+                                          style: TextStyle(fontSize: 25.0),
+                                          textAlign: TextAlign.start,
+                                        ),
+                                      ],
+                                    )),
+                                  ],
+                                )),
+                            Container(
+                                decoration: BoxDecoration(
+                                  gradient: LinearGradient(
+                                      colors: index % 2 == 0 ? color1 : color2,
+                                      begin: Alignment.topLeft,
+                                      end: Alignment.bottomRight),
+                                  borderRadius: BorderRadius.circular(15.0),
+                                  boxShadow: [
+                                    BoxShadow(
+                                        color: Colors.black45,
+                                        blurRadius: 15.0,
+                                        offset: Offset.fromDirection(1.0, 10.0))
+                                  ],
+                                ),
+                                margin: EdgeInsets.all(10.0),
+                                // width: 300,
+                                height: 100,
+                                child: Column(
+                                  children: <Widget>[
+                                    Center(
+                                        child: Column(
+                                      children: <Widget>[
+                                        IconButton(
+                                            icon: Icon(Icons.call),
+                                            onPressed: () => launch("tel://" +
+                                                content[index]["contact3"]
+                                                    .toString())),
+                                        Text(
+                                          "Phone: " +
+                                              content[index]["contact3"]
+                                                  .toString(),
+                                          style: TextStyle(fontSize: 25.0),
+                                          textAlign: TextAlign.start,
+                                        ),
+                                      ],
+                                    )),
+                                  ],
+                                )),
+                            Container(
+                                decoration: BoxDecoration(
+                                  gradient: LinearGradient(
+                                      colors: index % 2 == 0 ? color1 : color2,
+                                      begin: Alignment.topLeft,
+                                      end: Alignment.bottomRight),
+                                  borderRadius: BorderRadius.circular(15.0),
+                                  boxShadow: [
+                                    BoxShadow(
+                                        color: Colors.black45,
+                                        blurRadius: 15.0,
+                                        offset: Offset.fromDirection(1.0, 10.0))
+                                  ],
+                                ),
+                                margin: EdgeInsets.all(10.0),
+                                // width: 300,
+                                height: 100,
+                                child: Column(
+                                  children: <Widget>[
+                                    Center(
+                                        child: Column(
+                                      children: <Widget>[
+                                        IconButton(
+                                            icon: Icon(Icons.call),
+                                            onPressed: () => launch("tel://" +
+                                                content[index]["contact4"]
+                                                    .toString())),
+                                        Text(
+                                          "Phone: " +
+                                              content[index]["contact4"]
+                                                  .toString(),
+                                          style: TextStyle(fontSize: 25.0),
+                                          textAlign: TextAlign.start,
+                                        ),
+                                      ],
+                                    )),
+                                  ],
+                                )),
+                            Container(
+                                decoration: BoxDecoration(
+                                  gradient: LinearGradient(
+                                      colors: index % 2 == 0 ? color1 : color2,
+                                      begin: Alignment.topLeft,
+                                      end: Alignment.bottomRight),
+                                  borderRadius: BorderRadius.circular(15.0),
+                                  boxShadow: [
+                                    BoxShadow(
+                                        color: Colors.black45,
+                                        blurRadius: 15.0,
+                                        offset: Offset.fromDirection(1.0, 10.0))
+                                  ],
+                                ),
+                                margin: EdgeInsets.all(10.0),
+                                // width: 300,
+                                height: 130,
+                                child: Column(
+                                  children: <Widget>[
+                                    Center(
+                                        child: Column(
+                                      children: <Widget>[
+                                        IconButton(
+                                            icon: Icon(Icons.mail),
+                                            onPressed: () {}),
+                                        Text(
+                                          "Email: " + content[index]["email"],
+                                          style: TextStyle(fontSize: 25.0),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ],
+                                    )),
+                                  ],
+                                )),
+                          ],
+                        )),
                       ),
                     );
                   } else {
@@ -214,11 +464,11 @@ Widget helpLineDetails(String state) {
               );
             } else {
               return Center(
-                child: CircularProgressIndicator(
-                  backgroundColor: Colors.black,
-                  strokeWidth: 20.0,
-                ),
-              );
+                  child: SpinKitChasingDots(
+                    color: Colors.black,
+                    size: 50.0,
+                  ),
+                );
             }
           },
         )),

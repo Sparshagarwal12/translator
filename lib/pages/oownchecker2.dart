@@ -1,3 +1,5 @@
+import 'package:flutter_localization_master/localization/language_constants.dart';
+
 import 'grid.dart';
 import 'ownchecker3.dart';
 import 'selfchecker.dart';
@@ -85,7 +87,8 @@ class _ownchecker2 extends State<ownchecker2> {
                                 ),
                                 Center(
                                   child: Text(
-                                    " आपका लिंग क्या है?",
+                                    getTranslated(context, 'own_ques2'),
+                                    // " आपका लिंग क्या है?",
                                     style: TextStyle(fontSize: 20.0),
                                     textAlign: TextAlign.center,
                                   ),
@@ -101,7 +104,10 @@ class _ownchecker2 extends State<ownchecker2> {
                                             value: 0,
                                             groupValue: _radioValue,
                                             onChanged: _handleRadio),
-                                        Text("पुरुष"),
+                                        Text(
+                                          getTranslated(context, 'male')
+                                          // "पुरुष"
+                                        ),
                                       ],
                                     ),
                                     Row(
@@ -110,7 +116,10 @@ class _ownchecker2 extends State<ownchecker2> {
                                             value: 1,
                                             groupValue: _radioValue,
                                             onChanged: _handleRadio),
-                                        Text("महिला")
+                                        Text(
+                                          getTranslated(context, 'female'),
+                                          // "महिला"
+                                        )
                                       ],
                                     )
                                   ],
@@ -145,10 +154,11 @@ class _ownchecker2 extends State<ownchecker2> {
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) =>
-                                            selfownchecker3()));
+                                         ownchecker3()));
                               },
                               child: Text(
-                                "आगे  >>>",
+                                getTranslated(context, 'next'),
+                                // "आगे  >>>",
                                 style: TextStyle(color: Colors.white),
                               ),
                             ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localization_master/localization/language_constants.dart';
 import 'deathgrid.dart';
 import 'depart.dart';
 import 'pcr.dart';
@@ -59,7 +60,8 @@ class _testinggrid1 extends State<testinggrid1>
                                               AssetImage('images/center.png')),
                                       Center(
                                         child: Text(
-                                          "परीक्षण केंद्र",
+                                          getTranslated(context, 'testing_center'),
+                                          // "परीक्षण केंद्र",
                                           textAlign: TextAlign.center,
                                           textDirection: TextDirection.ltr,
                                           style: TextStyle(
@@ -89,7 +91,8 @@ class _testinggrid1 extends State<testinggrid1>
                                   Image(image: AssetImage('images/pcr.png')),
                                   Center(
                                     child: Text(
-                                      "पीसीआर मशीन",
+                                      getTranslated(context,'pcr'),
+                                      // "पीसीआर मशीन",
                                       textAlign: TextAlign.center,
                                       textDirection: TextDirection.ltr,
                                       style: TextStyle(
@@ -145,7 +148,8 @@ class _testinggrid1 extends State<testinggrid1>
                               Image(image: AssetImage('images/sample.png')),
                               Center(
                                 child: Text(
-                                  "नमूना संग्रह",
+                                  getTranslated(context, 'sample_coll'),
+                                  // "नमूना संग्रह",
                                   textAlign: TextAlign.center,
                                   textDirection: TextDirection.ltr,
                                   style: TextStyle(
@@ -176,7 +180,8 @@ class _testinggrid1 extends State<testinggrid1>
                                   Image(image: AssetImage('images/inform.png')),
                                   Center(
                                     child: Text(
-                                      "\nदिशा निर्देशों",
+                                      getTranslated(context, 'guidlines'),
+                                      // "\nदिशा निर्देशों",
                                       textAlign: TextAlign.center,
                                       textDirection: TextDirection.ltr,
                                       style: TextStyle(

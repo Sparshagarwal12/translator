@@ -1,4 +1,8 @@
+import 'package:flutter_localization_master/pages/coronaMonitor.dart';
+import 'package:flutter_localization_master/pages/homePage.dart';
+
 import 'DeclarationForm.dart';
+import 'MyHomePage.dart';
 import 'grid.dart';
 import 'LanguagePage.dart';
 import 'slefDeclaration.dart';
@@ -30,12 +34,14 @@ class _CheckUserState extends State<CheckUser> {
         } else {
           Navigator.pushAndRemoveUntil(
               context,
-              MaterialPageRoute(builder: (context) => DashBoard()),
+              MaterialPageRoute(builder: (context) =>CoronaMonitor()),
               (_) => false);
         }
       } else {
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => LanguagePage()));
+        Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(builder: (context) => HomePage()),
+            (_) => false);
       }
     });
 

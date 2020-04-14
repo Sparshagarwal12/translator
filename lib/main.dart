@@ -63,7 +63,8 @@ class _MyAppState extends State<MyApp> {
           Locale("pa", "IN"),
           Locale("ta", "IN"),
           Locale("te", "IN"),
-          Locale("ur", "IN")
+          Locale("ur", "IN"),
+          Locale("or", "IN")
         ],
         localizationsDelegates: [
           DemoLocalization.delegate,

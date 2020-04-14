@@ -1,5 +1,9 @@
 import 'dart:convert';
 
+// import 'package:flutter_localization_master/pages/zkcm.dart';
+
+import 'package:flutter_localization_master/pages/DailyBasis.dart';
+
 import 'dashBoardGoogleMap.dart' as dash;
 import 'ministrystate.dart';
 import 'package:flutter_localization_master/localization/language_constants.dart';
@@ -20,19 +24,6 @@ import 'tracker.dart';
 import 'userrequire.dart';
 import 'videoPage.dart';
 
-class DashBoard extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        home: Scaffold(
-            appBar: AppBar(
-                title: Text("कोविड-19"),
-                elevation: 0.0,
-                backgroundColor: Color(0xFFFF9933)),
-            body: LogoApp()));
-  }
-}
 
 class LogoApp extends StatefulWidget {
   @override
@@ -45,26 +36,26 @@ Future<Map> getUri() async {
   return json.decode(response.body);
 }
 
-Route createRoute(Widget name) {
-  return PageRouteBuilder(
-      pageBuilder: (context, animation, secondaryAnimation) => name,
-      transitionsBuilder: (context, animation, secondaryAnimation, child) {
-        var begin = Offset(0.0, 1.0);
-        var end = Offset.zero;
-        var curve = Curves.easeInOutQuad;
+// Route createRoute(Widget name) {
+//   return PageRouteBuilder(
+//       pageBuilder: (context, animation, secondaryAnimation) => name,
+//       transitionsBuilder: (context, animation, secondaryAnimation, child) {
+//         var begin = Offset(0.0, 1.0);
+//         var end = Offset.zero;
+//         var curve = Curves.easeInOutQuad;
 
-        var tween = Tween(begin: begin, end: end);
-        var curvedAnimation = CurvedAnimation(
-          parent: animation,
-          curve: curve,
-        );
+//         var tween = Tween(begin: begin, end: end);
+//         var curvedAnimation = CurvedAnimation(
+//           parent: animation,
+//           curve: curve,
+//         );
 
-        return SlideTransition(
-          position: tween.animate(curvedAnimation),
-          child: child,
-        );
-      });
-}
+//         return SlideTransition(
+//           position: tween.animate(curvedAnimation),
+//           child: child,
+//         );
+//       });
+// }
 
 class _LogoAppState extends State<LogoApp> with SingleTickerProviderStateMixin {
   @override
@@ -111,10 +102,14 @@ class _LogoAppState extends State<LogoApp> with SingleTickerProviderStateMixin {
                                     children: <Widget>[
                                       Cont(
                                           end: content['registered'].toDouble(),
-                                          text: "कुल उपयोगकर्ता रजिस्टर"),
+                                          text: getTranslated(context, 'total_register'),
+                                          // "कुल उपयोगकर्ता रजिस्टर"
+                                          ),
                                       Cont(
                                           end: content['infected'].toDouble(),
-                                          text: "कुल संक्रमित व्यक्ति"),
+                                          text:  getTranslated(context, 'total_infected'),
+                                          //  "कुल संक्रमित व्यक्ति"
+                                          ),
                                     ],
                                   )),
                               SizedBox(
@@ -127,10 +122,14 @@ class _LogoAppState extends State<LogoApp> with SingleTickerProviderStateMixin {
                                     children: <Widget>[
                                       Cont(
                                           end: content['symptoms'].toDouble(),
-                                          text: "संदिग्ध मामलाा"),
+                                          text: getTranslated(context, 'suspected'),
+                                          // "संदिग्ध मामलाा"
+                                          ),
                                       Cont(
                                           end: 7.0,
-                                          text: "कुल व्यक्ति ठीक हो गया")
+                                          text: getTranslated(context, 'total_cured')
+                                          // "कुल व्यक्ति ठीक हो गया"
+                                          )
                                     ],
                                   )),
                               SizedBox(
@@ -141,10 +140,14 @@ class _LogoAppState extends State<LogoApp> with SingleTickerProviderStateMixin {
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: <Widget>[
-                                      Cont(end: 3.0, text: "कुल मौत"),
+                                      Cont(end: 3.0, text: getTranslated(context, 'total_death')
+                                      //  "कुल मौत"
+                                       ),
                                       Cont(
                                           end: 3.0,
-                                          text: "कुल लोगों को अलग कर दिया")
+                                          text: getTranslated(context,'total_isolated')
+                                          // "कुल लोगों को अलग कर दिया"
+                                          )
                                     ],
                                   )),
                               Padding(
@@ -153,7 +156,9 @@ class _LogoAppState extends State<LogoApp> with SingleTickerProviderStateMixin {
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: <Widget>[
-                                      Cont(end: 2.0, text: "कुल लोग बरामद"),
+                                      Cont(end: 2.0, text:
+                                       "कुल लोग बरामद"
+                                       ),
                                       Expanded(
                                         child: GestureDetector(
                                           child: Card(
@@ -177,7 +182,8 @@ class _LogoAppState extends State<LogoApp> with SingleTickerProviderStateMixin {
                                                           'images/hospital.png')),
                                                   Center(
                                                     child: Text(
-                                                      "\nअस्पताल",
+                                                      "\n"+getTranslated(context, 'hospital'),
+                                                      // "\nअस्पताल",
                                                       textAlign:
                                                           TextAlign.center,
                                                       textDirection:
@@ -236,7 +242,8 @@ class _LogoAppState extends State<LogoApp> with SingleTickerProviderStateMixin {
                                                           'images/headset.png')),
                                                   Center(
                                                     child: Text(
-                                                      "\nहेल्पलाइन",
+                                                      // "\nहेल्पलाइन",
+                                                      getTranslated(context, 'helpline'),
                                                       textAlign:
                                                           TextAlign.center,
                                                       textDirection:
@@ -283,7 +290,8 @@ class _LogoAppState extends State<LogoApp> with SingleTickerProviderStateMixin {
                                                           'images/lab_items.png')),
                                                   Center(
                                                     child: Text(
-                                                      "\nपरीक्षण प्रयोगशाला",
+                                                      "\n"+getTranslated(context, 'testing_labs'),
+                                                      // "\nपरीक्षण प्रयोगशाला",
                                                       textAlign:
                                                           TextAlign.center,
                                                       textDirection:
@@ -342,7 +350,8 @@ class _LogoAppState extends State<LogoApp> with SingleTickerProviderStateMixin {
                                                           'images/blackspot.png')),
                                                   Center(
                                                     child: Text(
-                                                      "मानचित्र ",
+                                                      getTranslated(context, 'blackspot'),
+                                                      // "मानचित्र ",
                                                       textAlign:
                                                           TextAlign.center,
                                                       textDirection:
@@ -387,7 +396,8 @@ class _LogoAppState extends State<LogoApp> with SingleTickerProviderStateMixin {
                                                   ),
                                                   Center(
                                                     child: Text(
-                                                      "\nवीडियो",
+                                                      "\n"+getTranslated(context, 'video'),
+                                                      // "\nवीडियो",
                                                       textAlign:
                                                           TextAlign.center,
                                                       textDirection:
@@ -447,7 +457,8 @@ class _LogoAppState extends State<LogoApp> with SingleTickerProviderStateMixin {
                                                           'images/ministry.png')),
                                                   Center(
                                                     child: Text(
-                                                      "स्वास्थ्य मंत्रालय",
+                                                      getTranslated(context,'health_ministry'),
+                                                      // "स्वास्थ्य मंत्रालय",
                                                       textAlign:
                                                           TextAlign.center,
                                                       textDirection:
@@ -498,7 +509,8 @@ class _LogoAppState extends State<LogoApp> with SingleTickerProviderStateMixin {
                                                           'images/warning.png')),
                                                   Center(
                                                     child: Text(
-                                                      "\nसावधानियां",
+                                                      "\n"+getTranslated(context, 'precaution'),
+                                                      // "\nसावधानियां",
                                                       textAlign:
                                                           TextAlign.center,
                                                       textDirection:
@@ -557,7 +569,8 @@ class _LogoAppState extends State<LogoApp> with SingleTickerProviderStateMixin {
                                                           'images/aware.png')),
                                                   Center(
                                                     child: Text(
-                                                      "जागरूकता",
+                                                      getTranslated(context,'awareness'),
+                                                      // "जागरूकता",
                                                       textAlign:
                                                           TextAlign.center,
                                                       textDirection:
@@ -608,7 +621,8 @@ class _LogoAppState extends State<LogoApp> with SingleTickerProviderStateMixin {
                                                           'images/advice.png')),
                                                   Center(
                                                     child: Text(
-                                                      "\nसलाहकार",
+                                                      "\n"+getTranslated(context, 'advisory'),
+                                                      // "\nसलाहकार",
                                                       textAlign:
                                                           TextAlign.center,
                                                       textDirection:
@@ -631,7 +645,9 @@ class _LogoAppState extends State<LogoApp> with SingleTickerProviderStateMixin {
                                               context,
                                               MaterialPageRoute(
                                                   builder: (context) =>
-                                                      point.advicegrid()),
+                                                      point.advicegrid()
+                                                      // LocalAudio(),
+                                                      ),
                                             );
                                           },
                                         ),
@@ -667,7 +683,8 @@ class _LogoAppState extends State<LogoApp> with SingleTickerProviderStateMixin {
                                                           'images/faq.png')),
                                                   Center(
                                                     child: Text(
-                                                      "\nसामान्य प्रश्न",
+                                                      "\n"+getTranslated(context, 'faq'),
+                                                      // "\nसामान्य प्रश्न",
                                                       textAlign:
                                                           TextAlign.center,
                                                       textDirection:
@@ -718,7 +735,8 @@ class _LogoAppState extends State<LogoApp> with SingleTickerProviderStateMixin {
                                                           'images/audio.png')),
                                                   Center(
                                                     child: Text(
-                                                      "ऑडियो नमूना",
+                                                      getTranslated(context,'audio_sample'),
+                                                      // "ऑडियो नमूना",
                                                       textAlign:
                                                           TextAlign.center,
                                                       textDirection:
@@ -777,7 +795,8 @@ class _LogoAppState extends State<LogoApp> with SingleTickerProviderStateMixin {
                                                           'images/selfcheck.png')),
                                                   Center(
                                                     child: Text(
-                                                      "स्वयं जाँचकर्ता",
+                                                      getTranslated(context,'self_checker'),
+                                                      // "स्वयं जाँचकर्ता",
                                                       textAlign:
                                                           TextAlign.center,
                                                       textDirection:
@@ -800,7 +819,7 @@ class _LogoAppState extends State<LogoApp> with SingleTickerProviderStateMixin {
                                               context,
                                               MaterialPageRoute(
                                                   builder: (context) =>
-                                                      selfcheck2()),
+                                                      checker()),
                                             );
                                           },
                                         ),
@@ -828,7 +847,8 @@ class _LogoAppState extends State<LogoApp> with SingleTickerProviderStateMixin {
                                                           'images/virus.png')),
                                                   Center(
                                                     child: Text(
-                                                      "\nकोरोना ट्रैकर",
+                                                      "\n"+getTranslated(context, 'corona_tracker'),
+                                                      // "\nकोरोना ट्रैकर",
                                                       textAlign:
                                                           TextAlign.center,
                                                       textDirection:
@@ -887,7 +907,8 @@ class _LogoAppState extends State<LogoApp> with SingleTickerProviderStateMixin {
                                                           'images/require.png')),
                                                   Center(
                                                     child: Text(
-                                                      "लोगों की जरुरत",
+                                                      getTranslated(context,'user_requrirement'),
+                                                      // "लोगों की जरुरत",
                                                       textAlign:
                                                           TextAlign.center,
                                                       textDirection:
@@ -938,7 +959,8 @@ class _LogoAppState extends State<LogoApp> with SingleTickerProviderStateMixin {
                                                           'images/inform.png')),
                                                   Center(
                                                     child: Text(
-                                                      "\nअन्य व्यक्ति की जानकारी",
+                                                      "\n"+getTranslated(context, 'people_info'),
+                                                      // "\nअन्य व्यक्ति की जानकारी",
                                                       textAlign:
                                                           TextAlign.center,
                                                       textDirection:
@@ -997,10 +1019,10 @@ class _LogoAppState extends State<LogoApp> with SingleTickerProviderStateMixin {
                                                   //         'images/file.png')),
                                                   Center(
                                                     child: Text(
-                                                      "\nबाहरी स्रोत से डेटा",
+                                                      // "\nबाहरी स्रोत से डेटा",
                                                       // "\n" +
-                                                          // getTranslated(context,
-                                                          //     'external_soc'),
+                                                          getTranslated(context,
+                                                              'external_soc'),
                                                       textAlign:
                                                           TextAlign.center,
                                                       textDirection:
@@ -1046,12 +1068,127 @@ class _LogoAppState extends State<LogoApp> with SingleTickerProviderStateMixin {
                                                 mainAxisAlignment:
                                                     MainAxisAlignment.center,
                                                 children: <Widget>[
+                                                  Image(
+                                                      image: AssetImage(
+                                                          'images/elab.png')),
+                                                  Center(
+                                                    child: Text(
+                                                      // "बाहरी स्रोत से परीक्षण केंद्र डेटा",
+                                                      getTranslated(context,
+                                                          'external_lab'),
+                                                      textAlign:
+                                                          TextAlign.center,
+                                                      textDirection:
+                                                          TextDirection.ltr,
+                                                      style: TextStyle(
+                                                        fontSize: 20,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        color: Colors.blue,
+                                                      ),
+                                                    ),
+                                                  )
+                                                ],
+                                              ),
+                                            ),
+                                            margin: EdgeInsets.only(left: 10),
+                                          ),
+                                          onTap: () {
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      point.exterTestgrid()),
+                                            );
+                                          },
+                                        ),
+                                      )
+                                    ],
+                                  )),
+                                    Padding(
+                                  padding: EdgeInsets.only(
+                                      top: 20, left: 20, right: 20),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: <Widget>[
+                                      Expanded(
+                                        child: GestureDetector(
+                                          child: Card(
+                                            shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(
+                                                        30.0)),
+                                            elevation: 10.0,
+                                            color: Color(0xFFFFFFFF),
+                                            child: Container(
+                                              height: MediaQuery.of(context)
+                                                      .size
+                                                      .height /
+                                                  5,
+                                              child: Column(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: <Widget>[
+                                                  // Image(
+                                                  //     image: AssetImage(
+                                                  //         'images/file.png')),
+                                                  Center(
+                                                    child: Text(
+                                                      "Daily Basis",
+                                                      // "\n" +
+                                                          // getTranslated(context,
+                                                          //     'external_soc'),
+                                                      textAlign:
+                                                          TextAlign.center,
+                                                      textDirection:
+                                                          TextDirection.ltr,
+                                                      style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        fontSize: 18.0,
+                                                        color: Colors.blue,
+                                                      ),
+                                                    ),
+                                                  )
+                                                ],
+                                              ),
+                                            ),
+                                            margin: EdgeInsets.only(left: 10),
+                                          ),
+                                          onTap: () {
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      DailyBasis()),
+                                            );
+                                          },
+                                        ),
+                                      ),
+                                      Expanded(
+                                        child: GestureDetector(
+                                          child: Card(
+                                            shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(
+                                                        30.0)),
+                                            elevation: 10.0,
+                                            color: Color(0xFFFFFFFF),
+                                            child: Container(
+                                              height: MediaQuery.of(context)
+                                                      .size
+                                                      .height /
+                                                  5,
+                                              child: Column(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: <Widget>[
                                                   // Image(
                                                   //     image: AssetImage(
                                                   //         'images/elab.png')),
                                                   Center(
                                                     child: Text(
-                                                      "बाहरी स्रोत से परीक्षण केंद्र डेटा",
+                                                      "About App",
                                                       // getTranslated(context,
                                                       //     'external_lab'),
                                                       textAlign:

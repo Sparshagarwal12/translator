@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localization_master/localization/language_constants.dart';
+import 'package:flutter_localization_master/pages/DailyBasis.dart';
+import 'package:flutter_localization_master/pages/HospitalList.dart';
 import 'package:flutter_localization_master/pages/PatientReport.dart';
+import 'package:flutter_localization_master/pages/vrdlCenter.dart';
 import 'hospitaldata.dart';
 
 class hospitalinner extends StatefulWidget {
@@ -38,7 +41,7 @@ class _hospitalinner extends State<hospitalinner>
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => firstgrid()),
+                                      builder: (context) => HospitalList()),
                                 );
                               },
                               child: Card(
@@ -99,7 +102,8 @@ class _hospitalinner extends State<hospitalinner>
                                   Center(
                                     child: Text(
                                       // "\nअपनी रिपोर्ट देखें",
-                                    "\n"+  getTranslated(context, 'see_report'),
+                                    "\n"+  getTranslated(context, 'see_report'
+                                    ),
                                       textAlign: TextAlign.center,
                                       textDirection: TextDirection.ltr,
                                       style: TextStyle(
@@ -149,7 +153,7 @@ class _hospitalinner extends State<hospitalinner>
                                   Center(
                                     child: Text(
                                       // "\nअस्पताल का विवरण देखें",
-                                      getTranslated(context, 'corona_hospital'),
+                                      getTranslated(context, 'vrdl'),
                                       textAlign: TextAlign.center,
                                       textDirection: TextDirection.ltr,
                                       style: TextStyle(
@@ -165,11 +169,11 @@ class _hospitalinner extends State<hospitalinner>
                             margin: EdgeInsets.only(left: 10),
                           ),
                           onTap: () {
-                            // Navigator.push(
-                            //   context,
-                            //   MaterialPageRoute(
-                            //       builder: (context) => secondgrid()),
-                            // );
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => vrdl()),
+                            );
                           },
                         ),
                       ),

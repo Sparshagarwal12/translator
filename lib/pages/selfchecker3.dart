@@ -106,7 +106,7 @@ class _checker3 extends State<checker3> {
                                           onChanged: _handleRadio),
                                       Text(
                                         // "किसी और के लिए"
-                                        getTranslated(context, 'ans1'))
+                                        getTranslated(context, 'ans2'))
                                     ],
                                   ),
                                   SizedBox(

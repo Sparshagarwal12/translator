@@ -1,3 +1,4 @@
+import 'package:flutter_localization_master/localization/language_constants.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'grid.dart';
 import 'lastchecker.dart';
@@ -110,7 +111,8 @@ class _ownchecker3 extends State<ownchecker3> {
                               children: <Widget>[
                                 Center(
                                   child: Text(
-                                    "क्या आपके पास निम्न जीवन-धमकी के कोई लक्षण हैं?",
+                                    getTranslated(context, 'own_ques3'),
+                                    // "क्या आपके पास निम्न जीवन-धमकी के कोई लक्षण हैं?",
                                     style: TextStyle(fontSize: 20.0),
                                     textAlign: TextAlign.center,
                                   ),
@@ -129,7 +131,10 @@ class _ownchecker3 extends State<ownchecker3> {
                                                 val0 = value0;
                                               });
                                             }),
-                                        Text("सांस लेने में कठिनाई"),
+                                        Text(
+                                          getTranslated(context, 'symp1'),
+                                          // "सांस लेने में कठिनाई"
+                                          ),
                                       ],
                                     ),
                                     Row(
@@ -141,7 +146,10 @@ class _ownchecker3 extends State<ownchecker3> {
                                                 val1 = value1;
                                               });
                                             }),
-                                        Text("बुखार")
+                                        Text(
+                                          getTranslated(context, 'symp2')
+                                          // "बुखार"
+                                          )
                                       ],
                                     ),
                                     Row(
@@ -153,7 +161,10 @@ class _ownchecker3 extends State<ownchecker3> {
                                                 val2 = value2;
                                               });
                                             }),
-                                        Text("सूखी खाँसी"),
+                                        Text(
+                                          getTranslated(context, 'symp3'),
+                                          // "सूखी खाँसी"
+                                          ),
                                       ],
                                     ),
                                     Row(
@@ -165,7 +176,10 @@ class _ownchecker3 extends State<ownchecker3> {
                                                 val3 = value3;
                                               });
                                             }),
-                                        Text("दर्द")
+                                        Text(
+                                          getTranslated(context, 'symp4')
+                                          // "दर्द"
+                                          )
                                       ],
                                     ),
                                     Row(
@@ -177,7 +191,10 @@ class _ownchecker3 extends State<ownchecker3> {
                                                 val4 = value4;
                                               });
                                             }),
-                                        Text("नाक बहना"),
+                                        Text(
+                                          // getTranslated(context, 'symp5')
+                                          "नाक बहना"
+                                          ),
                                       ],
                                     ),
                                     Row(
@@ -189,7 +206,10 @@ class _ownchecker3 extends State<ownchecker3> {
                                                 val5 = value5;
                                               });
                                             }),
-                                        Text("गले में खराश")
+                                        Text(
+                                          // getTranslated(context, 'symp6')
+                                          "गले में खराश"
+                                          )
                                       ],
                                     ),
                                     Row(
@@ -201,7 +221,10 @@ class _ownchecker3 extends State<ownchecker3> {
                                                 val6 = value6;
                                               });
                                             }),
-                                        Text("सरदर्द"),
+                                        Text(
+                                          getTranslated(context, 'symp7')
+                                          // "सरदर्द"
+                                          ),
                                       ],
                                     ),
                                     Row(
@@ -213,7 +236,10 @@ class _ownchecker3 extends State<ownchecker3> {
                                                 val7 = value7;
                                               });
                                             }),
-                                        Text("दस्त")
+                                        Text(
+                                          getTranslated(context, 'symp8')
+                                          // "दस्त"
+                                          )
                                       ],
                                     ),
                                     Row(
@@ -225,7 +251,10 @@ class _ownchecker3 extends State<ownchecker3> {
                                                 val8 = value8;
                                               });
                                             }),
-                                        Text("नीले रंग का होंठ या चेहरा"),
+                                        Text(
+                                          getTranslated(context, 'symp9')
+                                          // "नीले रंग का होंठ या चेहरा"
+                                          ),
                                       ],
                                     ),
                                     Row(
@@ -238,7 +267,9 @@ class _ownchecker3 extends State<ownchecker3> {
                                               });
                                             }),
                                         Text(
-                                            "छाती में गंभीर और लगातार दर्द या दबाव")
+                                          getTranslated(context, 'symp10')
+                                            // "छाती में गंभीर और लगातार दर्द या दबाव"
+                                            )
                                       ],
                                     ),
                                     Row(
@@ -250,7 +281,10 @@ class _ownchecker3 extends State<ownchecker3> {
                                                 val10 = value10;
                                               });
                                             }),
-                                        Text("लगातार चक्कर आना ")
+                                        Text(
+                                          getTranslated(context, 'symp11')
+                                          // "लगातार चक्कर आना "
+                                          )
                                       ],
                                     ),
                                     Row(
@@ -262,7 +296,10 @@ class _ownchecker3 extends State<ownchecker3> {
                                                 val11 = value11;
                                               });
                                             }),
-                                        Text("उलझा हुआ अभिनय"),
+                                        Text(
+                                          getTranslated(context, 'symp12')
+                                          // "उलझा हुआ अभिनय"
+                                          ),
                                       ],
                                     ),
                                     Row(
@@ -274,7 +311,10 @@ class _ownchecker3 extends State<ownchecker3> {
                                                 val12 = value12;
                                               });
                                             }),
-                                        Text("अचेतन या बहुत मुश्किल से जागना")
+                                        Text(
+                                          getTranslated(context, 'symp13')
+                                          // "अचेतन या बहुत मुश्किल से जागना"
+                                          )
                                       ],
                                     ),
                                     Row(
@@ -286,7 +326,10 @@ class _ownchecker3 extends State<ownchecker3> {
                                                 val13 = value13;
                                               });
                                             }),
-                                        Text("बोलने पर शब्दों का खराब उच्चारण"),
+                                        Text(
+                                          getTranslated(context, 'symp14')
+                                          // "बोलने पर शब्दों का खराब उच्चारण"
+                                          ),
                                       ],
                                     ),
                                     Row(
@@ -299,7 +342,9 @@ class _ownchecker3 extends State<ownchecker3> {
                                               });
                                             }),
                                         Text(
-                                            "पिछले 14 दिनों में विदेश यात्रा की")
+                                          getTranslated(context, 'symp15')
+                                            // "पिछले 14 दिनों में विदेश यात्रा की"
+                                            )
                                       ],
                                     ),
                                     Row(
@@ -312,7 +357,9 @@ class _ownchecker3 extends State<ownchecker3> {
                                               });
                                             }),
                                         Text(
-                                            "पिछले 2-14 दिनों में ये लक्षण पाए गए"),
+                                          getTranslated(context, 'symp16')
+                                            // "पिछले 2-14 दिनों में ये लक्षण पाए गए"
+                                            ),
                                       ],
                                     ),
                                     Row(
@@ -324,7 +371,10 @@ class _ownchecker3 extends State<ownchecker3> {
                                                 val16 = value16;
                                               });
                                             }),
-                                        Text("क्या आप कोरोना वायरस फैल रहा है")
+                                        Text(
+                                          getTranslated(context, 'symp17')
+                                          // "क्या आप कोरोना वायरस फैल रहा है"
+                                          )
                                       ],
                                     ),
                                   ],
@@ -375,7 +425,8 @@ class _ownchecker3 extends State<ownchecker3> {
                                 }
                               },
                               child: Text(
-                                "Next  >>>",
+                                getTranslated(context, 'next'),
+                                // "Next  >>>",
                                 style: TextStyle(color: Colors.white),
                               ),
                             ),

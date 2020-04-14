@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localization_master/localization/language_constants.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'DeclarationForm.dart';
 import 'package:geolocator/geolocator.dart';
@@ -6,8 +7,8 @@ import 'dart:async';
 import 'package:http/http.dart';
 import 'dart:convert';
 
-void makePost2(String a, String b, String c, String d, String e, double f, double g,
-    String h, String i, String j, String k, var l) async {
+void makePost2(String a, String b, String c, String d, String e, double f,
+    double g, String h, String i, String j, String k, var l) async {
   String url = "https://covid-mitrc.herokuapp.com/apis/requirements/create";
   var body = {
     "rashan": a,
@@ -47,7 +48,14 @@ class _userReq extends State<userReq> {
   ];
 
   var value1, value2, value3, value4;
-  bool boolv1 = false,boolv2 = false,boolv3 = false,boolv4 = false,boolv5 = false,boolv6 = false,boolv7 = false,boolv8 = false;
+  bool boolv1 = false,
+      boolv2 = false,
+      boolv3 = false,
+      boolv4 = false,
+      boolv5 = false,
+      boolv6 = false,
+      boolv7 = false,
+      boolv8 = false;
   String selectedState;
   List<String> states = ["Rajasthan", "up", "Gujrat"];
   String selectedDistrict;
@@ -103,21 +111,23 @@ class _userReq extends State<userReq> {
           child: ListView(
             children: <Widget>[
               Padding(
-                  padding:
-                      EdgeInsets.only(left: 10, right: 10, top: 20),
+                  padding: EdgeInsets.only(left: 10, right: 10, top: 20),
                   child: Column(
                     children: <Widget>[
-                      Text(
-                        "उपयोगकर्ता की आवश्यकता के लिए आपका स्वागत है5",
-                        style: TextStyle(
-                            fontSize: 30, fontWeight: FontWeight.bold),
-                        textAlign: TextAlign.center,
-                      ),
+                      Image(image: AssetImage('images/flag.gif')),
+                      // Text(
+                      //   "उपयोगकर्ता की आवश्यकता के लिए आपका स्वागत है5",
+                      //   style: TextStyle(
+                      //       fontSize: 30, fontWeight: FontWeight.bold),
+                      //   textAlign: TextAlign.center,
+                      // ),
                       Padding(
                           padding: EdgeInsets.only(top: 20),
                           child: Row(
                             children: <Widget>[
-                              Text("राशन:"),
+                              Text(
+                                  // "राशन:"
+                                  getTranslated(context, 'ration')),
                               Checkbox(
                                 value: boolv1,
                                 onChanged: (bool value) {
@@ -127,7 +137,9 @@ class _userReq extends State<userReq> {
                                   });
                                 },
                               ),
-                              Text("हाँ"),
+                              Text(getTranslated(context, 'y')
+                                  // "हाँ"
+                                  ),
                               Checkbox(
                                 value: boolv2,
                                 onChanged: (bool value) {
@@ -137,14 +149,18 @@ class _userReq extends State<userReq> {
                                   });
                                 },
                               ),
-                              Text("नहीं")
+                              Text(getTranslated(context, 'n')
+                                  // "नहीं"
+                                  )
                             ],
                           )),
                       Padding(
                         padding: EdgeInsets.only(top: 10),
                         child: Row(
                           children: <Widget>[
-                            Text("गैस:"),
+                            Text(getTranslated(context, 'gas')
+                                // "गैस:"
+                                ),
                             Checkbox(
                               value: boolv3,
                               onChanged: (bool value) {
@@ -154,7 +170,9 @@ class _userReq extends State<userReq> {
                                 });
                               },
                             ),
-                            Text("हाँ"),
+                            Text(getTranslated(context, 'y')
+                                // "हाँ"
+                                ),
                             Checkbox(
                               value: boolv4,
                               onChanged: (bool value) {
@@ -164,7 +182,9 @@ class _userReq extends State<userReq> {
                                 });
                               },
                             ),
-                            Text("नहीं")
+                            Text(getTranslated(context, 'n')
+                                // "नहीं"
+                                )
                           ],
                         ),
                       ),
@@ -172,7 +192,9 @@ class _userReq extends State<userReq> {
                         padding: EdgeInsets.only(top: 10),
                         child: Row(
                           children: <Widget>[
-                            Text("मेडिकल:"),
+                            Text(getTranslated(context, 'med')
+                                // "मेडिकल:"
+                                ),
                             Checkbox(
                               value: boolv5,
                               onChanged: (bool value) {
@@ -182,7 +204,9 @@ class _userReq extends State<userReq> {
                                 });
                               },
                             ),
-                            Text("हाँ"),
+                            Text(getTranslated(context, 'y')
+                                // "हाँ"
+                                ),
                             Checkbox(
                               value: boolv6,
                               onChanged: (bool value) {
@@ -192,7 +216,9 @@ class _userReq extends State<userReq> {
                                 });
                               },
                             ),
-                            Text("नहीं")
+                            Text(getTranslated(context, 'n')
+                                // "नहीं"
+                                )
                           ],
                         ),
                       ),
@@ -204,7 +230,8 @@ class _userReq extends State<userReq> {
                           keyboardType: TextInputType.text,
                           // controller: passEditor,
                           decoration: InputDecoration(
-                            labelText: "टिप्पणी",
+                            labelText: getTranslated(context, 'remark'),
+                            // "टिप्पणी",
                             border: new OutlineInputBorder(
                               borderRadius: new BorderRadius.circular(5.0),
                               borderSide: new BorderSide(),
@@ -216,7 +243,10 @@ class _userReq extends State<userReq> {
                         padding: EdgeInsets.only(top: 10),
                         child: Row(
                           children: <Widget>[
-                            Text("आपातकालीन:"),
+                            Text(
+                              getTranslated(context, 'emergency'),
+                              // "आपातकालीन:"
+                            ),
                             Checkbox(
                               value: boolv7,
                               onChanged: (bool value) {
@@ -226,7 +256,10 @@ class _userReq extends State<userReq> {
                                 });
                               },
                             ),
-                            Text("हाँ"),
+                            Text(
+                              getTranslated(context, 'y'),
+                              // "हाँ"
+                            ),
                             Checkbox(
                               value: boolv8,
                               onChanged: (bool value) {
@@ -236,7 +269,10 @@ class _userReq extends State<userReq> {
                                 });
                               },
                             ),
-                            Text("नहीं")
+                            Text(
+                              getTranslated(context, 'n'),
+                              // "नहीं"
+                            )
                           ],
                         ),
                       ),
@@ -301,7 +337,10 @@ class _userReq extends State<userReq> {
                                         ]),
                                     child: MaterialButton(
                                       onPressed: getLocation,
-                                      child: Text("स्थान प्राप्त करें"),
+                                      child: Text(
+                                        getTranslated(context, 'fetch'),
+                                        // "स्थान प्राप्त करें"
+                                      ),
                                     ),
                                   ),
                                 ],
@@ -326,7 +365,8 @@ class _userReq extends State<userReq> {
                                 child: DropdownButton(
                                   iconDisabledColor: Colors.black,
                                   hint: Text(
-                                    'अपना राज्य चुनें',
+                                    getTranslated(context, 'select_state'),
+                                    // 'अपना राज्य चुनें',
                                     style: TextStyle(
                                         color: Colors.black, fontSize: 15.0),
                                   ),
@@ -354,7 +394,9 @@ class _userReq extends State<userReq> {
                                   borderRadius: BorderRadius.circular(15.0),
                                 ),
                                 child: DropdownButton(
-                                  hint: Text('अपने जिले का चयन करें',
+                                  hint: Text(
+                                      getTranslated(context, 'select_district'),
+                                      // 'अपने जिले का चयन करें',
                                       style: TextStyle(
                                           color: Colors.black, fontSize: 15.0)),
                                   value: selectedDistrict,
@@ -383,7 +425,8 @@ class _userReq extends State<userReq> {
                           keyboardType: TextInputType.number,
                           // controller: passEditor,
                           decoration: InputDecoration(
-                            labelText: "मोबाइल नंबर",
+                            labelText: getTranslated(context, 'mob'),
+                            // "मोबाइल नंबर",
                             border: new OutlineInputBorder(
                               borderRadius: new BorderRadius.circular(5.0),
                               borderSide: new BorderSide(),
@@ -399,7 +442,8 @@ class _userReq extends State<userReq> {
                           keyboardType: TextInputType.text,
                           // controller: passEditor,
                           decoration: InputDecoration(
-                            labelText: "कालोनी",
+                            labelText: getTranslated(context, 'col'),
+                            // "कालोनी",
                             border: new OutlineInputBorder(
                               borderRadius: new BorderRadius.circular(5.0),
                               borderSide: new BorderSide(),
@@ -415,7 +459,8 @@ class _userReq extends State<userReq> {
                           keyboardType: TextInputType.text,
                           // controller: passEditor,
                           decoration: InputDecoration(
-                            labelText: "घर का नंबर",
+                            labelText: getTranslated(context, 'hnumber'),
+                            // "घर का नंबर",
                             border: new OutlineInputBorder(
                               borderRadius: new BorderRadius.circular(5.0),
                               borderSide: new BorderSide(),
@@ -432,26 +477,27 @@ class _userReq extends State<userReq> {
                               var latu = double.parse(lat.toString());
                               var longu = double.parse(long.toString());
                               makePost2(
-                                
-                                value1.toString(),
-                                value2.toString(),
-                                value3.toString(),
-                                remarkEditor.text,
-                                value4.toString(),
-                                latu,
-                                longu,
-                                colnyEditor.text,
-                                selectedState.toString(),
-                                selectedDistrict.toString(),
-                                hnumberEditor.text,
-                                mob                              
-                                  );
+                                  value1.toString(),
+                                  value2.toString(),
+                                  value3.toString(),
+                                  remarkEditor.text,
+                                  value4.toString(),
+                                  latu,
+                                  longu,
+                                  colnyEditor.text,
+                                  selectedState.toString(),
+                                  selectedDistrict.toString(),
+                                  hnumberEditor.text,
+                                  mob);
                             },
                             //   Fluttertoast.showToast(
                             //       msg: valu2.toString(),
                             //       toastLength: Toast.LENGTH_SHORT);
                             // },
-                            child: Text("Submit"),
+                            child: Text(
+                              getTranslated(context, 'submit')
+                              // "Submit"
+                              ),
                           )))
                     ],
                   ))

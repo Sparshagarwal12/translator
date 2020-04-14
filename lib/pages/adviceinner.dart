@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localization_master/localization/language_constants.dart';
 import 'advisory.dart';
 import 'advisoryUpdate.dart';
 
@@ -49,7 +50,8 @@ class AdviceInner extends StatelessWidget {
                                               AssetImage('images/virus.png')),
                                       Center(
                                         child: Text(
-                                          "\nUpdate",
+                                        "\n"+ getTranslated(context, 'update'),
+                                          // "\nUpdate",
                                           textAlign: TextAlign.center,
                                           textDirection: TextDirection.ltr,
                                           style: TextStyle(
@@ -100,7 +102,8 @@ class AdviceInner extends StatelessWidget {
                                 Image(image: AssetImage('images/symptoms.png')),
                                 Center(
                                   child: Text(
-                                    "\nSee Advice",
+                                    "\n"+getTranslated(context, 'see_advice'),
+                                    // "\nSee Advice",
                                     textDirection: TextDirection.ltr,
                                     textAlign: TextAlign.center,
                                     style: TextStyle(

@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:audioplayers/audioplayers.dart';
+import 'package:audioplayers/audio_cache.dart';
 import 'package:flutter_localization_master/localization/language_constants.dart';
 import 'package:flutter_localization_master/pages/MyHomePage.dart';
 // import 'package:fprojects/familyDeclaration.dart';
+import 'LanguagePage.dart' as lanf;
 // import 'package:fprojects/slefDeclaration.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -23,8 +26,40 @@ Future<dynamic> getUri() async {
   http.Response response = await http.get(url, headers: headers);
   return json.decode(response.body);
 }
-
+String aud = lanf.xyz+'.mp3';
 class _CoronaMonitorState extends State<CoronaMonitor> {
+  AudioCache audioCache;
+
+  Duration _duration = new Duration();
+  Duration _position = new Duration();
+  AudioPlayer advancedPlayer;
+  // AudioCache audioCache;
+
+  @override
+  void initState() {
+    super.initState();
+    initPlayer();
+  }
+
+  void initPlayer() {
+    advancedPlayer = new AudioPlayer();
+    audioCache = new AudioCache(fixedPlayer: advancedPlayer);
+
+    advancedPlayer.durationHandler = (d) => setState(() {
+          _duration = d;
+        });
+
+    advancedPlayer.positionHandler = (p) => setState(() {
+          _position = p;
+        });
+  }
+
+  void seekToSecond(int second) {
+    Duration newDuration = Duration(seconds: second);
+
+    advancedPlayer.seek(newDuration);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -63,6 +98,7 @@ class _CoronaMonitorState extends State<CoronaMonitor> {
             future: getUri(),
             builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
               if (snapshot.hasData) {
+                audioCache.play(aud);
                 Map content = snapshot.data;
                 return ListView(
                   children: <Widget>[
@@ -114,7 +150,8 @@ class _CoronaMonitorState extends State<CoronaMonitor> {
                                                     alignment: Alignment.center,
                                                     child: Text(
                                                       // "कुल संक्रमण:"
-                                                      getTranslated(context, 'total_infected')+
+                                                      getTranslated(context,
+                                                              'total_infected') +
                                                           "\n" +
                                                           content["countries_stat"]
                                                               [41]["cases"],
@@ -148,8 +185,9 @@ class _CoronaMonitorState extends State<CoronaMonitor> {
                                             child: Align(
                                               alignment: Alignment.center,
                                               child: Text(
-                                                // "कुल मौतें:" 
-                                             getTranslated(context, 'total_death')   +
+                                                // "कुल मौतें:"
+                                                getTranslated(context,
+                                                        'total_death') +
                                                     "\n" +
                                                     content["countries_stat"]
                                                         [41]["deaths"],
@@ -192,8 +230,9 @@ class _CoronaMonitorState extends State<CoronaMonitor> {
                                                   child: Align(
                                                     alignment: Alignment.center,
                                                     child: Text(
-                                                      // "कुल उपचारित: " 
-                                                   getTranslated(context, 'total_cured')   +
+                                                      // "कुल उपचारित: "
+                                                      getTranslated(context,
+                                                              'total_cured') +
                                                           "\n" +
                                                           content["countries_stat"]
                                                                   [41][
@@ -228,8 +267,9 @@ class _CoronaMonitorState extends State<CoronaMonitor> {
                                             child: Align(
                                               alignment: Alignment.center,
                                               child: Text(
-                                                // "संक्रमण के नए मामले : " 
-                                                getTranslated(context, 'new_cases')+
+                                                // "संक्रमण के नए मामले : "
+                                                getTranslated(
+                                                        context, 'new_cases') +
                                                     "\n" +
                                                     content["countries_stat"][
                                                             41] //new_deaths":"2","new_cases":"121","serious_critical":"0","active_cases":"602","total_cases_per_1m_population":"0.5
@@ -274,8 +314,9 @@ class _CoronaMonitorState extends State<CoronaMonitor> {
                                                       alignment:
                                                           Alignment.center,
                                                       child: Text(
-                                                        // "गंभीर / महत्वपूर्ण:" 
-                                                        getTranslated(context, 'critical')+
+                                                        // "गंभीर / महत्वपूर्ण:"
+                                                        getTranslated(context,
+                                                                'critical') +
                                                             "\n" +
                                                             content["countries_stat"]
                                                                     [41][
@@ -311,7 +352,8 @@ class _CoronaMonitorState extends State<CoronaMonitor> {
                                               alignment: Alignment.center,
                                               child: Text(
                                                 // "सक्रिय मामले:"
-                                                getTranslated(context, 'active_cases') +
+                                                getTranslated(context,
+                                                        'active_cases') +
                                                     "\n" +
                                                     content["countries_stat"]
                                                         [41]["active_cases"],
@@ -444,15 +486,6 @@ class _CoronaMonitorState extends State<CoronaMonitor> {
                                                     MainAxisAlignment
                                                         .spaceBetween,
                                                 children: <Widget>[
-                                                  // Text(
-                                                  //   "Total Cases\t\t",
-                                                  //   style: TextStyle(
-                                                  //       fontSize: 16.0,
-                                                  //       fontWeight:
-                                                  //           FontWeight
-                                                  //               .bold),
-                                                  // ),
-
                                                   Text(
                                                     content["countries_stat"][1]
                                                         ["country_name"],
@@ -492,15 +525,6 @@ class _CoronaMonitorState extends State<CoronaMonitor> {
                                                     MainAxisAlignment
                                                         .spaceBetween,
                                                 children: <Widget>[
-                                                  // Text(
-                                                  //   "Total Deaths",
-                                                  //   style: TextStyle(
-                                                  //       fontSize: 16.0,
-                                                  //       fontWeight:
-                                                  //           FontWeight
-                                                  //               .bold),
-                                                  // ),
-
                                                   Text(
                                                     content["countries_stat"][2]
                                                         ["country_name"],
@@ -525,93 +549,6 @@ class _CoronaMonitorState extends State<CoronaMonitor> {
                                           ])
                                         ],
                                       )),
-
-                                  // Padding(
-                                  //  padding: EdgeInsets.only(left:5),
-                                  //   child: Row(
-                                  //     children: <Widget>[
-                                  //       Column(
-                                  //         mainAxisAlignment:
-                                  //             MainAxisAlignment.center,
-                                  //         children: <Widget>[
-
-                                  //           Text("                "),
-                                  //           Text(
-                                  //             content["countries_stat"][0]
-                                  //                 ["country_name"],
-                                  //             style: TextStyle(fontSize: 18.0),
-                                  //           ),
-                                  //           Text(
-                                  //             content["countries_stat"][1]
-                                  //                 ["country_name"],
-                                  //             style: TextStyle(fontSize: 18.0),
-                                  //           ),
-                                  //           Text(
-                                  //             content["countries_stat"][2]
-                                  //                 ["country_name"],
-                                  //             style: TextStyle(fontSize: 18.0),
-                                  //           )
-                                  //         ],
-                                  //       ),
-                                  //       Padding(padding: EdgeInsets.only(left:8),
-                                  //       child:Column(
-                                  //         mainAxisAlignment:
-                                  //             MainAxisAlignment.center,
-                                  //         children: <Widget>[
-                                  //           Text(
-                                  //             "Total Cases\t\t",
-                                  //             style: TextStyle(
-                                  //                 fontSize: 16.0,
-                                  //                 fontWeight: FontWeight.bold),
-                                  //           ),
-                                  //           Text(
-                                  //             content["countries_stat"][0]
-                                  //                 ["cases"],
-                                  //             style: TextStyle(fontSize: 18.0),
-                                  //           ),
-                                  //           Text(
-                                  //             content["countries_stat"][1]
-                                  //                 ["cases"],
-                                  //             style: TextStyle(fontSize: 18.0),
-                                  //           ),
-                                  //           Text(
-                                  //             content["countries_stat"][2]
-                                  //                 ["cases"],
-                                  //             style: TextStyle(fontSize: 18.0),
-                                  //           )
-                                  //         ],
-                                  //       )),
-                                  //       Padding(padding: EdgeInsets.only(left:10),
-                                  //       child:Column(
-                                  //         mainAxisAlignment:
-                                  //             MainAxisAlignment.center,
-                                  //         children: <Widget>[
-                                  //           Text(
-                                  //             "Total Deaths",
-                                  //             style: TextStyle(
-                                  //                 fontSize: 16.0,
-                                  //                 fontWeight: FontWeight.bold),
-                                  //           ),
-                                  //           Text(
-                                  //             content["countries_stat"][0]
-                                  //                 ["deaths"],
-                                  //             style: TextStyle(fontSize: 18.0),
-                                  //           ),
-                                  //           Text(
-                                  //             content["countries_stat"][1]
-                                  //                 ["deaths"],
-                                  //             style: TextStyle(fontSize: 18.0),
-                                  //           ),
-                                  //           Text(
-                                  //             content["countries_stat"][2]
-                                  //                 ["deaths"],
-                                  //             style: TextStyle(fontSize: 18.0),
-                                  //           )
-                                  //         ],
-                                  //       ))
-                                  //     ],
-                                  //   ),
-                                  // )
                                 ],
                               ),
                             ))),
@@ -630,12 +567,15 @@ class _CoronaMonitorState extends State<CoronaMonitor> {
                           ),
                           child: MaterialButton(
                             onPressed: () {
-                              Navigator.push(
+                              advancedPlayer.stop();
+                              Navigator.pushAndRemoveUntil(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) =>mainBoard()));
+                                      builder: (context) => mainBoard()),
+                                  (_) => false);
                             },
                             child: Text(
+                              
                               // "Next",
                               getTranslated(context, 'next'),
                               style: TextStyle(color: Colors.white),
@@ -647,8 +587,8 @@ class _CoronaMonitorState extends State<CoronaMonitor> {
               } else {
                 return Center(
                   child: CircularProgressIndicator(
-                  strokeWidth: 3.0,
-                ),
+                    strokeWidth: 3.0,
+                  ),
                 );
               }
             }),

@@ -116,8 +116,11 @@ class _warn extends State<warn> {
                   ),
                   child: MaterialButton(
                     onPressed: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => DashBoard()));
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => LogoApp(),
+                          ));
                     },
                     child: Text(
                       "मुख्य मेनू पर जाएं >>>",

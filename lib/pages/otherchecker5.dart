@@ -120,7 +120,7 @@ class _majorotherLast extends State<majorotherLast> {
                                     Navigator.pushAndRemoveUntil(
                                         context,
                                         MaterialPageRoute(
-                                            builder: (context) => DashBoard()),
+                                            builder: (context) => LogoApp(),),
                                         (Route<dynamic> route) => false);
 
                                     // else{

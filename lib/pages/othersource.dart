@@ -43,8 +43,8 @@ class OtherSource extends StatelessWidget {
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: <Widget>[
-                                      // Image(
-                                      //     image: AssetImage('images/list.png')),
+                                      Image(
+                                          image: AssetImage('images/list.png')),
                                       Center(
                                         child: Text(
                                           "\nराज्यवार कोरोना मामले",
@@ -89,8 +89,8 @@ class OtherSource extends StatelessWidget {
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: <Widget>[
-                                      // Image(
-                                      //     image: AssetImage('images/time.png')),
+                                      Image(
+                                          image: AssetImage('images/time.png')),
                                       Center(
                                         child: Text(
                                           "\nसमय श्रृंखला डेटा",

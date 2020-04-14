@@ -16,6 +16,7 @@ const String TAMIL = 'ta';
 const String TELAGU = 'te';
 const String PUNJABI = 'pa';
 const String GUJARATI = 'gu';
+const String ORIYA = 'or';
 
 Future<Locale> setLocale(String languageCode) async {
   SharedPreferences _prefs = await SharedPreferences.getInstance();
@@ -54,8 +55,11 @@ Locale _locale(String languageCode) {
       return Locale(PUNJABI, "IN");
     case TELAGU:
       return Locale(TELAGU, "IN");
+    case ORIYA:
+      return Locale(ORIYA, "IN");
     case TAMIL:
       return Locale(TAMIL, "IN");
+    // case Oriya: 
     default:
       return Locale(ENGLISH, 'US');
   }

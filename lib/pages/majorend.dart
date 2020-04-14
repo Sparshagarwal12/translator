@@ -1,3 +1,6 @@
+import 'package:flutter_localization_master/localization/language_constants.dart';
+import 'package:flutter_localization_master/pages/MyHomePage.dart';
+
 import 'grid.dart';
 import 'package:flutter/material.dart';
 
@@ -58,7 +61,8 @@ class _majorLast extends State<majorLast> {
                                 children: <Widget>[
                                   Center(
                                     child: Text(
-                                      "हमने आप में कोरोना के गंभीर लक्षण पाए हैं",
+                                      // "हमने आप में कोरोना के गंभीर लक्षण पाए हैं",
+                                      getTranslated(context, 'symp_found'),
                                       style: TextStyle(fontSize: 30.0),
                                       textAlign: TextAlign.center,
                                     ),
@@ -69,7 +73,8 @@ class _majorLast extends State<majorLast> {
                                   Column(children: <Widget>[
                                     Center(
                                       child: Text(
-                                        "1.अब 1075 पर कॉल करें। तत्काल चिकित्सा ध्यान देने की आवश्यकता है।",
+                                        // "1.अब 1075 पर कॉल करें। तत्काल चिकित्सा ध्यान देने की आवश्यकता है।",
+                                        getTranslated(context, 'advice_1'),
                                         style: TextStyle(fontSize: 20.0),
                                       ),
                                     ),
@@ -78,7 +83,8 @@ class _majorLast extends State<majorLast> {
                                     ),
                                     Center(
                                       child: Text(
-                                        "2.1075 हेल्पलाइन बताएं कि क्या आप COVID-19 के साथ किसी के संपर्क में हैं या यदि आप हाल ही में किसी ऐसे क्षेत्र में गए हैं जहां COVID-19 फैल रहा है।",
+                                        // "2.1075 हेल्पलाइन बताएं कि क्या आप COVID-19 के साथ किसी के संपर्क में हैं या यदि आप हाल ही में किसी ऐसे क्षेत्र में गए हैं जहां COVID-19 फैल रहा है।",
+                                       getTranslated(context, 'advice_2'),
                                         style: TextStyle(fontSize: 20.0),
                                       ),
                                     ),
@@ -114,7 +120,7 @@ class _majorLast extends State<majorLast> {
                                     Navigator.pushAndRemoveUntil(
                                         context,
                                         MaterialPageRoute(
-                                            builder: (context) => DashBoard()),
+                                            builder: (context) => mainBoard()),
                                         (Route<dynamic> route) => false);
 
                                     // else{
@@ -126,7 +132,8 @@ class _majorLast extends State<majorLast> {
                                     // }
                                   },
                                   child: Text(
-                                    "मुख्य मेनू पर जाएं >>>",
+                                    // "मुख्य मेनू पर जाएं >>>",
+                                    getTranslated(context, 'main_menu'),
                                     style: TextStyle(color: Colors.white),
                                   ),
                                 ),

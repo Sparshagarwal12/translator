@@ -1,75 +1,16 @@
-// import 'dart:convert';
-
-// import 'package:flutter/material.dart';
-// import 'package:flutter_localization_master/pages/DeclarationForm.dart';
-// import 'package:http/http.dart' as http;
-
-// class PatientReport extends StatefulWidget {
-//   @override
-//   _PatientReport createState() => _PatientReport();
-// }
-
-// Future<Map<String,dynamic>> Report() async {
-//   String url = 'http://hospital-covid.herokuapp.com/api/patient/${9941}';
-//   http.Response response = await http.get(url);
-//   return json.decode(response.body);
-// }
-
-// // TextEditingController ctr;
-// var aadhar = 9941;
-
-// class _PatientReport extends State<PatientReport> {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Container(
-//       decoration: BoxDecoration(
-//           gradient: LinearGradient(colors: [
-//         Color(0xFFFF9933),
-//         Color(0xFFFFFFFF),
-//         Color(0xFF138808),
-//       ], begin: Alignment.topCenter, end: Alignment.bottomCenter)),
-//       child: FutureBuilder(
-//           future: Report(),
-//           builder: (BuildContext context, AsyncSnapshot snapshot) {
-//             if (snapshot.hasData) {
-//               List content = snapshot.data;
-//               return ListView.builder(
-//                   itemCount: content.length,
-//                   itemBuilder: (BuildContext context, int index) {
-//                     return Container(
-//                       color: Colors.white,
-//                       child: Center(
-//                           child: Padding(
-//                               padding: EdgeInsets.all(10),
-//                               child: Text(
-//                                 content[index]["status"],
-//                                 style: TextStyle(
-//                                     fontSize: 20.0, color: Colors.white),
-//                               ))),
-//                     );
-//                   });
-//             } else {
-//               return Container();
-//             }
-//           }),
-//     );
-//   }
-// }
-
 import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:http/http.dart' as http;
 
-
-Future<List<dynamic>> getUri() async {
-  String url = "https://hospital-covid.herokuapp.com/api/patient/9941";
+Future<Map> getUri(int a) async {
+  String url = "https://hospital-covid.herokuapp.com/api/patient/$a";
   http.Response response = await http.get(url);
   // var sa = json.encode(response.body);
   return json.decode(response.body);
 }
-
 
 // class Album {
 //   final String status;
@@ -88,6 +29,7 @@ Future<List<dynamic>> getUri() async {
 // }
 
 var data;
+TextEditingController mobEditor = new TextEditingController();
 
 class PatientReport extends StatefulWidget {
   PatientReport({Key key}) : super(key: key);
@@ -109,33 +51,102 @@ class _PatientReport extends State<PatientReport> {
 
   @override
   Widget build(BuildContext context) {
-      return Scaffold(
-    body: Center(
-      child: FutureBuilder(
-        future: getUri(),
-        builder: (context, snapshot) {
-          // print(snapshot.data.status);
-          if (snapshot.hasData) {
-            List content = snapshot.data;
-            return ListView.builder(
-                itemCount: 1,
-                itemBuilder: (BuildContext context, int index) {
-                  return Column(
-                    children: <Widget>[
-                      
-                      Text(content[index]["status"])
-                    ],
-                  );
-                });
-          } else if (snapshot.hasError) {
-            return Text("${snapshot.error}");
-          }
+    return Scaffold(
+      appBar: AppBar(title:Text("India's Fight against Corona")),
+        body: Container(
+            decoration: BoxDecoration(
+                gradient: LinearGradient(colors: [
+              Color(0xFFFF9933),
+              Color(0xFFFFFFFF),
+              Color(0xFF138808),
+            ], begin: Alignment.topCenter, end: Alignment.bottomCenter)),
+            child: Column(
+              children: <Widget>[
+                Image(image: AssetImage('images/flag.gif')),
+                SizedBox(
+                  height:30
+                ),
+                Center(
+                  child: Padding(
+                    padding: EdgeInsets.all( 20),
+                    child: TextFormField(
+                      obscureText: false,
+                      controller: mobEditor,
+                      keyboardType: TextInputType.number,
+                      // controller: passEditor,
+                      decoration: InputDecoration(
+                        labelText: "Aadhar Number",
+                        border: new OutlineInputBorder(
+                          borderRadius: new BorderRadius.circular(5.0),
+                          borderSide: new BorderSide(),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
 
-          // By default, show a loading spinner.
-          return CircularProgressIndicator();
-        },
-      ),
+                Center(
+                    child:
+                    Container(
+                      width: 200.0,
+                      height: 50.0,
+                      decoration: BoxDecoration(
+                        color: Color(0xFF426bd7),
+                        boxShadow: [
+                          BoxShadow(color: Colors.black26, blurRadius: 10.0)
+                        ],
+                        borderRadius: BorderRadius.all(Radius.circular(15.0)),
+                      ),
+                      child: MaterialButton(
+                        onPressed: () {
+                    var data = mobEditor.text;
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => fetchDetail(data)));
+                  },
+                        child: Text(
+                          "Submit",
+                          // getTranslated(context, 'login'),
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ),
+                    )),
+              ],
+            )));
+  }
+}
+
+Widget fetchDetail(var data) {
+  var et = int.parse(data);
+  return Center(
+    child: FutureBuilder(
+      future: getUri(et),
+      builder: (context, AsyncSnapshot<dynamic> snapshot) {
+        // print(snapshot.data.status);
+        if (snapshot.hasData) {
+          print(snapshot.data);
+          Map content = snapshot.data;
+          print(content);
+          return ListView.builder(
+              itemCount: 1,
+              itemBuilder: (BuildContext context, int index) {
+                return Column(
+                  children: <Widget>[Text(content["status"])],
+                );
+              });
+        } else if (snapshot.hasError) {
+          return Text("${snapshot.error}");
+        }
+
+        // By default, show a loading spinner.
+        return Center(
+          child: SpinKitChasingDots(
+            color: Colors.black,
+            size: 50.0,
+          ),
+        );
+      },
     ),
   );
-  }
 }

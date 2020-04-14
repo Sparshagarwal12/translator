@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localization_master/localization/language_constants.dart';
 
 class audiodata extends StatelessWidget {
   @override
@@ -47,8 +48,8 @@ class audiodata extends StatelessWidget {
                                               AssetImage('images/virus.png')),
                                       Center(
                                         child: Text(
-                                        
-                                          "\nयदि कोरोना है तो ऑडियो नमूना अपलोड करें",
+                                        getTranslated(context, 'audio_sample_after'),
+                                          // "\nयदि कोरोना है तो ऑडियो नमूना अपलोड करें",
                                           textAlign:TextAlign.center,
                                           
                                           textDirection: TextDirection.ltr,
@@ -102,7 +103,8 @@ class audiodata extends StatelessWidget {
                                   Image(image: AssetImage('images/symptoms.png')),
                                   Center(
                                     child: Text(
-                                      "\nलक्षण होने पर ऑडियो नमूना अपलोड करें",
+                                      getTranslated(context, 'audio_sample_before'),
+                                      // "\nलक्षण होने पर ऑडियो नमूना अपलोड करें",
                                       textDirection: TextDirection.ltr,
                                       textAlign:TextAlign.center,
                                       style: TextStyle(

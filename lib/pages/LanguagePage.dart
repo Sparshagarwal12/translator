@@ -5,6 +5,8 @@ import 'package:flutter_localization_master/main.dart';
 import 'package:flutter_localization_master/pages/LoginPage.dart';
 import 'package:flutter_localization_master/pages/homePage.dart';
 import 'package:flutter_localization_master/pages/splashPage.dart';
+import 'package:flutter_localization_master/pages/userCheck.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 // import 'package:flutter_localization_master/router/route_constants.dart';
 
 class LanguagePage extends StatefulWidget {
@@ -13,7 +15,7 @@ class LanguagePage extends StatefulWidget {
   @override
   _LanguagePage createState() => _LanguagePage();
 }
-
+String xyz;
 class _LanguagePage extends State<LanguagePage> {
   Language language;
   final GlobalKey<FormState> _key = GlobalKey<FormState>();
@@ -56,8 +58,10 @@ class _LanguagePage extends State<LanguagePage> {
                   child: Card(
                     child: Center(
                       child: DropdownButton<Language>(
+                        hint: Text("Select Language"),
                         underline: SizedBox(),
                         onChanged: (Language language) {
+                          xyz= language.languageCode;
                           _changeLanguage(language);
                         },
                         items: Language.languageList()
@@ -84,14 +88,12 @@ class _LanguagePage extends State<LanguagePage> {
             Padding(
                 padding: EdgeInsets.all(40),
                 child: MaterialButton(
-                  onPressed: () {
-                    // To close the Drawer
-                    // Navigator.pop(context);
-                    // Navigating to About Page
-                    // Navigator.pushNamed(context, 'splashR');
+                  onPressed: () async {
+                    SharedPreferences prefs =
+                        await SharedPreferences.getInstance();
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => HomePage()),
+                      MaterialPageRoute(builder: (context) => CheckUser()),
                     );
                   },
                   height: 50,

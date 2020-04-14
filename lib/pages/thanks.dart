@@ -1,3 +1,4 @@
+import 'package:flutter_localization_master/localization/language_constants.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'grid.dart';
 import 'lastchecker.dart';
@@ -54,7 +55,8 @@ class _thanks extends State<thanks> {
               children: <Widget>[
                 SizedBox(height: MediaQuery.of(context).size.height / 8),
                 Text(
-                  "बधाई हो कि आप कोरोना जैसी प्रमुख बीमारी से सुरक्षित हैं लेकिन कृपया सावधानी बरतें जो इस प्रकार हैं:",
+                  // "बधाई हो कि आप कोरोना जैसी प्रमुख बीमारी से सुरक्षित हैं लेकिन कृपया सावधानी बरतें जो इस प्रकार हैं:",
+                  getTranslated(context, 'safe_head'),
                   style: TextStyle(
                     fontSize: 30,
                   ),
@@ -62,35 +64,40 @@ class _thanks extends State<thanks> {
                 ),
                 SizedBox(height: MediaQuery.of(context).size.height / 10),
                 Text(
-                  "1.अपनी आंखों, नाक और मुंह को छूने से बचें।",
+                  // "1.अपनी आंखों, नाक और मुंह को छूने से बचें।",
+                  getTranslated(context, 'prec1'),
                   style: TextStyle(
                     fontSize: 20,
                   ),
                 ),
                 SizedBox(height: MediaQuery.of(context).size.height / 30),
                 Text(
-                  "2.बीमार होने पर घर पर रहें",
+                  // "2.बीमार होने पर घर पर रहें",
+                  getTranslated(context, 'prec2'),
                   style: TextStyle(
                     fontSize: 20,
                   ),
                 ),
                 SizedBox(height: MediaQuery.of(context).size.height / 30),
                 Text(
-                  "3.कम से कम 20 सेकंड के लिए अपने हाथों को अक्सर साबुन और पानी से धोएं, खासकर बाथरूम जाने से पहले, खाने से पहले, और अपनी नाक बहने के बाद, खांसने या छींकने से।",
+                  // "3.कम से कम 20 सेकंड के लिए अपने हाथों को अक्सर साबुन और पानी से धोएं, खासकर बाथरूम जाने से पहले, खाने से पहले, और अपनी नाक बहने के बाद, खांसने या छींकने से।",
+                  getTranslated(context, 'prec3'),
                   style: TextStyle(
                     fontSize: 20,
                   ),
                 ),
                 SizedBox(height: MediaQuery.of(context).size.height / 30),
                 Text(
-                  "4.यदि आपको बुखार, खांसी और सांस लेने में कठिनाई है, तो तुरंत चिकित्सा की तलाश करें।",
+                  // "4.यदि आपको बुखार, खांसी और सांस लेने में कठिनाई है, तो तुरंत चिकित्सा की तलाश करें।",
+                  getTranslated(context, 'prec4'),
                   style: TextStyle(
                     fontSize: 20,
                   ),
                 ),
                 SizedBox(height: MediaQuery.of(context).size.height / 30),
                 Text(
-                  "5.एक नियमित रूप से घरेलू सफाई स्प्रे या पोंछे का उपयोग करके अक्सर छुआ-छूत वाली वस्तुओं और सतहों को साफ और कीटाणुरहित करें।",
+                  // "5.एक नियमित रूप से घरेलू सफाई स्प्रे या पोंछे का उपयोग करके अक्सर छुआ-छूत वाली वस्तुओं और सतहों को साफ और कीटाणुरहित करें।",
+                  getTranslated(context, 'prec5'),
                   style: TextStyle(
                     fontSize: 20,
                   ),
@@ -98,7 +105,8 @@ class _thanks extends State<thanks> {
                 ),
                 SizedBox(height: MediaQuery.of(context).size.height / 30),
                 Text(
-                  "6.यदि साबुन और पानी आसानी से उपलब्ध नहीं हैं, तो कम से कम 60% अल्कोहल के साथ अल्कोहल-आधारित हैंड सैनिटाइज़र का उपयोग करें।",
+                  // "6.यदि साबुन और पानी आसानी से उपलब्ध नहीं हैं, तो कम से कम 60% अल्कोहल के साथ अल्कोहल-आधारित हैंड सैनिटाइज़र का उपयोग करें।",
+                  getTranslated(context, 'prec6'),
                   style: TextStyle(
                     fontSize: 20,
                   ),
@@ -124,11 +132,12 @@ class _thanks extends State<thanks> {
                     onPressed: () {
                       Navigator.pushAndRemoveUntil(
                           context,
-                          MaterialPageRoute(builder: (context) => DashBoard()),
+                          MaterialPageRoute(builder: (context) => LogoApp()),
                           (Route<dynamic> route) => false);
                     },
                     child: Text(
-                      "मुख्य मेनू पर जाएं >>>",
+                      // "मुख्य मेनू पर जाएं >>>",
+                      getTranslated(context, 'main_menu'),
                       style: TextStyle(color: Colors.white),
                     ),
                   ),

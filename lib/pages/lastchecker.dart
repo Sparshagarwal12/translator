@@ -1,3 +1,5 @@
+import 'package:flutter_localization_master/localization/language_constants.dart';
+
 import 'grid.dart';
 import 'majorend.dart';
 import 'ownchecker3.dart';
@@ -83,6 +85,7 @@ class _majorchecker extends State<majorchecker> {
                               children: <Widget>[
                                 Center(
                                   child: Text(
+                                    // getTranslated(context, 'key'),
                                     "क्या आपको इनमें से कोई बड़ी समस्या है",
                                     style: TextStyle(fontSize: 20.0),
                                     textAlign: TextAlign.center,
@@ -99,7 +102,10 @@ class _majorchecker extends State<majorchecker> {
                                             value: 0,
                                             groupValue: _radioValue,
                                             onChanged: _handleRadio),
-                                        Text("पुरानी फेफड़ों की बीमारी"),
+                                        Text(
+                                          getTranslated(context, 'own_major1'),
+                                          // "पुरानी फेफड़ों की बीमारी"
+                                          ),
                                       ],
                                     ),
                                     Row(
@@ -108,7 +114,10 @@ class _majorchecker extends State<majorchecker> {
                                             value: 1,
                                             groupValue: _radioValue,
                                             onChanged: _handleRadio),
-                                        Text("गंभीर दिल की स्थिति")
+                                        Text(
+                                          getTranslated(context, 'own_major2'),
+                                          // "गंभीर दिल की स्थिति"
+                                          )
                                       ],
                                     ),
                                     Row(
@@ -117,7 +126,10 @@ class _majorchecker extends State<majorchecker> {
                                             value: 2,
                                             groupValue: _radioValue,
                                             onChanged: _handleRadio),
-                                        Text("कैंसर का उपचार")
+                                        Text(
+                                          getTranslated(context, 'own_major3'),
+                                          // "कैंसर का उपचार"
+                                          )
                                       ],
                                     ),
                                     Row(
@@ -135,7 +147,10 @@ class _majorchecker extends State<majorchecker> {
                                             value: 4,
                                             groupValue: _radioValue,
                                             onChanged: _handleRadio),
-                                        Text("मधुमेह")
+                                        Text(
+                                          getTranslated(context, 'own_major4'),
+                                          // "मधुमेह"
+                                          )
                                       ],
                                     ),
                                     Row(
@@ -184,7 +199,8 @@ class _majorchecker extends State<majorchecker> {
                                 }
                               },
                               child: Text(
-                                "आगे >>>",
+                                // "आगे >>>",
+                                getTranslated(context, 'next'),
                                 style: TextStyle(
                                     color: Colors.white, fontSize: 20),
                               ),

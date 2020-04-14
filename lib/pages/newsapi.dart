@@ -6,6 +6,7 @@ import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'dart:convert';
 import 'package:url_launcher/url_launcher.dart';
+import 'getLangCode.dart' as lang;
 
 class NewsApi extends StatefulWidget {
   @override
@@ -57,26 +58,56 @@ String searchQuery;
 TextEditingController queryEditor = new TextEditingController();
 
 class _NewsApi extends State<NewsApi> {
+  List<String> news = [];
+  void translate(Map data) async {
+    String langCode = lang.langCode;
+    for (int i = 0; i < data['articles'].length; i++) {
+      String text = data['articles'][i]["title"];
+      String url =
+          "https://translation.googleapis.com/language/translate/v2?target=$langCode&key=AIzaSyAu7bUrwnWzbfN2lK-zGxdf-KHbzvm-PNA&q=$text";
+      http.Response response = await http.get(url);
+      Map content = json.decode(response.body);
+      if (!news
+          .contains(content["data"]["translations"][0]["translatedText"])) {
+        news.add(content["data"]["translations"][0]["translatedText"]);
+      }
+    }
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    lang.prefs();
+  }
+
   @override
   Widget build(BuildContext context) {
     width = MediaQuery.of(context).size.width;
     height = MediaQuery.of(context).size.height;
     return Scaffold(
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        backgroundColor: Colors.white,
+        title: Center(
+          child: Text(
+            "News",
+            style: TextStyle(fontSize: 30.0, color: Colors.black),
+          ),
+        ),
+        elevation: 0.0,
+      ),
       body: Container(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
-        decoration: BoxDecoration(
-          gradient: LinearGradient(colors: [
-            Color(0xFFFF9933),
-            Color(0xFFFFFFFF),
-            Color(0xFF138808),
-          ], begin: Alignment.topCenter, end: Alignment.bottomCenter),
-        ),
+        decoration: BoxDecoration(color: Colors.white),
         child: FutureBuilder(
             future: getUri(),
             builder: (BuildContext context, AsyncSnapshot snapshot) {
               if (snapshot.hasData) {
                 Map content = snapshot.data;
+                translate(content);
                 // for (int i = 0; i < content.length; i++) {
                 //   if (!states.contains(content[i]["state"])) {
                 //     states.add(content[i]["state"]);
@@ -122,7 +153,9 @@ class _NewsApi extends State<NewsApi> {
                                   child: Padding(
                                       padding: EdgeInsets.all(10),
                                       child: Text(
-                                        content['articles'][index]["title"],
+                                        news.isEmpty
+                                            ? "Loading...."
+                                            : news[index],
                                         style: TextStyle(
                                             fontSize: 20.0,
                                             color: Colors.white),

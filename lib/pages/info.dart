@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localization_master/localization/language_constants.dart';
 import 'package:geolocator/geolocator.dart';
 import 'dart:async';
 import 'package:http/http.dart';
 import 'dart:convert';
 
 void makePost2(
-    String a, String b, String c, String d, String e, String f, var g) async {
+    String a, String b, String c, String d, String e, String f, var g,String h) async {
   String url = "https://covid-mitrc.herokuapp.com/apis/neighbours/create";
   var body = {
     "rel": a,
@@ -13,8 +14,10 @@ void makePost2(
     "colony": c,
     "state": d,
     "district": e,
+    "gender": h,
     "house": f,
     "mobile": g,
+
   };
   Response r = await post(
     Uri.parse(url),
@@ -39,8 +42,8 @@ class _Info extends State<Info> {
     "kota"
   ];
 
-  var valu, valu1;
-  bool valu3 = false, valu4 = false;
+  var valu, valu1,valu2;
+  bool valu3 = false, valu4 = false,valu5 = false,valu6 = false;
   String selectedState;
   List<String> states = ["Rajasthan", "up", "Gujrat"];
   String selectedDistrict;
@@ -102,43 +105,54 @@ class _Info extends State<Info> {
                       EdgeInsets.only(left: 10, right: 10, top: 20, bottom: 20),
                   child: Column(
                     children: <Widget>[
-                      Text(
-                        "अपने देश की रक्षा के लिए कृपया हमारा समर्थन करें",
-                        style: TextStyle(
-                            fontSize: 30, fontWeight: FontWeight.bold),
-                        textAlign: TextAlign.center,
-                      ),
+                      Image(image: AssetImage('images/flag.gif')),
+                      // Text(
+                      //   "अपने देश की रक्षा के लिए कृपया हमारा समर्थन करें",
+                      //   style: TextStyle(
+                      //       fontSize: 30, fontWeight: FontWeight.bold),
+                      //   textAlign: TextAlign.center,
+                      // ),
                       Padding(
                           padding: EdgeInsets.only(top: 20),
                           child: Row(
                             children: <Widget>[
+                              Text(getTranslated(context, 'gender')),
                               Checkbox(
-                              value: valu3,
+                              value: valu5,
                               onChanged: (bool value) {
                                 setState(() {
-                                  valu1 = 'N';
-                                  valu3 = value;
+                                  valu2 = 'male';
+                                  valu5 = value;
                                 });
                               },
                             ),
-                              Text("पुरुष"),
+                              Text(
+                                getTranslated(context, 'male')
+                                // "पुरुष"
+                                ),
                               Checkbox(
-                              value: valu3,
+                              value: valu6,
                               onChanged: (bool value) {
                                 setState(() {
-                                  valu1 = 'N';
-                                  valu3 = value;
+                                  valu2 = 'female';
+                                  valu6 = value;
                                 });
                               },
                             ),
-                              Text("महिला")
+                              Text(
+                                getTranslated(context, 'female')
+                                // "महिला"
+                                )
                             ],
                           )),
                       Padding(
                         padding: EdgeInsets.only(top: 10),
                         child: Row(
                           children: <Widget>[
-                            Text("रिश्ता:"),
+                            Text(
+                              getTranslated(context, 'relation')
+                              // "रिश्ता:"
+                              ),
                             Checkbox(
                               value: valu3,
                               onChanged: (bool value) {
@@ -148,7 +162,10 @@ class _Info extends State<Info> {
                                 });
                               },
                             ),
-                            Text("पड़ोसी"),
+                            Text(
+                              getTranslated(context, 'neighbor')
+                              // "पड़ोसी"
+                              ),
                             Checkbox(
                               value: valu4,
                               onChanged: (bool value) {
@@ -158,7 +175,10 @@ class _Info extends State<Info> {
                                 });
                               },
                             ),
-                            Text("मित्र")
+                            Text(
+                              getTranslated(context, 'friend')
+                              // "मित्र"
+                              )
                           ],
                         ),
                       ),
@@ -180,7 +200,8 @@ class _Info extends State<Info> {
                                 child: DropdownButton(
                                   iconDisabledColor: Colors.black,
                                   hint: Text(
-                                    'अपना राज्य चुनें',
+                                    getTranslated(context, 'select_state'),
+                                    // 'अपना राज्य चुनें',
                                     style: TextStyle(
                                         color: Colors.black, fontSize: 15.0),
                                   ),
@@ -208,7 +229,9 @@ class _Info extends State<Info> {
                                   borderRadius: BorderRadius.circular(15.0),
                                 ),
                                 child: DropdownButton(
-                                  hint: Text('अपने जिले का चयन करें',
+                                  hint: Text(
+                                    getTranslated(context, 'select_district'),
+                                    // 'अपने जिले का चयन करें',
                                       style: TextStyle(
                                           color: Colors.black, fontSize: 15.0)),
                                   value: selectedDistrict,
@@ -237,7 +260,8 @@ class _Info extends State<Info> {
                           keyboardType: TextInputType.text,
                           // controller: passEditor,
                           decoration: InputDecoration(
-                            labelText: "नाम दर्ज करें",
+                            labelText: getTranslated(context, 'name'),
+                            // "नाम दर्ज करें",
                             border: new OutlineInputBorder(
                               borderRadius: new BorderRadius.circular(5.0),
                               borderSide: new BorderSide(),
@@ -253,7 +277,8 @@ class _Info extends State<Info> {
                           keyboardType: TextInputType.number,
                           // controller: passEditor,
                           decoration: InputDecoration(
-                            labelText: "मोबाइल नंबर",
+                            labelText:getTranslated(context, 'mob'),
+                            //  "मोबाइल नंबर",
                             border: new OutlineInputBorder(
                               borderRadius: new BorderRadius.circular(5.0),
                               borderSide: new BorderSide(),
@@ -269,7 +294,8 @@ class _Info extends State<Info> {
                           keyboardType: TextInputType.text,
                           // controller: passEditor,
                           decoration: InputDecoration(
-                            labelText: "कालोनी",
+                            labelText:getTranslated(context, 'col'),
+                            //  "कालोनी",
                             border: new OutlineInputBorder(
                               borderRadius: new BorderRadius.circular(5.0),
                               borderSide: new BorderSide(),
@@ -285,7 +311,8 @@ class _Info extends State<Info> {
                           keyboardType: TextInputType.text,
                           // controller: passEditor,
                           decoration: InputDecoration(
-                            labelText: "घर का नंबर",
+                            labelText: getTranslated(context, 'hnumber'),
+                            // "घर का नंबर",
                             border: new OutlineInputBorder(
                               borderRadius: new BorderRadius.circular(5.0),
                               borderSide: new BorderSide(),
@@ -306,13 +333,17 @@ class _Info extends State<Info> {
                                   selectedState.toString(),
                                   selectedDistrict.toString(),
                                   hnumberEditor.text,
-                                  mob);
+                                  mob,
+                                  valu2.toString());
                             },
                             //   Fluttertoast.showToast(
                             //       msg: valu2.toString(),
                             //       toastLength: Toast.LENGTH_SHORT);
                             // },
-                            child: Text("Submit"),
+                            child: Text(
+                              getTranslated(context, 'submit'),
+                              // "Submit"
+                              ),
                           )))
                     ],
                   ))
