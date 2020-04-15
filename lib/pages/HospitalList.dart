@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:math';
+import 'package:flutter_localization_master/localization/language_constants.dart';
 import 'package:flutter_localization_master/pages/DeclarationForm.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:flutter/material.dart';
@@ -9,14 +10,14 @@ import 'package:http/http.dart' as http;
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
-Future<Map> getState(String a) async {
-  String url = "https://hospital-covid.herokuapp.com/api?state=${a}";
+Future<Map> getOverall() async {
+  String url = "https://hospital-covid.herokuapp.com/api";
   http.Response response = await http.get(url);
   return json.decode(response.body);
 }
 
-Future<Map> getDistrict(String a) async {
-  String url = "https://hospital-covid.herokuapp.com/api?district=${a}";
+Future<Map> getState(String a) async {
+  String url = "https://hospital-covid.herokuapp.com/api?state=${a}";
   http.Response response = await http.get(url);
   return json.decode(response.body);
 }
@@ -117,7 +118,7 @@ class _HospitalList extends State<HospitalList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("asdas")),
+      appBar: AppBar(title: Text("India's Fight Against Corona")),
       body: Container(
           decoration: BoxDecoration(
               gradient: LinearGradient(colors: [
@@ -135,7 +136,7 @@ class _HospitalList extends State<HospitalList> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => fetchState(context)));
+                          builder: (context) => fetchDetail(context)));
                 },
                 child: Container(
                     decoration: BoxDecoration(
@@ -156,7 +157,8 @@ class _HospitalList extends State<HospitalList> {
                     height: 100,
                     child: Center(
                       child: Text(
-                        "OverAll StateWise Hospital Data",
+                        // "OverAll Hospital Data",
+                        getTranslated(context, 'total_hos_list'),
                         textAlign: TextAlign.center,
                         style: TextStyle(
                             fontSize: 20, fontWeight: FontWeight.bold),
@@ -192,7 +194,8 @@ class _HospitalList extends State<HospitalList> {
                     height: 100,
                     child: Center(
                       child: Text(
-                        "OverAll DistrictWise Hospital Data",
+                        // "OverAll DistrictWise Hospital Data",
+                        getTranslated(context, 'total_state_list'),
                         textAlign: TextAlign.center,
                         style: TextStyle(
                             fontSize: 20, fontWeight: FontWeight.bold),
@@ -205,46 +208,18 @@ class _HospitalList extends State<HospitalList> {
   }
 }
 
-Widget fetchState(BuildContext context) {
+Widget fetchDetail(BuildContext context) {
   return Scaffold(
-      body: Column(
-    children: <Widget>[
-      Center(
-        child: Padding(
-          padding: EdgeInsets.only(top: 20),
-          child: TextFormField(
-            obscureText: false,
-            controller: mobEditor,
-            // controller: passEditor,
-            decoration: InputDecoration(
-              labelText: "मोबाइल नंबर",
-              border: new OutlineInputBorder(
-                borderRadius: new BorderRadius.circular(5.0),
-                borderSide: new BorderSide(),
-              ),
-            ),
-          ),
-        ),
-      ),
-      Center(
-          child: MaterialButton(
-        onPressed: () {
-          var data = mobEditor.text;
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => fetchDetail(data)));
-        },
-        child: Text("Submit"),
-      ))
-    ],
-  ));
-}
-
-Widget fetchDetail(var data) {
-  var fav = data.toString();
-  return Scaffold(
-    body: Center(
+      body: Container(
+    decoration: BoxDecoration(
+        gradient: LinearGradient(colors: [
+      Color(0xFFFF9933),
+      Color(0xFFFFFFFF),
+      Color(0xFF138808),
+    ], begin: Alignment.topCenter, end: Alignment.bottomCenter)),
+    child: Center(
       child: FutureBuilder(
-        future: getState(fav),
+        future: getOverall(),
         builder: (context, AsyncSnapshot<dynamic> snapshot) {
           // print(snapshot.data.status);
           if (snapshot.hasData) {
@@ -255,13 +230,94 @@ Widget fetchDetail(var data) {
                 itemCount: 1,
                 itemBuilder: (BuildContext context, int index) {
                   return Column(children: <Widget>[
-                    Text(content["pending"].toString()),
-                    Text(content["death"].toString()),
-                    Text(content["discharged"].toString()),
-                    Text(content["total"].toString()),
-                    Text(content["positive"].toString()),
-                    Text(content["negative"].toString()),
-                    Text(content["admit"].toString()),
+                    Image(image: AssetImage('images/flag.gif')),
+                    GestureDetector(
+                        onTap: () {},
+                        child: Container(
+                          decoration: BoxDecoration(
+                            gradient: LinearGradient(
+                                colors: color2,
+                                begin: Alignment.topLeft,
+                                end: Alignment.bottomRight),
+                            borderRadius: BorderRadius.circular(15.0),
+                            boxShadow: [
+                              BoxShadow(
+                                  color: Colors.black45,
+                                  blurRadius: 15.0,
+                                  offset: Offset.fromDirection(1.0, 10.0))
+                            ],
+                          ),
+                          margin: EdgeInsets.all(10.0),
+                          width: 300,
+                          // height: 100,
+                          child: Padding(
+                              padding: EdgeInsets.all(20),
+                              child: Column(
+                                children: <Widget>[
+                                  Align(
+                                      alignment: Alignment.topLeft,
+                                      child: Text(
+                                        getTranslated(context, 'pending') +
+                                            "\t\t" +
+                                            content["pending"].toString(),
+                                        style: TextStyle(fontSize: 20),
+                                      )),
+                                  Align(
+                                    alignment: Alignment.topLeft,
+                                    child: Text(
+                                      getTranslated(context, 'death') +
+                                          "\t\t" +
+                                          content["death"].toString(),
+                                      style: TextStyle(fontSize: 20),
+                                    ),
+                                  ),
+                                  Align(
+                                    alignment: Alignment.topLeft,
+                                    child: Text(
+                                      getTranslated(context, 'discharge') +
+                                          "\t\t" +
+                                          content["discharged"].toString(),
+                                      style: TextStyle(fontSize: 20),
+                                    ),
+                                  ),
+                                  Align(
+                                    alignment: Alignment.topLeft,
+                                    child: Text(
+                                      getTranslated(context, 'total') +
+                                          "\t\t" +
+                                          content["total"].toString(),
+                                      style: TextStyle(fontSize: 20),
+                                    ),
+                                  ),
+                                  Align(
+                                    alignment: Alignment.topLeft,
+                                    child: Text(
+                                      getTranslated(context, 'positive') +
+                                          "\t\t" +
+                                          content["positive"].toString(),
+                                      style: TextStyle(fontSize: 20),
+                                    ),
+                                  ),
+                                  Align(
+                                    alignment: Alignment.topLeft,
+                                    child: Text(
+                                      getTranslated(context, 'negative') +
+                                          "\t\t" +
+                                          content["negative"].toString(),
+                                      style: TextStyle(fontSize: 20),
+                                    ),
+                                  ),
+                                  Align(
+                                    alignment: Alignment.topLeft,
+                                    child: Text(
+                                      "Total Admitted Cases:\t\t" +
+                                          content["admit"].toString(),
+                                      style: TextStyle(fontSize: 20),
+                                    ),
+                                  ),
+                                ],
+                              )),
+                        ))
                   ]);
                 });
           } else if (snapshot.hasError) {
@@ -269,16 +325,21 @@ Widget fetchDetail(var data) {
           }
 
           // By default, show a loading spinner.
-          return CircularProgressIndicator();
+          return Center(
+            child: SpinKitChasingDots(
+              color: Colors.black,
+              size: 50.0,
+            ),
+          );
         },
       ),
     ),
-  );
+  ));
 }
 
 Widget fetchDistrict(BuildContext context) {
   return Scaffold(
-      appBar: AppBar(title: Text("adakdmsad")),
+      appBar: AppBar(title: Text("India's Fight Against Corona")),
       body: Container(
           decoration: BoxDecoration(
               gradient: LinearGradient(colors: [
@@ -357,7 +418,9 @@ Widget fetchDistrict(BuildContext context) {
                                     builder: (context) => fetchDetail2(abs)));
                             // Fluttertoast.showToast(msg: abs.toString(),toastLength: Toast.LENGTH_SHORT);
                           },
-                          child: Text("Submit"),
+                          child: Text(getTranslated(context, 'submit')
+                              // "Submit"
+                              ),
                         )))
               ],
             ),
@@ -367,9 +430,16 @@ Widget fetchDistrict(BuildContext context) {
 Widget fetchDetail2(var data) {
   var fav = data.toString();
   return Scaffold(
-    body: Center(
+      body: Container(
+    decoration: BoxDecoration(
+        gradient: LinearGradient(colors: [
+      Color(0xFFFF9933),
+      Color(0xFFFFFFFF),
+      Color(0xFF138808),
+    ], begin: Alignment.topCenter, end: Alignment.bottomCenter)),
+    child: Center(
       child: FutureBuilder(
-        future: getDistrict(fav),
+        future: getState(fav),
         builder: (context, AsyncSnapshot<dynamic> snapshot) {
           // print(snapshot.data.status);
           if (snapshot.hasData) {
@@ -410,42 +480,48 @@ Widget fetchDetail2(var data) {
                                   child: Column(
                                 children: <Widget>[
                                   Text(
-                                    "Pending Cases:\t\t" +
+                                    getTranslated(context, 'pending') +
+                                        "\t\t" +
                                         content["pending"].toString(),
                                     style: TextStyle(
                                         fontWeight: FontWeight.bold,
                                         fontSize: 20),
                                   ),
                                   Text(
-                                    "Death Cases:\t\t" +
+                                    getTranslated(context, 'death') +
+                                        "\t\t" +
                                         content["death"].toString(),
                                     style: TextStyle(
                                         fontWeight: FontWeight.bold,
                                         fontSize: 20),
                                   ),
                                   Text(
-                                    "Discharged Cases:\t\t" +
+                                    getTranslated(context, 'discharge') +
+                                        "\t\t" +
                                         content["discharged"].toString(),
                                     style: TextStyle(
                                         fontWeight: FontWeight.bold,
                                         fontSize: 20),
                                   ),
                                   Text(
-                                    "Total Cases:\t\t" +
+                                    getTranslated(context, 'total') +
+                                        "\t\t" +
                                         content["total"].toString(),
                                     style: TextStyle(
                                         fontWeight: FontWeight.bold,
                                         fontSize: 20),
                                   ),
                                   Text(
-                                    "Positive Cases:\t\t" +
+                                    getTranslated(context, 'positive') +
+                                        "\t\t" +
                                         content["positive"].toString(),
                                     style: TextStyle(
                                         fontWeight: FontWeight.bold,
                                         fontSize: 20),
                                   ),
                                   Text(
-                                    "Negative Cases:\t\t" +
+                                    getTranslated(context, 'negative') +
+                                        "\t\t" +
                                         content["negative"].toString(),
                                     style: TextStyle(
                                         fontWeight: FontWeight.bold,
@@ -472,9 +548,14 @@ Widget fetchDetail2(var data) {
           }
 
           // By default, show a loading spinner.
-          return CircularProgressIndicator();
+          return Center(
+            child: SpinKitChasingDots(
+              color: Colors.black,
+              size: 50.0,
+            ),
+          );
         },
       ),
     ),
-  );
+  ));
 }
