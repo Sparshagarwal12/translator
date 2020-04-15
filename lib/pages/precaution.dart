@@ -1,0 +1,112 @@
+import 'dart:convert';
+
+import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'dart:async';
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+
+Future<List<String>> getPrec() async {
+  String url = "https://covid-mitrc.herokuapp.com/apis/precaution";
+  http.Response response = await http.get(url);
+  print(response.statusCode);
+   return json.decode(response.body);
+
+}
+
+List<Color> color1 = [
+  Color(0xFF11998e),
+  Color(0xFF38ef7d),
+];
+List<Color> color2 = [
+  Color(0xFFff9966),
+  Color(0xFFff5e62),
+];
+
+class Precaution extends StatefulWidget {
+  @override
+  _Precaution createState() => _Precaution();
+}
+
+class _Precaution extends State<Precaution> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("India's Fight Against Corona"),
+      ),
+      body: Container(
+        decoration: BoxDecoration(
+            gradient: LinearGradient(colors: [
+          Color(0xFFFF9933),
+          Color(0xFFFFFFFF),
+          Color(0xFF138808),
+        ], begin: Alignment.topCenter, end: Alignment.bottomCenter)),
+        child: FutureBuilder(
+            future: getPrec(),
+            builder: (BuildContext context, AsyncSnapshot snapshot) {
+              if (snapshot.hasData) {
+                List content = snapshot.data;
+                return ListView.builder(
+                    itemCount: content.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return AnimationConfiguration.staggeredList(
+                        position: index,
+                        duration: const Duration(milliseconds: 800),
+                        child: SlideAnimation(
+                          horizontalOffset: 50.0,
+                          child: FadeInAnimation(
+                            child: GestureDetector(
+                              onTap: () {
+                                // Navigator.push(
+                                //     context,
+                                //     MaterialPageRoute(
+                                //         builder: (context) => newsDetails(
+                                //             content['articles'][index]
+                                //                 ["title"])));
+                              },
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  gradient: LinearGradient(
+                                      colors: index % 2 == 0 ? color1 : color2,
+                                      begin: Alignment.topLeft,
+                                      end: Alignment.bottomRight),
+                                  borderRadius: BorderRadius.circular(15.0),
+                                  boxShadow: [
+                                    BoxShadow(
+                                        color: Colors.black45,
+                                        blurRadius: 15.0,
+                                        offset: Offset.fromDirection(1.0, 10.0))
+                                  ],
+                                ),
+                                margin: EdgeInsets.all(10.0),
+                                width: 300,
+                                height: 100,
+                                child: Center(
+                                    child: Padding(
+                                        padding: EdgeInsets.all(10),
+                                        child: Text(
+                                          content[index]["title"],
+                                          style: TextStyle(
+                                              fontSize: 20.0,
+                                              color: Colors.white),
+                                        ))),
+                              ),
+                            ),
+                          ),
+                        ),
+                      );
+                    });
+              } else {
+                return Center(
+                  child: SpinKitChasingDots(
+                    color: Colors.black,
+                    size: 50.0,
+                  ),
+                );
+              }
+            }),
+      ),
+    );
+  }
+}
