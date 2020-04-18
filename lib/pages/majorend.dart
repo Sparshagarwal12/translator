@@ -120,7 +120,7 @@ class _majorLast extends State<majorLast> {
                                     Navigator.pushAndRemoveUntil(
                                         context,
                                         MaterialPageRoute(
-                                            builder: (context) => mainBoard()),
+                                            builder: (context) => BottomnavBar()),
                                         (Route<dynamic> route) => false);
 
                                     // else{

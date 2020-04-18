@@ -36,21 +36,28 @@ dependencies:
   google_maps_flutter: ^0.5.11
   geolocator: ^5.3.0
   location_permissions: ^2.0.5
+  youtube_api: ^0.7.2
   youtube_player: ^0.6.0
   flutube: 
   charts_flutter:
   url_launcher: ^5.4.2
   assets_audio_player: 
   shimmer:
+  youtube_player_flutter: 
   carousel_slider: ^1.3.0
   audioplayers: ^0.14.1
   font_awesome_flutter: ^8.2.0
+  toast:
   firebase_database:
+  image_picker:
+  mime:
   firebase_core:
   neumorphic: ^0.1.2
   video_player: ^0.10.1+3
   curved_navigation_bar:
   flutter_launcher_icons: "^0.7.3"
+  google_nav_bar: ^2.0.0
+  line_icons: ^0.2.0
 
 flutter_icons:
   android: "launcher_icon" 

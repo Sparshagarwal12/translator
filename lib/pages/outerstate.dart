@@ -1,3 +1,5 @@
+import 'package:flutter_localization_master/localization/language_constants.dart';
+
 import 'searchPage.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -202,7 +204,7 @@ Widget stateDetails(var date) {
                                       child: Align(
                                         alignment: Alignment.topLeft,
                                         child: Text(
-                                          "\nActive Cases: " +
+                                          "\n" +getTranslated(context, 'active')+
                                               content['statewise'][index]
                                                       ["active"]
                                                   .toString(),
@@ -215,7 +217,7 @@ Widget stateDetails(var date) {
                                     child: Align(
                                       alignment: Alignment.topLeft,
                                       child: Text(
-                                        "\nConfirmed Cases: " +
+                                        "\n" +getTranslated(context, 'confirm')+
                                             content['statewise'][index]
                                                     ["confirmed"]
                                                 .toString(),
@@ -229,7 +231,7 @@ Widget stateDetails(var date) {
                                       child: Align(
                                         alignment: Alignment.topLeft,
                                         child: Text(
-                                          "\nDeaths Cases: " +
+                                          "\n " +getTranslated(context, 'death')+
                                               content['statewise'][index]
                                                       ["deaths"]
                                                   .toString(),
@@ -242,7 +244,7 @@ Widget stateDetails(var date) {
                                       child: Align(
                                         alignment: Alignment.topLeft,
                                         child: Text(
-                                          "\nLast Updated Time: " +
+                                          "\n" +getTranslated(context, 'update')+
                                               "\n" +
                                               content['statewise'][index]
                                                       ["lastupdatedtime"]
@@ -256,11 +258,11 @@ Widget stateDetails(var date) {
                                       child: Align(
                                         alignment: Alignment.topLeft,
                                         child: Text(
-                                          "\nTotal Recovered Cases: " +
+                                      
+                                      "\n"+getTranslated(context, 'total_cured')+":"+
                                               content['statewise'][index]
                                                       ["recovered"]
-                                                  .toString() +
-                                              "\n",
+                                                  .toString()+"\n",
                                           style: TextStyle(fontSize: 25.0),
                                           textAlign: TextAlign.start,
                                         ),

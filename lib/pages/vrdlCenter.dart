@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_localization_master/pages/DeclarationForm.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -13,7 +12,7 @@ Future<List<dynamic>> getUri() async {
 }
 
 var string;
-// List<String> states = [];
+List<String> states = [];
 // List<String> district = [];
 
 List<Color> color1 = [

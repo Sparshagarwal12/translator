@@ -1,11 +1,5 @@
 import 'package:flutter_localization_master/localization/language_constants.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'grid.dart';
-import 'lastchecker.dart';
-import 'oownchecker2.dart';
-import 'selfchecker.dart';
-import 'selfchecker3.dart';
-import 'slefDeclaration.dart';
 import 'package:flutter/material.dart';
 
 class thanks extends StatefulWidget {

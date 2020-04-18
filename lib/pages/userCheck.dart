@@ -29,7 +29,7 @@ class _CheckUserState extends State<CheckUser> {
             prefs.getBool('declared') == null) {
           Navigator.pushAndRemoveUntil(
               context,
-              MaterialPageRoute(builder: (context) => FamilyDeclaration()),
+              MaterialPageRoute(builder: (context) => SelectMembers()),
               (_) => false);
         } else {
           Navigator.pushAndRemoveUntil(

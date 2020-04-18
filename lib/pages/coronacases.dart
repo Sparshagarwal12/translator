@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'chart1.dart';
-import 'chart2.dart';
+import 'ministrystate.dart';
 
-class deathgrid extends StatelessWidget {
+class CoronaCase extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -111,11 +110,11 @@ class deathgrid extends StatelessWidget {
                             margin: EdgeInsets.only(left: 10),
                           ),
                           onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => districtRoute()),
-                            );
+                            // Navigator.push(
+                            //   context,
+                            //   MaterialPageRoute(
+                            //       builder: (context) => districtRoute()),
+                            // );
                           },
                         ),
                       )
@@ -130,17 +129,21 @@ class deathgrid extends StatelessWidget {
 class cityRoute extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: HomePage4());
+    return Scaffold(
+        appBar: AppBar(
+          title: Text("कोरोना के खिलाफ भारत की लड़ाई"),
+        ),
+        body: stateList());
   }
 }
 
-class districtRoute extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: Text("कोविड-19"),
-        ),
-        body: district());
-  }
-}
+// class districtRoute extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//         appBar: AppBar(
+//           title: Text("कोविड-19"),
+//         ),
+//         body: district());
+//   }
+// }

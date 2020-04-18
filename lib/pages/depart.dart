@@ -51,8 +51,8 @@ class _department extends State<department>
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: <Widget>[
                                       Image(
-                                          image:
-                                              AssetImage('images/hospital.png')),
+                                          image: AssetImage(
+                                              'images/hospital.png')),
                                       Center(
                                         child: Text(
                                           "\nसरकारी लैब सेंटर",
@@ -92,7 +92,8 @@ class _department extends State<department>
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: <Widget>[
-                                  Image(image: AssetImage('images/hospital.png')),
+                                  Image(
+                                      image: AssetImage('images/hospital.png')),
                                   Center(
                                     child: Text(
                                       "\nनिजी लैब सेंटर",

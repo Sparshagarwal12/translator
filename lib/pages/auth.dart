@@ -1,17 +1,16 @@
 import 'dart:io';
 import 'dart:convert';
-import 'DeclarationForm.dart';
+// import 'package:covid19/familyDeclaration.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 
 String userId;
-
+Map content;
 //Register Variables
 TextEditingController userName = new TextEditingController();
 TextEditingController name = new TextEditingController();
 TextEditingController password = new TextEditingController();
-// List
 
 Future<dynamic> getUri() async {
   String url = "https://covid-mitrc.herokuapp.com/accounts";
@@ -31,7 +30,7 @@ Map<dynamic, dynamic> getJson() {
     future: getUri(),
     builder: (BuildContext context, AsyncSnapshot snapshot) {
       if (snapshot.hasData) {
-         List content = snapshot.data;
+        List content = snapshot.data;
       } else {
         print("connection error");
       }
