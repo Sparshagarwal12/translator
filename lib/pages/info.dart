@@ -5,8 +5,8 @@ import 'dart:async';
 import 'package:http/http.dart';
 import 'dart:convert';
 
-void makePost2(
-    String a, String b, String c, String d, String e, String f, var g,String h) async {
+void makePost2(String a, String b, String c, String d, String e, String f,
+    var g, String h) async {
   String url = "https://covid-mitrc.herokuapp.com/apis/neighbours/create";
   var body = {
     "rel": a,
@@ -17,7 +17,6 @@ void makePost2(
     "gender": h,
     "house": f,
     "mobile": g,
-
   };
   Response r = await post(
     Uri.parse(url),
@@ -26,6 +25,44 @@ void makePost2(
   );
   print(r.body);
 }
+
+List<Map<String, dynamic>> animCont = [
+  {"color": color5, "shadow": Colors.deepOrange[300]},
+  {"color": color5, "shadow": Colors.deepOrange[300]},
+  {"color": color5, "shadow": Colors.deepOrange[300]},
+  {"color": color5, "shadow": Colors.black54},
+  {"color": color6, "shadow": Colors.black54},
+  {"color": color6, "shadow": Colors.black54},
+];
+
+bool _value1 = false,
+    _value2 = false,
+    _value3 = false,
+    _value4 = false,
+    _value5 = false,
+    _value6 = false,
+    _value7 = false,
+    _value8 = false;
+
+List<Color> color6 = [
+  Color(0xFFf80759),
+  Color(0xFFbc4e9c),
+];
+
+List<Color> color3 = [
+  Color(0xFF8E2DE2),
+  Color(0xFF4A00E0),
+];
+List<Color> color1 = [
+  Color(0xFF00b09b),
+  Color(0xFF00b09b),
+];
+List<Color> color5 = [Color(0xFFFF5F6D), Color(0xFFFFC371)];
+List<Color> color2 = [
+  Color(0xFFff9966),
+  Color(0xFFff5e62),
+];
+List<Color> color4 = [Color(0xFF36D1DC), Color(0xFF5B86E5)];
 
 class Info extends StatefulWidget {
   @override
@@ -42,8 +79,9 @@ class _Info extends State<Info> {
     "kota"
   ];
 
-  var valu, valu1,valu2;
-  bool valu3 = false, valu4 = false,valu5 = false,valu6 = false;
+  String gender, relation;
+  var valu, valu1, valu2;
+  bool valu3 = false, valu4 = false, valu5 = false, valu6 = false;
   String selectedState;
   List<String> states = ["Rajasthan", "up", "Gujrat"];
   String selectedDistrict;
@@ -91,13 +129,8 @@ class _Info extends State<Info> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-         height: MediaQuery.of(context).size.height ,
-          decoration: BoxDecoration(
-              gradient: LinearGradient(colors: [
-            Color(0xFFFF9933),
-            Color(0xFFFFFFFF),
-            Color(0xFF138808),
-          ], begin: Alignment.topCenter, end: Alignment.bottomCenter)),
+          height: MediaQuery.of(context).size.height,
+          color: Colors.white,
           child: ListView(
             children: <Widget>[
               Padding(
@@ -105,83 +138,348 @@ class _Info extends State<Info> {
                       EdgeInsets.only(left: 10, right: 10, top: 20, bottom: 20),
                   child: Column(
                     children: <Widget>[
-                      Image(image: AssetImage('images/flag.gif')),
-                      // Text(
-                      //   "अपने देश की रक्षा के लिए कृपया हमारा समर्थन करें",
-                      //   style: TextStyle(
-                      //       fontSize: 30, fontWeight: FontWeight.bold),
-                      //   textAlign: TextAlign.center,
-                      // ),
                       Padding(
-                          padding: EdgeInsets.only(top: 20),
-                          child: Row(
-                            children: <Widget>[
-                              Text(getTranslated(context, 'gender')),
-                              Checkbox(
-                              value: valu5,
-                              onChanged: (bool value) {
-                                setState(() {
-                                  valu2 = 'male';
-                                  valu5 = value;
-                                });
-                              },
-                            ),
-                              Text(
-                                getTranslated(context, 'male')
-                                // "पुरुष"
-                                ),
-                              Checkbox(
-                              value: valu6,
-                              onChanged: (bool value) {
-                                setState(() {
-                                  valu2 = 'female';
-                                  valu6 = value;
-                                });
-                              },
-                            ),
-                              Text(
-                                getTranslated(context, 'female')
-                                // "महिला"
-                                )
-                            ],
-                          )),
+                          padding: EdgeInsets.only(left: 30, right: 30),
+                          child: AnimatedContainer(
+                              curve: Curves.bounceInOut,
+                              duration: Duration(milliseconds: 500),
+                              height: 150,
+                              child: Card(
+                                  elevation: 10,
+                                  color: Colors.white,
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: <Widget>[
+                                      Text(
+                                        "Gender:",
+                                        style: TextStyle(
+                                            fontSize: 25,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                      SizedBox(
+                                        height: 10,
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: <Widget>[
+                                          GestureDetector(
+                                              onTap: () {
+                                                gender = "male";
+                                                if (_value2 == false) {
+                                                  setState(() {
+                                                    _value1 = true;
+                                                  });
+                                                } else {
+                                                  setState(() {
+                                                    _value1 = true;
+                                                    _value2 = false;
+                                                  });
+                                                }
+                                              },
+                                              child: _value1 == false
+                                                  ? AnimatedContainer(
+                                                      duration: Duration(
+                                                          milliseconds: 500),
+                                                      curve: Curves.bounceInOut,
+                                                      decoration: BoxDecoration(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(6.0),
+                                                        gradient:
+                                                            LinearGradient(
+                                                          colors: animCont[1]
+                                                              ["color"],
+                                                          begin: Alignment
+                                                              .bottomRight,
+                                                          end:
+                                                              Alignment.topLeft,
+                                                        ),
+                                                      ),
+                                                      height: 80,
+                                                      width: 80,
+                                                      child: Center(
+                                                        child: Text(
+                                                          "Male",
+                                                          style: TextStyle(
+                                                              fontSize: 20,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold),
+                                                        ),
+                                                      ))
+                                                  : AnimatedContainer(
+                                                      duration: Duration(
+                                                          milliseconds: 500),
+                                                      curve: Curves.easeInOut,
+                                                      decoration: BoxDecoration(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(6.0),
+                                                        gradient:
+                                                            LinearGradient(
+                                                          colors: animCont[5]
+                                                              ["color"],
+                                                          begin: Alignment
+                                                              .bottomRight,
+                                                          end:
+                                                              Alignment.topLeft,
+                                                        ),
+                                                      ),
+                                                      height: 80,
+                                                      width: 80,
+                                                      child: Icon(Icons.done),
+                                                    )),
+                                          GestureDetector(
+                                              onTap: () {
+                                                gender = "female";
+                                                if (_value1 == false) {
+                                                  setState(() {
+                                                    _value2 = true;
+                                                  });
+                                                } else {
+                                                  setState(() {
+                                                    _value2 = true;
+                                                    _value1 = false;
+                                                  });
+                                                }
+                                              },
+                                              child: _value2 == false
+                                                  ? Center(
+                                                      child: AnimatedContainer(
+                                                          duration: Duration(
+                                                              milliseconds:
+                                                                  500),
+                                                          curve:
+                                                              Curves.easeInOut,
+                                                          decoration:
+                                                              BoxDecoration(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        6.0),
+                                                            gradient:
+                                                                LinearGradient(
+                                                              colors:
+                                                                  animCont[1]
+                                                                      ["color"],
+                                                              begin: Alignment
+                                                                  .bottomRight,
+                                                              end: Alignment
+                                                                  .topLeft,
+                                                            ),
+                                                          ),
+                                                          height: 80,
+                                                          width: 80,
+                                                          child: Center(
+                                                            child: Text(
+                                                                "Female",
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        20,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .bold)),
+                                                          )),
+                                                    )
+                                                  : Center(
+                                                      child: AnimatedContainer(
+                                                      duration: Duration(
+                                                          milliseconds: 500),
+                                                      curve: Curves.easeInOut,
+                                                      decoration: BoxDecoration(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(6.0),
+                                                        gradient:
+                                                            LinearGradient(
+                                                          colors: animCont[5]
+                                                              ["color"],
+                                                          begin: Alignment
+                                                              .bottomRight,
+                                                          end:
+                                                              Alignment.topLeft,
+                                                        ),
+                                                      ),
+                                                      height: 80,
+                                                      width: 80,
+                                                      child: Icon(Icons.done),
+                                                    )))
+                                        ],
+                                      ),
+                                    ],
+                                  )))),
                       Padding(
-                        padding: EdgeInsets.only(top: 10),
-                        child: Row(
-                          children: <Widget>[
-                            Text(
-                              getTranslated(context, 'relation')
-                              // "रिश्ता:"
-                              ),
-                            Checkbox(
-                              value: valu3,
-                              onChanged: (bool value) {
-                                setState(() {
-                                  valu1 = 'N';
-                                  valu3 = value;
-                                });
-                              },
-                            ),
-                            Text(
-                              getTranslated(context, 'neighbor')
-                              // "पड़ोसी"
-                              ),
-                            Checkbox(
-                              value: valu4,
-                              onChanged: (bool value) {
-                                setState(() {
-                                  valu1 = 'F';
-                                  valu4 = value;
-                                });
-                              },
-                            ),
-                            Text(
-                              getTranslated(context, 'friend')
-                              // "मित्र"
-                              )
-                          ],
-                        ),
-                      ),
+                          padding: EdgeInsets.only(left: 30, right: 30),
+                          child: AnimatedContainer(
+                              curve: Curves.bounceInOut,
+                              duration: Duration(milliseconds: 500),
+                              height: 150,
+                              child: Card(
+                                  elevation: 10,
+                                  color: Colors.white,
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: <Widget>[
+                                      Text(
+                                        "Relation:",
+                                        style: TextStyle(
+                                            fontSize: 25,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                      SizedBox(
+                                        height: 10,
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: <Widget>[
+                                          GestureDetector(
+                                              onTap: () {
+                                                relation = "F";
+                                                if (_value6 == false) {
+                                                  setState(() {
+                                                    _value5 = true;
+                                                  });
+                                                } else {
+                                                  setState(() {
+                                                    _value5 = true;
+                                                    _value6 = false;
+                                                  });
+                                                }
+                                              },
+                                              child: _value5 == false
+                                                  ? AnimatedContainer(
+                                                      duration: Duration(
+                                                          milliseconds: 500),
+                                                      curve: Curves.bounceInOut,
+                                                      decoration: BoxDecoration(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(6.0),
+                                                        gradient:
+                                                            LinearGradient(
+                                                          colors: animCont[1]
+                                                              ["color"],
+                                                          begin: Alignment
+                                                              .bottomRight,
+                                                          end:
+                                                              Alignment.topLeft,
+                                                        ),
+                                                      ),
+                                                      height: 80,
+                                                      width: 80,
+                                                      child: Center(
+                                                        child: Text(
+                                                          "Friend",
+                                                          style: TextStyle(
+                                                              fontSize: 18,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold),
+                                                        ),
+                                                      ))
+                                                  : AnimatedContainer(
+                                                      duration: Duration(
+                                                          milliseconds: 500),
+                                                      curve: Curves.easeInOut,
+                                                      decoration: BoxDecoration(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(6.0),
+                                                        gradient:
+                                                            LinearGradient(
+                                                          colors: animCont[5]
+                                                              ["color"],
+                                                          begin: Alignment
+                                                              .bottomRight,
+                                                          end:
+                                                              Alignment.topLeft,
+                                                        ),
+                                                      ),
+                                                      height: 80,
+                                                      width: 80,
+                                                      child: Icon(Icons.done),
+                                                    )),
+                                          GestureDetector(
+                                              onTap: () {
+                                                relation = "N";
+                                                if (_value5 == false) {
+                                                  setState(() {
+                                                    _value6 = true;
+                                                  });
+                                                } else {
+                                                  setState(() {
+                                                    _value6 = true;
+                                                    _value5 = false;
+                                                  });
+                                                }
+                                              },
+                                              child: _value6 == false
+                                                  ? Center(
+                                                      child: AnimatedContainer(
+                                                          duration: Duration(
+                                                              milliseconds:
+                                                                  500),
+                                                          curve:
+                                                              Curves.easeInOut,
+                                                          decoration:
+                                                              BoxDecoration(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        6.0),
+                                                            gradient:
+                                                                LinearGradient(
+                                                              colors:
+                                                                  animCont[1]
+                                                                      ["color"],
+                                                              begin: Alignment
+                                                                  .bottomRight,
+                                                              end: Alignment
+                                                                  .topLeft,
+                                                            ),
+                                                          ),
+                                                          height: 80,
+                                                          width: 80,
+                                                          child: Center(
+                                                            child: Text(
+                                                                "Neighbour",
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        17,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .bold)),
+                                                          )),
+                                                    )
+                                                  : Center(
+                                                      child: AnimatedContainer(
+                                                      duration: Duration(
+                                                          milliseconds: 500),
+                                                      curve: Curves.easeInOut,
+                                                      decoration: BoxDecoration(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(6.0),
+                                                        gradient:
+                                                            LinearGradient(
+                                                          colors: animCont[5]
+                                                              ["color"],
+                                                          begin: Alignment
+                                                              .bottomRight,
+                                                          end:
+                                                              Alignment.topLeft,
+                                                        ),
+                                                      ),
+                                                      height: 80,
+                                                      width: 80,
+                                                      child: Icon(Icons.done),
+                                                    )))
+                                        ],
+                                      ),
+                                    ],
+                                  )))),
                       Padding(
                           padding: EdgeInsets.only(top: 10),
                           child: Row(
@@ -230,8 +528,8 @@ class _Info extends State<Info> {
                                 ),
                                 child: DropdownButton(
                                   hint: Text(
-                                    getTranslated(context, 'select_district'),
-                                    // 'अपने जिले का चयन करें',
+                                      getTranslated(context, 'select_district'),
+                                      // 'अपने जिले का चयन करें',
                                       style: TextStyle(
                                           color: Colors.black, fontSize: 15.0)),
                                   value: selectedDistrict,
@@ -263,7 +561,7 @@ class _Info extends State<Info> {
                             labelText: getTranslated(context, 'name'),
                             // "नाम दर्ज करें",
                             border: new OutlineInputBorder(
-                              borderRadius: new BorderRadius.circular(5.0),
+                              borderRadius: new BorderRadius.circular(25.0),
                               borderSide: new BorderSide(),
                             ),
                           ),
@@ -277,10 +575,10 @@ class _Info extends State<Info> {
                           keyboardType: TextInputType.number,
                           // controller: passEditor,
                           decoration: InputDecoration(
-                            labelText:getTranslated(context, 'mob'),
+                            labelText: getTranslated(context, 'mob'),
                             //  "मोबाइल नंबर",
                             border: new OutlineInputBorder(
-                              borderRadius: new BorderRadius.circular(5.0),
+                              borderRadius: new BorderRadius.circular(25.0),
                               borderSide: new BorderSide(),
                             ),
                           ),
@@ -294,10 +592,10 @@ class _Info extends State<Info> {
                           keyboardType: TextInputType.text,
                           // controller: passEditor,
                           decoration: InputDecoration(
-                            labelText:getTranslated(context, 'col'),
+                            labelText: getTranslated(context, 'col'),
                             //  "कालोनी",
                             border: new OutlineInputBorder(
-                              borderRadius: new BorderRadius.circular(5.0),
+                              borderRadius: new BorderRadius.circular(25.0),
                               borderSide: new BorderSide(),
                             ),
                           ),
@@ -314,37 +612,44 @@ class _Info extends State<Info> {
                             labelText: getTranslated(context, 'hnumber'),
                             // "घर का नंबर",
                             border: new OutlineInputBorder(
-                              borderRadius: new BorderRadius.circular(5.0),
+                              borderRadius: new BorderRadius.circular(25.0),
                               borderSide: new BorderSide(),
                             ),
                           ),
                         ),
                       ),
                       Padding(
-                          padding: EdgeInsets.only(top: 30),
-                          child: Center(
-                              child: RaisedButton(
+                        padding: EdgeInsets.only(top: 30),
+                        child: Container(
+                          width: 200,
+                          child: RaisedButton(
+                            color: Color(0xFF57bbd8),
+                            highlightElevation: 10,
                             onPressed: () {
                               var mob = int.parse(mobEditor.text);
                               makePost2(
-                                  valu1.toString(),
+                                  relation,
                                   nameEditor.text,
                                   colnyEditor.text,
                                   selectedState.toString(),
                                   selectedDistrict.toString(),
                                   hnumberEditor.text,
                                   mob,
-                                  valu2.toString());
+                                  gender);
                             },
-                            //   Fluttertoast.showToast(
-                            //       msg: valu2.toString(),
-                            //       toastLength: Toast.LENGTH_SHORT);
-                            // },
+                            shape: RoundedRectangleBorder(
+                              borderRadius: new BorderRadius.circular(18.0),
+                            ),
                             child: Text(
-                              getTranslated(context, 'submit'),
-                              // "Submit"
-                              ),
-                          )))
+                              "Submit",
+                              // getTranslated(context, 'login'),
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                        ),
+                      )
                     ],
                   ))
             ],
