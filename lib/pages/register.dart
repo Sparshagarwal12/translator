@@ -366,15 +366,9 @@
 //   }
 // }
 
-import 'dart:io';
-
-// import 'advisoryUpdate.dart';
-import 'package:flutter_localization_master/pages/PatientReport.dart';
 import 'package:flutter_localization_master/pages/coronaMonitor.dart';
 
-import 'LoginPage.dart';
 import 'package:flutter_localization_master/localization/language_constants.dart';
-import 'DeclarationForm.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'auth.dart' as auth;

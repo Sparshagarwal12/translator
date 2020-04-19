@@ -1,11 +1,5 @@
-import 'package:fluttertoast/fluttertoast.dart';
-import 'grid.dart';
-import 'lastchecker.dart';
-import 'oownchecker2.dart';
+
 import 'otherchecker4.dart';
-import 'selfchecker.dart';
-import 'selfchecker3.dart';
-import 'slefDeclaration.dart';
 import 'package:flutter/material.dart';
 import 'wardn.dart';
 
@@ -15,19 +9,6 @@ class otherchecker3 extends StatefulWidget {
 }
 
 class _otherchecker3 extends State<otherchecker3> {
-  int _radioValue, _radioValue2;
-
-  void _handleRadio(int value) {
-    setState(() {
-      _radioValue = value;
-    });
-  }
-
-  void _handleRadio2(int value) {
-    setState(() {
-      _radioValue = value;
-    });
-  }
 
   List<String> users = ["Hospital", "Citizen"];
   String text;

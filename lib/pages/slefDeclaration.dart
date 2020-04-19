@@ -1,12 +1,9 @@
-import 'DeclarationForm.dart';
-import 'familyRadio.dart';
 import 'helpLine.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rounded_date_picker/rounded_picker.dart';
 import 'package:geolocator/geolocator.dart';
 import 'dart:async';
 import 'globalVar.dart' as global;
-import 'package:location_permissions/location_permissions.dart';
 
 class SelfDeclaration extends StatefulWidget {
   @override

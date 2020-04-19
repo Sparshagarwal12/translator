@@ -1,10 +1,4 @@
-import 'grid.dart';
-import 'majorend.dart';
 import 'otherchecker5.dart';
-import 'ownchecker3.dart';
-import 'selfchecker.dart';
-import 'selfchecker3.dart';
-import 'slefDeclaration.dart';
 import 'package:flutter/material.dart';
 
 class majorotherchecker extends StatefulWidget {

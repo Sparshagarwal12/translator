@@ -1,6 +1,9 @@
 import 'dart:convert';
 
+import 'package:flutter_localization_master/pages/BankPost.dart';
 import 'package:flutter_localization_master/pages/DailyBasis.dart';
+import 'package:flutter_localization_master/pages/HomeCreate.dart';
+import 'package:flutter_localization_master/pages/HomeGet.dart';
 // import 'package:flutter_localization_master/pages/HomeCreate.dart';
 import 'package:line_icons/line_icons.dart';
 
@@ -1230,7 +1233,9 @@ class _LogoAppState extends State<LogoApp> with SingleTickerProviderStateMixin {
                                               context,
                                               MaterialPageRoute(
                                                   builder: (context) =>
-                                                      point.exterTestgrid()),
+                                                  HomeView(),
+                                                      // point.exterTestgrid()
+                                                      ),
                                             );
                                           },
                                         ),

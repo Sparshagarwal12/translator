@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localization_master/localization/language_constants.dart';
-import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 
 List<Color> color1 = [
   Color(0xFF11998e),

@@ -1,4 +1,4 @@
-import 'package:covid19/faqPage.dart';
+import 'faqPage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 

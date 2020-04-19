@@ -1,12 +1,8 @@
 import 'package:flutter_localization_master/pages/coronaMonitor.dart';
 import 'package:flutter_localization_master/pages/homePage.dart';
 
-import 'DeclarationForm.dart';
-import 'MyHomePage.dart';
-import 'grid.dart';
-import 'LanguagePage.dart';
-import 'slefDeclaration.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localization_master/pages/DeclarationForm.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class CheckUser extends StatefulWidget {
@@ -36,6 +32,7 @@ class _CheckUserState extends State<CheckUser> {
               context,
               MaterialPageRoute(builder: (context) =>CoronaMonitor()),
               (_) => false);
+          
         }
       } else {
         Navigator.pushAndRemoveUntil(

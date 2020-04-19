@@ -30,7 +30,7 @@ Map<dynamic, dynamic> getJson() {
     future: getUri(),
     builder: (BuildContext context, AsyncSnapshot snapshot) {
       if (snapshot.hasData) {
-        List content = snapshot.data;
+        // List content = snapshot.data;
       } else {
         print("connection error");
       }
