@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'dart:convert';
-import 'package:flutter_localization_master/pages/MyHomePage.dart';
-import 'package:flutter_localization_master/pages/coronaMonitor.dart';
 import 'package:flutter_localization_master/pages/userrequire.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart';
@@ -28,27 +26,28 @@ class _Login extends State<Login> {
       children: <Widget>[
         Column(
           children: <Widget>[
-            SizedBox(height: 50),
+            SizedBox(height: 20),
             Center(
                 child: Text("Login",
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 40,
                         color: Colors.blue))),
-            SizedBox(height: 30),
+            SizedBox(height: 15),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 GestureDetector(
                     onTap: () {
-                      if (_check2 == false) {
+                      if (_check2 == false && _check3 == false) {
                         setState(() {
                           _check = true;
                         });
-                      } else {
+                      } else if (_check2 == true || _check3 == true) {
                         setState(() {
                           _check = true;
                           _check2 = false;
+                          _check3 = false;
                         });
                       }
                     },
@@ -59,25 +58,27 @@ class _Login extends State<Login> {
                             width: 120,
                             child: _check == false
                                 ? Card(
-                                    color: Colors.blue,
                                     elevation: 10,
                                     child: Image(
                                         image: AssetImage(
                                             'assets/images/citizenlogo.png')))
                                 : Card(
-                                    color: Colors.yellow,
+                                    color: Colors.blue,
                                     elevation: 10,
-                                    child: Icon(Icons.done_all))))),
+                                    child: Image(
+                                        image: AssetImage(
+                                            'assets/images/citizenlogo.png')))))),
                 GestureDetector(
                     onTap: () {
-                      if (_check == false) {
+                      if (_check == false && _check3 == false) {
                         setState(() {
                           _check2 = true;
                         });
-                      } else {
+                      } else if (_check == true || _check3 == true) {
                         setState(() {
                           _check2 = true;
                           _check = false;
+                          _check3 = false;
                         });
                       }
                     },
@@ -88,15 +89,16 @@ class _Login extends State<Login> {
                             width: 120,
                             child: _check2 == false
                                 ? Card(
-                                    color: Colors.blue,
                                     elevation: 10,
                                     child: Image(
                                         image: AssetImage(
                                             'assets/images/farmerlogo.png')))
                                 : Card(
-                                    color: Colors.yellow,
+                                    color: Colors.blue,
                                     elevation: 10,
-                                    child: Icon(Icons.done_all))))),
+                                    child: Image(
+                                        image: AssetImage(
+                                            'assets/images/farmerlogo.png')))))),
               ],
             ),
             GestureDetector(
@@ -105,7 +107,7 @@ class _Login extends State<Login> {
                     setState(() {
                       _check3 = true;
                     });
-                  } else {
+                  } else if (_check2 == true || _check == true) {
                     setState(() {
                       _check3 = true;
                       _check2 = false;
@@ -114,21 +116,22 @@ class _Login extends State<Login> {
                   }
                 },
                 child: Padding(
-                    padding: EdgeInsets.all(20),
+                    padding: EdgeInsets.only(bottom:10),
                     child: Container(
                         height: 120,
                         width: 120,
                         child: _check3 == false
                             ? Card(
-                                color: Colors.blue,
                                 elevation: 10,
                                 child: Image(
                                     image: AssetImage(
                                         'assets/images/frontlinelogo.png')))
                             : Card(
-                                color: Colors.yellow,
+                                color: Colors.blue,
                                 elevation: 10,
-                                child: Icon(Icons.done_all))))),
+                                child: Image(
+                                    image: AssetImage(
+                                        'assets/images/frontlinelogo.png')))))),
             _check == false && _check2 == false
                 ? Center(
                     child: Text(
