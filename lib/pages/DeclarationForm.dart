@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localization_master/localization/language_constants.dart';
 import 'package:flutter_localization_master/pages/MyHomePage.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -45,18 +46,24 @@ Future<bool> _exitApp(BuildContext context) {
   return showDialog(
         context: context,
         child: new AlertDialog(
-          title: new Text('Do you want to go back to previous page?'),
+          title: new Text(getTranslated(context, 'previous')),
           actions: <Widget>[
             new FlatButton(
               onPressed: () => Navigator.of(context).pop(false),
-              child: new Text('No'),
+              child: new Text(
+                getTranslated(context, 'n'),
+                // 'No'
+              ),
             ),
             new FlatButton(
               onPressed: () {
                 tempIndex--;
                 return Navigator.of(context).pop(true);
               },
-              child: new Text('Yes'),
+              child: new Text(
+                getTranslated(context, 'y'),
+                // 'Yes'
+              ),
             ),
           ],
         ),
@@ -133,7 +140,7 @@ class _DeclarationState extends State<Declaration>
         appBar: AppBar(
           elevation: 0.0,
           title: Center(
-            child: Text("Form " + (widget.memberIndex + 1).toString(),
+            child: Text(getTranslated(context, 'form') + (widget.memberIndex + 1).toString(),
                 style: TextStyle(
                   fontSize: 30.0,
                   color: Colors.black87,
@@ -180,7 +187,7 @@ class _DeclarationState extends State<Declaration>
                           style:
                               TextStyle(color: Colors.white60, fontSize: 30.0),
                           decoration: InputDecoration(
-                              hintText: "Enter Name",
+                              hintText: getTranslated(context, 'enter_name'),
                               hintStyle: TextStyle(
                                 fontSize: 20.0,
                               ),
@@ -226,7 +233,7 @@ class _DeclarationState extends State<Declaration>
                           style: TextStyle(color: Colors.white, fontSize: 30.0),
                           decoration: InputDecoration(
                               contentPadding: EdgeInsets.all(10.0),
-                              hintText: "Enter Aadhar No.",
+                              hintText: getTranslated(context, 'enter_aadhar'),
                               counterText: "",
                               hintStyle: TextStyle(
                                 fontSize: 20.0,
@@ -302,7 +309,8 @@ class _DeclarationState extends State<Declaration>
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: <Widget>[
                                 Text(
-                                  "Gender",
+                                  // "Gender",
+                                  getTranslated(context, 'gender'),
                                   style: TextStyle(
                                       fontSize: 23.0, color: Colors.black54),
                                 ),
@@ -374,7 +382,8 @@ class _DeclarationState extends State<Declaration>
                             child: widget.memberIndex == 0
                                 ? (lat == 0.0
                                     ? Text(
-                                        "Get location",
+                                        // "Get location",
+                                        getTranslated(context, 'fetch'),
                                         style: TextStyle(
                                             fontSize: 14.0,
                                             color: Colors.black54),
@@ -384,7 +393,8 @@ class _DeclarationState extends State<Declaration>
                                             ? Colors.black
                                             : Colors.white))
                                 : Text(
-                                    "Select Address",
+                                    // "Select Address",
+                                    getTranslated(context, 'add'),
                                     style: TextStyle(
                                         fontSize: 14.0, color: Colors.black54),
                                   ),
@@ -430,7 +440,9 @@ class _DeclarationState extends State<Declaration>
                                             DropdownButton(
                                               iconDisabledColor: Colors.black,
                                               hint: Text(
-                                                "Select State",
+                                                // "Select State",
+                                                getTranslated(
+                                                    context, 'select_state'),
                                                 style: TextStyle(
                                                     color: Colors.black,
                                                     fontSize: 15.0),
@@ -460,7 +472,9 @@ class _DeclarationState extends State<Declaration>
                                             DropdownButton(
                                               iconDisabledColor: Colors.black,
                                               hint: Text(
-                                                "Select District",
+                                                // "Select District",
+                                                getTranslated(
+                                                    context, 'select_district'),
                                                 style: TextStyle(
                                                     color: Colors.black,
                                                     fontSize: 15.0),
@@ -492,7 +506,11 @@ class _DeclarationState extends State<Declaration>
                                               onPressed: () {
                                                 Navigator.pop(context);
                                               },
-                                              child: Text("Submit"),
+                                              child: Text(
+                                                getTranslated(
+                                                    context, 'submit'),
+                                                // "Submit"
+                                              ),
                                             )
                                           ],
                                         ),
@@ -503,7 +521,8 @@ class _DeclarationState extends State<Declaration>
                           },
                           child: Center(
                               child: Text(
-                            "Select State & District",
+                            // "Select State & District",
+                            getTranslated(context, 'state_district'),
                             style: TextStyle(
                                 fontSize: 18.0, color: Colors.black54),
                           )),
@@ -575,7 +594,9 @@ class _DeclarationState extends State<Declaration>
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
                               Text(
-                                "Is Infected?",
+                                // "Is Infected?",
+                                getTranslated(context, 'is_infected'),
+
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                     fontSize: 18.0, color: Colors.black54),
@@ -591,8 +612,10 @@ class _DeclarationState extends State<Declaration>
                                     declaration.isInfected[
                                                 widget.memberIndex] ==
                                             true
-                                        ? "Yes"
-                                        : "No",
+                                        // ? "Yes"
+                                        // : "No",
+                                        ?getTranslated(context, 'y')
+                                        :getTranslated(context, 'n'),
                                     style: TextStyle(
                                         fontSize: 15.0, color: Colors.black87),
                                   ),
@@ -658,7 +681,8 @@ class _DeclarationState extends State<Declaration>
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
                               Text(
-                                "Is Cured?",
+                                // "Is Cured?",
+                                getTranslated(context, 'is_cured'),
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                     fontSize: 18.0, color: Colors.black54),
@@ -673,8 +697,9 @@ class _DeclarationState extends State<Declaration>
                                   Text(
                                     declaration.isCured[widget.memberIndex] ==
                                             true
-                                        ? "Yes"
-                                        : "No",
+                                        ?getTranslated(context, 'y')
+                                        // : "No",
+                                        :getTranslated(context, 'n'),
                                     style: TextStyle(
                                         fontSize: 15.0, color: Colors.black87),
                                   ),
@@ -744,7 +769,8 @@ class _DeclarationState extends State<Declaration>
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
                               Text(
-                                "Is Hospitalised?",
+                                // "Is Hospitalised?",
+                                getTranslated(context, 'is_hospital'),
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                     fontSize: 18.0, color: Colors.black54),
@@ -760,8 +786,10 @@ class _DeclarationState extends State<Declaration>
                                     declaration.hospitalised[
                                                 widget.memberIndex] ==
                                             true
-                                        ? "Yes"
-                                        : "No",
+                                        // ? "Yes"
+                                        ?getTranslated(context, 'y')
+                                        // : "No",
+                                        :getTranslated(context, 'n'),
                                     style: TextStyle(
                                         fontSize: 15.0, color: Colors.black87),
                                   ),
@@ -840,7 +868,8 @@ class _DeclarationState extends State<Declaration>
                                                   MainAxisAlignment.center,
                                               children: <Widget>[
                                                 Text(
-                                                  "Select Options",
+                                                  // "Select Options",
+                                                  getTranslated(context, 'option'),
                                                   style: TextStyle(
                                                       color: Colors.white70,
                                                       fontSize: 20.0),
@@ -850,7 +879,9 @@ class _DeclarationState extends State<Declaration>
                                                       MainAxisAlignment.center,
                                                   children: <Widget>[
                                                     Text(
-                                                      "Fever?",
+                                                      // "Fever?",
+                                                      getTranslated(
+                                                          context, 'symp2'),
                                                       style: TextStyle(
                                                           color:
                                                               Colors.white70),
@@ -859,7 +890,8 @@ class _DeclarationState extends State<Declaration>
                                                       width: 10.0,
                                                     ),
                                                     Text(
-                                                      "Yes",
+                                                      // "Yes",
+                                                      getTranslated(context, 'y'),
                                                       style: TextStyle(
                                                           color:
                                                               Colors.white70),
@@ -882,7 +914,8 @@ class _DeclarationState extends State<Declaration>
                                                           });
                                                         }),
                                                     Text(
-                                                      "No",
+                                                      // "No",
+                                                      getTranslated(context, 'n'),
                                                       style: TextStyle(
                                                           color:
                                                               Colors.white70),
@@ -911,7 +944,9 @@ class _DeclarationState extends State<Declaration>
                                                           .spaceEvenly,
                                                   children: <Widget>[
                                                     Text(
-                                                      "Cough?",
+                                                      // "Cough?",
+                                                      getTranslated(
+                                                          context, 'symp3'),
                                                       style: TextStyle(
                                                           color:
                                                               Colors.white70),
@@ -920,7 +955,8 @@ class _DeclarationState extends State<Declaration>
                                                       width: 10.0,
                                                     ),
                                                     Text(
-                                                      "Yes",
+                                                      // "Yes",
+                                                      getTranslated(context, 'y'),
                                                       style: TextStyle(
                                                           color:
                                                               Colors.white70),
@@ -942,7 +978,8 @@ class _DeclarationState extends State<Declaration>
                                                           });
                                                         }),
                                                     Text(
-                                                      "No",
+                                                      // "No",
+                                                      getTranslated(context, 'n'),
                                                       style: TextStyle(
                                                           color:
                                                               Colors.white70),
@@ -974,7 +1011,8 @@ class _DeclarationState extends State<Declaration>
                                                           .spaceEvenly,
                                                   children: <Widget>[
                                                     Text(
-                                                      "Short Breath?",
+                                                      // "Short Breath?",
+                                                      getTranslated(context, 'short'),
                                                       style: TextStyle(
                                                           color:
                                                               Colors.white70),
@@ -983,7 +1021,8 @@ class _DeclarationState extends State<Declaration>
                                                       width: 10.0,
                                                     ),
                                                     Text(
-                                                      "Yes",
+                                                      // "Yes",
+                                                      getTranslated(context, 'y'),
                                                       style: TextStyle(
                                                           color:
                                                               Colors.white70),
@@ -1005,7 +1044,8 @@ class _DeclarationState extends State<Declaration>
                                                           });
                                                         }),
                                                     Text(
-                                                      "No",
+                                                      // "No",
+                                                      getTranslated(context, 'n'),
                                                       style: TextStyle(
                                                           color:
                                                               Colors.white70),
@@ -1037,7 +1077,9 @@ class _DeclarationState extends State<Declaration>
                                                           .spaceEvenly,
                                                   children: <Widget>[
                                                     Text(
-                                                      "Running \nNose?",
+                                                      // "Running \nNose?",
+                                                      getTranslated(
+                                                          context, 'symp5'),
                                                       style: TextStyle(
                                                           color:
                                                               Colors.white70),
@@ -1046,7 +1088,8 @@ class _DeclarationState extends State<Declaration>
                                                       width: 10.0,
                                                     ),
                                                     Text(
-                                                      "Yes",
+                                                      // "Yes",
+                                                      getTranslated(context, 'y'),
                                                       style: TextStyle(
                                                           color:
                                                               Colors.white70),
@@ -1068,7 +1111,8 @@ class _DeclarationState extends State<Declaration>
                                                           });
                                                         }),
                                                     Text(
-                                                      "No",
+                                                      // "No",
+                                                      getTranslated(context, 'n'),
                                                       style: TextStyle(
                                                           color:
                                                               Colors.white70),
@@ -1100,7 +1144,9 @@ class _DeclarationState extends State<Declaration>
                                                           .spaceEvenly,
                                                   children: <Widget>[
                                                     Text(
-                                                      "Dizziness?",
+                                                      // "Dizziness?",
+                                                      getTranslated(
+                                                          context, 'symp11'),
                                                       style: TextStyle(
                                                           color:
                                                               Colors.white70),
@@ -1109,7 +1155,8 @@ class _DeclarationState extends State<Declaration>
                                                       width: 10.0,
                                                     ),
                                                     Text(
-                                                      "Yes",
+                                                      // "Yes",
+                                                      getTranslated(context, 'y'),
                                                       style: TextStyle(
                                                           color:
                                                               Colors.white70),
@@ -1131,7 +1178,8 @@ class _DeclarationState extends State<Declaration>
                                                           });
                                                         }),
                                                     Text(
-                                                      "No",
+                                                      // "No",
+                                                      getTranslated(context, 'n'),
                                                       style: TextStyle(
                                                           color:
                                                               Colors.white70),
@@ -1163,7 +1211,8 @@ class _DeclarationState extends State<Declaration>
                                                           .spaceEvenly,
                                                   children: <Widget>[
                                                     Text(
-                                                      "Difficulty\nin\npronounciation?",
+                                                      // "Difficulty\nin\npronounciation?",
+                                                      getTranslated(context, 'pron'),
                                                       style: TextStyle(
                                                           color: Colors.white70,
                                                           fontSize: 12),
@@ -1172,7 +1221,8 @@ class _DeclarationState extends State<Declaration>
                                                       width: 8.0,
                                                     ),
                                                     Text(
-                                                      "Yes",
+                                                      // "Yes",
+                                                      getTranslated(context, 'y'),
                                                       style: TextStyle(
                                                           color:
                                                               Colors.white70),
@@ -1194,7 +1244,8 @@ class _DeclarationState extends State<Declaration>
                                                           });
                                                         }),
                                                     Text(
-                                                      "No",
+                                                      // "No",
+                                                      getTranslated(context, 'n'),
                                                       style: TextStyle(
                                                           color:
                                                               Colors.white70),
@@ -1226,7 +1277,9 @@ class _DeclarationState extends State<Declaration>
                                                           .spaceEvenly,
                                                   children: <Widget>[
                                                     Text(
-                                                      "Chest/Throat\nPain?",
+                                                      // "Chest/Throat\nPain?",
+                                                      getTranslated(
+                                                          context, 'symp4'),
                                                       style: TextStyle(
                                                           color:
                                                               Colors.white70),
@@ -1235,7 +1288,8 @@ class _DeclarationState extends State<Declaration>
                                                       width: 10.0,
                                                     ),
                                                     Text(
-                                                      "Yes",
+                                                      // "Yes",
+                                                      getTranslated(context, 'y'),
                                                       style: TextStyle(
                                                           color:
                                                               Colors.white70),
@@ -1257,7 +1311,8 @@ class _DeclarationState extends State<Declaration>
                                                           });
                                                         }),
                                                     Text(
-                                                      "No",
+                                                      // "No",
+                                                      getTranslated(context, 'n'),
                                                       style: TextStyle(
                                                           color:
                                                               Colors.white70),
@@ -1289,7 +1344,9 @@ class _DeclarationState extends State<Declaration>
                                                           .spaceEvenly,
                                                   children: <Widget>[
                                                     Text(
-                                                      "Diarrhea?",
+                                                      // "Diarrhea?",
+                                                      getTranslated(
+                                                          context, 'symp8'),
                                                       style: TextStyle(
                                                           color:
                                                               Colors.white70),
@@ -1298,7 +1355,8 @@ class _DeclarationState extends State<Declaration>
                                                       width: 10.0,
                                                     ),
                                                     Text(
-                                                      "Yes",
+                                                      // "Yes",
+                                                      getTranslated(context, 'y'),
                                                       style: TextStyle(
                                                           color:
                                                               Colors.white70),
@@ -1320,7 +1378,8 @@ class _DeclarationState extends State<Declaration>
                                                           });
                                                         }),
                                                     Text(
-                                                      "No",
+                                                      // "No",
+                                                      getTranslated(context, 'n'),
                                                       style: TextStyle(
                                                           color:
                                                               Colors.white70),
@@ -1352,7 +1411,8 @@ class _DeclarationState extends State<Declaration>
                                                           .spaceEvenly,
                                                   children: <Widget>[
                                                     Text(
-                                                      "Attended \njamat?",
+                                                      // "Attended \njamat?",
+                                                      getTranslated(context, 'jamat'),
                                                       style: TextStyle(
                                                           color:
                                                               Colors.white70),
@@ -1361,7 +1421,8 @@ class _DeclarationState extends State<Declaration>
                                                       width: 10.0,
                                                     ),
                                                     Text(
-                                                      "Yes",
+                                                      // "Yes",
+                                                      getTranslated(context, 'y'),
                                                       style: TextStyle(
                                                           color:
                                                               Colors.white70),
@@ -1383,7 +1444,8 @@ class _DeclarationState extends State<Declaration>
                                                           });
                                                         }),
                                                     Text(
-                                                      "No",
+                                                      // "No",
+                                                      getTranslated(context, 'n'),
                                                       style: TextStyle(
                                                           color:
                                                               Colors.white70),
@@ -1415,7 +1477,8 @@ class _DeclarationState extends State<Declaration>
                                                           .spaceEvenly,
                                                   children: <Widget>[
                                                     Text(
-                                                      "Met\nany\njamati?",
+                                                      // "Met\nany\njamati?",
+                                                      getTranslated(context, 'met'),
                                                       style: TextStyle(
                                                           color:
                                                               Colors.white70),
@@ -1424,7 +1487,8 @@ class _DeclarationState extends State<Declaration>
                                                       width: 10.0,
                                                     ),
                                                     Text(
-                                                      "Yes",
+                                                      // "Yes",
+                                                      getTranslated(context, 'y'),
                                                       style: TextStyle(
                                                           color:
                                                               Colors.white70),
@@ -1446,7 +1510,8 @@ class _DeclarationState extends State<Declaration>
                                                           });
                                                         }),
                                                     Text(
-                                                      "No",
+                                                      // "No",
+                                                      getTranslated(context, 'n'),
                                                       style: TextStyle(
                                                           color:
                                                               Colors.white70),
@@ -1478,7 +1543,8 @@ class _DeclarationState extends State<Declaration>
                                                           .spaceEvenly,
                                                   children: <Widget>[
                                                     Text(
-                                                      "Met someone\nwho\nvisited\nabroad?",
+                                                      // "Met someone\nwho\nvisited\nabroad?",
+                                                      getTranslated(context,'abroad'),
                                                       style: TextStyle(
                                                           color:
                                                               Colors.white70),
@@ -1487,7 +1553,9 @@ class _DeclarationState extends State<Declaration>
                                                       width: 10.0,
                                                     ),
                                                     Text(
-                                                      "Yes",
+                                                      // "Yes",
+                                                      getTranslated(
+                                                          context, 'y'),
                                                       style: TextStyle(
                                                           color:
                                                               Colors.white70),
@@ -1510,7 +1578,9 @@ class _DeclarationState extends State<Declaration>
                                                           });
                                                         }),
                                                     Text(
-                                                      "No",
+                                                      // "No",
+                                                      getTranslated(
+                                                          context, 'n'),
                                                       style: TextStyle(
                                                           color:
                                                               Colors.white70),
@@ -1543,7 +1613,9 @@ class _DeclarationState extends State<Declaration>
                                                           .spaceEvenly,
                                                   children: <Widget>[
                                                     Text(
-                                                      "Visited any\ncorona\noutbreak\nplace?",
+                                                      // "Visited any\ncorona\noutbreak\nplace?",
+                                                      getTranslated(context,
+                                                          'corona_outbreak'),
                                                       style: TextStyle(
                                                           color:
                                                               Colors.white70),
@@ -1629,7 +1701,8 @@ class _DeclarationState extends State<Declaration>
                         child: Text(
                           onTapped == true
                               ? "Tap"
-                              : "Select options which satisfies you",
+                              // : "Select options which satisfies you",
+                              : getTranslated(context, 'select_option'),
                           style:
                               TextStyle(fontSize: 15.0, color: Colors.white70),
                         ),
@@ -1682,8 +1755,12 @@ class _DeclarationState extends State<Declaration>
                               context: context,
                               builder: (context) {
                                 return AlertDialog(
-                                  title: Text("Error"),
-                                  content: Text("One or More fields are Empty"),
+                                  title: Text(
+                                      // "Error"
+                                      getTranslated(context, 'error')),
+                                  content: Text(
+                                      // "One or More fields are Empty"
+                                      getTranslated(context, 'one_or_more')),
                                   actions: <Widget>[
                                     IconButton(
                                         icon: Icon(Icons.done),
@@ -1781,7 +1858,8 @@ class _DeclarationState extends State<Declaration>
                       },
                       child: Center(
                           child: Text(
-                        "Next",
+                        // "Next",
+                        getTranslated(context, 'next'),
                         style: TextStyle(color: Colors.white, fontSize: 15.0),
                       )),
                     ),

@@ -183,10 +183,22 @@
   "about_self_service": "Users can provide basic necessities during lock down and volunteers will deliver items at home. Volunteer support team andThe official team will look into the requirements and provide materials in the designated area.",
   "about_chatBot": "Chatbots, designed using the NLU model with RASA, will interact with the user. Users can also get news related to Corona. The user will send audio samples of cough and sneeze by which we will apply ML using the RNN model to identify corona phases.",
   "about_dataMapper": "The government's data and app data are mapped to Google Maps as a block spot.",
-  "about_userSupport": "User can input daily basis requirement. Border workers will distribute these materials and meet basic needsUsers can get hospital list as well as report at homeUser can inform other corona infected person. He / she who will keep the information of the informant confidential."
-    
-
-  
-
-
+  "about_userSupport": "User can input daily basis requirement. Border workers will distribute these materials and meet basic needsUsers can get hospital list as well as report at homeUser can inform other corona infected person. He / she who will keep the information of the informant confidential.",
+  "previous": "Do you want to go back to previous page?",
+  "form": "Form",
+  "enter_name": "Enter Name",
+  "enter_aadhar": "Enter Aadhar Number",
+  "state_district": "Select State and District",
+  "is_infected": "Is Infected?",
+  "is_cured": "Is Cured",
+  "is_hospital": "Is Hospitalised",
+  "pron": "Difficult Pronunciation",
+  "jamat": "Attend any Jammat",
+  "met": "Met any Jamati",
+  "abroad": "Meet someone Who Visited Abroad",
+  "corona_outbreak": "Visited any Corona Outbreak?",
+  "select_option": "Select Options which Satisfies You",
+  "short": "Short Breath?",
+  "option": "Select Option",
+  "add": "Select Address"
 }
